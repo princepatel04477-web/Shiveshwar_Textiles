@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #0f0e0c;
+  color: #f5f0e8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.reveal-fade {
+  opacity: 0;
+  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Hint to the browser to promote animated elements to their own compositor layer
+   to improve animation smoothness (helps maintain 60fps). */
+.reveal-fade,
+.marquee-track,
+img,
+.group img {
+  will-change: transform, opacity;
+}
+
+/* Typing cursor blink */
+@keyframes blink { 50% { opacity: 0 } }
+.typed-wrap { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; }
+.typed-cursor { display:inline-block; width:4px; height:1.15em; background:#d4a96a; vertical-align:middle; margin-left:6px; animation:blink 1s steps(2,end) infinite; }
+
+.reveal-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-fade,
+  .marquee-track {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

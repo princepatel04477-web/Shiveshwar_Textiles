@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiveshwar Textiles — Fabric Built for Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --off-white: #faf8f4;
+    --warm-white: #fffdf9;
+    --charcoal: #1a1714;
+    --dark: #0f0e0c;
+    --gold: #b8924a;
+    --gold-light: #d4a96a;
+    --gold-pale: #e8d5b0;
+    --tan: #c9a96e;
+    --muted: #7a7068;
+    --border: rgba(184,146,74,0.25);
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(184,146,74,0.5);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.18s ease;
+  }
+  .cursor-ring.hovered { width:56px; height:56px; background:rgba(184,146,74,0.06); border-color:var(--gold); }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:9000; opacity:0.35;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    padding: 1.4rem 4rem;
+    display: flex; align-items:center; justify-content:space-between;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(15,14,12,0.92);
+    backdrop-filter: blur(18px);
+    padding: 1rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display:flex; align-items:center; gap:0.9rem;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 52px; height: 52px; object-fit: contain;
+    filter: drop-shadow(0 10px 24px rgba(184,146,74,0.16));
+    flex-shrink: 0;
+  }
+  .brand-text {
+    display:flex; flex-direction:column; gap:0.12rem;
+  }
+  .brand-kicker {
+    font-size: 0.55rem;
+    letter-spacing: 0.32em;
+    color: rgba(245,240,232,0.68);
+    text-transform: uppercase;
+  }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.28rem;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    position: relative;
+    opacity: 0.75;
+    transition: opacity 0.3s;
+  }
+  .nav-links a::after {
+    content:'';
+    position:absolute; bottom:-3px; left:0; right:0;
+    height:1px; background:var(--gold);
+    transform: scaleX(0); transform-origin:left;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    font-size: 0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .nav-cta:hover { background:var(--gold); color:var(--dark); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; height: 100vh; min-height: 700px;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset:0;
+    background: linear-gradient(160deg, #1a1510 0%, #0f0e0c 60%);
+  }
+  .hero-bg img {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; opacity:0.28;
+    filter: grayscale(30%);
+    transition: transform 8s ease;
+  }
+  .hero-bg::after {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(to top, var(--dark) 0%, transparent 50%),
+                linear-gradient(to right, var(--dark) 0%, transparent 60%);
+  }
+  /* Animated fabric lines */
+  .hero-lines {
+    position:absolute; inset:0; overflow:hidden; pointer-events:none;
+  }
+  .hero-lines span {
+    position:absolute; top:0; bottom:0; width:1px;
+    background: linear-gradient(to bottom, transparent, rgba(184,146,74,0.12), transparent);
+    animation: lineFade 4s ease-in-out infinite;
+  }
+  .hero-lines span:nth-child(1) { left:20%; animation-delay:0s; }
+  .hero-lines span:nth-child(2) { left:40%; animation-delay:0.8s; }
+  .hero-lines span:nth-child(3) { left:60%; animation-delay:1.6s; }
+  .hero-lines span:nth-child(4) { left:80%; animation-delay:2.4s; }
+  @keyframes lineFade {
+    0%,100%{opacity:0} 50%{opacity:1}
+  }
+
+  .hero-content {
+    position:relative; z-index:2;
+    padding: 0 4rem 6rem;
+    max-width: 820px;
+  }
+  .hero-since {
+    font-size: 0.65rem; letter-spacing:0.35em; text-transform:uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    display:flex; align-items:center; gap:1rem;
+    opacity:0;
+    animation: fadeUp 0.8s ease forwards 0.3s;
+  }
+  .hero-since::before { content:''; width:40px; height:1px; background:var(--gold); }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem,12vw,11rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+    opacity:0;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 1rem; line-height: 1.7;
+    color: rgba(245,240,232,0.65);
+    max-width: 460px; margin-top: 1.6rem;
+    opacity:0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+  .hero-actions {
+    display:flex; align-items:center; gap:2rem; margin-top:2.5rem;
+    opacity:0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+  .btn-primary {
+    display:inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position:relative; overflow:hidden;
+  }
+  .btn-primary::before {
+    content:''; position:absolute; inset:0;
+    background: var(--gold-light);
+    transform: scaleX(0); transform-origin:left;
+    transition: transform 0.35s ease;
+    z-index:0;
+  }
+  .btn-primary:hover::before { transform:scaleX(1); }
+  .btn-primary span { position:relative; z-index:1; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(184,146,74,0.25); }
+  .hero-social {
+    display:flex; gap:1.5rem;
+  }
+  .hero-social a {
+    width:38px; height:38px;
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--gold); text-decoration:none;
+    transition: all 0.3s;
+    font-size:0.75rem;
+  }
+  .hero-social a:hover { border-color:var(--gold); background:rgba(184,146,74,0.1); }
+
+  .hero-scroll {
+    position:absolute; right:4rem; bottom:4rem; z-index:2;
+    display:flex; flex-direction:column; align-items:center; gap:0.7rem;
+    opacity:0; animation: fadeIn 1s ease forwards 1.5s;
+  }
+  .hero-scroll span {
+    font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted);
+    writing-mode:vertical-rl;
+  }
+  .scroll-line {
+    width:1px; height:60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollAnim 2s ease-in-out infinite;
+  }
+  @keyframes scrollAnim {
+    0%{height:0;opacity:1} 70%{height:60px;opacity:1} 100%{height:60px;opacity:0}
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--gold);
+    overflow:hidden; padding:0.8rem 0;
+    border-top: 1px solid rgba(0,0,0,0.15);
+  }
+  .marquee-track {
+    display:flex; gap:3rem;
+    animation: marquee 22s linear infinite;
+    white-space:nowrap;
+  }
+  .marquee-track span {
+    font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase;
+    color: var(--dark); font-weight:500; flex-shrink:0;
+  }
+  .marquee-track .dot { color:rgba(0,0,0,0.35); }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 8rem 4rem; }
+  .section-tag {
+    font-size:0.62rem; letter-spacing:0.4em; text-transform:uppercase;
+    color: var(--gold); margin-bottom:1rem;
+    display:flex; align-items:center; gap:1rem;
+  }
+  .section-tag::before { content:''; width:30px; height:1px; background:var(--gold); }
+  .section-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2.5rem,5vw,4rem);
+    font-weight:300; line-height:1.1;
+    color: var(--cream);
+    margin-bottom:1.5rem;
+  }
+  .section-title em { font-style:italic; color:var(--gold); }
+  .section-body {
+    font-size:0.95rem; line-height:1.8;
+    color:rgba(245,240,232,0.6);
+    max-width:560px;
+  }
+
+  /* Reveal animations */
+  .reveal { opacity:0; transform:translateY(40px); transition: all 0.9s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-left { opacity:0; transform:translateX(-50px); transition: all 0.9s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-left.visible { opacity:1; transform:translateX(0); }
+  .reveal-right { opacity:0; transform:translateX(50px); transition: all 0.9s cubic-bezier(0.16,1,0.3,1); }
+  .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  /* ── ABOUT ── */
+  #about { background: var(--off-white); color:var(--charcoal); }
+  #about .section-title { color:var(--charcoal); }
+  #about .section-body { color:rgba(26,23,20,0.65); }
+  #about .section-tag { color:var(--gold); }
+  #about .section-tag::before { background:var(--gold); }
+
+  .about-layout {
+    display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; margin-top:4rem;
+  }
+  .about-text { }
+  .about-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:0.7rem;
+  }
+  .about-grid img {
+    width:100%; aspect-ratio:1;
+    object-fit:cover;
+    transition: transform 0.6s ease, filter 0.4s;
+    filter:grayscale(20%);
+  }
+  .about-grid img:hover { transform:scale(1.04); filter:grayscale(0%); }
+  .about-grid img:first-child { grid-column:span 2; aspect-ratio:16/9; }
+
+  /* Team */
+  .team-section {
+    margin-top:5rem; padding-top:4rem;
+    border-top:1px solid rgba(26,23,20,0.12);
+  }
+  .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2.5rem; margin-top:3rem; }
+  .team-card {
+    position:relative; overflow:hidden;
+    transition: transform 0.4s ease;
+    cursor:pointer;
+  }
+  .team-card:hover { transform:translateY(-6px); }
+  .team-card img {
+    width:100%; aspect-ratio:3/4;
+    object-fit:cover; object-position:top;
+    display:block;
+    filter:grayscale(30%);
+    transition: filter 0.5s ease, transform 0.6s ease;
+  }
+  .team-card:hover img { filter:grayscale(0%); transform:scale(1.03); }
+  .team-card-info {
+    padding:1.4rem 0 0.5rem;
+  }
+  .team-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.25rem; font-weight:600; color:var(--charcoal);
+  }
+  .team-role {
+    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--gold); margin-top:0.2rem; margin-bottom:0.7rem;
+  }
+  .team-quote {
+    font-size:0.82rem; line-height:1.65;
+    color:rgba(26,23,20,0.55); font-style:italic;
+  }
+  .team-card::before {
+    content:''; position:absolute;
+    bottom:0; left:0; right:0; height:3px;
+    background:var(--gold);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.4s ease;
+  }
+  .team-card:hover::before { transform:scaleX(1); }
+
+  /* ── PRODUCTS ── */
+  #products {
+    background: var(--dark);
+    position:relative;
+  }
+  #products::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .products-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:4rem; }
+  .products-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem;
+  }
+  .product-card {
+    position:relative; overflow:hidden;
+    aspect-ratio:3/4;
+    cursor:pointer; display:block; text-decoration:none;
+    background:var(--charcoal);
+  }
+  .product-card img {
+    width:100%; height:100%;
+    object-fit:cover;
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    filter:brightness(0.75);
+  }
+  .product-card:hover img { transform:scale(1.08); filter:brightness(0.55); }
+  .product-card-overlay {
+    position:absolute; inset:0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:1.8rem;
+  }
+  .product-num {
+    font-family:'Bebas Neue'; font-size:3.5rem;
+    color:rgba(184,146,74,0.2);
+    position:absolute; top:1rem; right:1.2rem;
+    line-height:1; transition: all 0.4s;
+  }
+  .product-card:hover .product-num { color:rgba(184,146,74,0.5); }
+  .product-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem; font-weight:400; color:var(--cream);
+    margin-bottom:0.4rem;
+  }
+  .product-sub {
+    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--gold); opacity:0;
+    transform:translateY(10px);
+    transition: all 0.4s ease;
+  }
+  .product-card:hover .product-sub { opacity:1; transform:translateY(0); }
+  .product-arrow {
+    position:absolute; top:1.2rem; left:1.5rem;
+    width:36px; height:36px;
+    border:1px solid rgba(184,146,74,0.4);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold); font-size:0.9rem;
+    opacity:0; transition:all 0.4s;
+    transform:rotate(-45deg);
+  }
+  .product-card:hover .product-arrow { opacity:1; transform:rotate(0); }
+
+  /* CTA strip */
+  .cta-strip {
+    margin-top:4rem; padding:3rem;
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+    background: linear-gradient(135deg, rgba(184,146,74,0.06), transparent);
+    transition:border-color 0.4s;
+  }
+  .cta-strip:hover { border-color:var(--gold); }
+  .cta-strip-text {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.7rem; font-weight:300; color:var(--cream);
+  }
+  .cta-strip-text em { font-style:italic; color:var(--gold); }
+
+  /* ── INFRASTRUCTURE ── */
+  #infrastructure { background:#121110; }
+  .infra-layout { display:grid; grid-template-columns:1fr 1.4fr; gap:5rem; align-items:center; margin-top:4rem; }
+  .infra-stat-row { display:flex; gap:3rem; margin-top:3rem; }
+  .infra-stat strong {
+    font-family:'Bebas Neue'; font-size:3.5rem; color:var(--gold); display:block; line-height:1;
+  }
+  .infra-stat span {
+    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-top:0.3rem; display:block;
+  }
+  .infra-gallery { display:grid; grid-template-columns:1fr 1fr; gap:0.7rem; }
+  .infra-gallery img {
+    width:100%; aspect-ratio:1; object-fit:cover;
+    filter:brightness(0.85) grayscale(10%);
+    transition: all 0.5s ease;
+  }
+  .infra-gallery img:hover { filter:brightness(1) grayscale(0%); transform:scale(1.02); }
+  .infra-gallery img:first-child { grid-column:span 2; aspect-ratio:16/7; }
+
+  /* ── QUALITY ── */
+  #quality { background:var(--off-white); color:var(--charcoal); }
+  #quality .section-title { color:var(--charcoal); }
+  #quality .section-body { color:rgba(26,23,20,0.6); }
+  #quality .section-tag { color:var(--gold); }
+  #quality .section-tag::before { background:var(--gold); }
+
+  .quality-layout { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; margin-top:4rem; }
+  .quality-pillars { display:grid; gap:1.5rem; margin-top:2rem; }
+  .pillar {
+    padding:1.8rem;
+    border:1px solid rgba(26,23,20,0.1);
+    border-left:3px solid var(--gold);
+    transition:all 0.3s ease;
+    background: white;
+    cursor:default;
+  }
+  .pillar:hover { border-color:var(--gold); background:#fffdf9; box-shadow:0 8px 32px rgba(0,0,0,0.06); transform:translateX(4px); }
+  .pillar-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.2rem; font-weight:600; color:var(--charcoal); margin-bottom:0.5rem;
+  }
+  .pillar-desc { font-size:0.85rem; line-height:1.7; color:rgba(26,23,20,0.55); }
+  .quality-images { display:grid; gap:0.7rem; }
+  .quality-images img {
+    width:100%; aspect-ratio:16/10; object-fit:cover;
+    filter:grayscale(20%); transition:all 0.5s;
+  }
+  .quality-images img:hover { filter:grayscale(0%); transform:scale(1.01); }
+
+  /* ── CONTACT ── */
+  #contact { background:var(--dark); }
+  .contact-layout { display:grid; grid-template-columns:1fr 1.3fr; gap:6rem; align-items:start; margin-top:4rem; }
+  .contact-info h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:1rem; font-weight:400; letter-spacing:0.1em;
+    color:var(--gold); text-transform:uppercase; margin-bottom:1.2rem;
+  }
+  .contact-detail {
+    display:flex; gap:1rem; align-items:flex-start; margin-bottom:1rem;
+  }
+  .contact-detail-icon { color:var(--gold); font-size:1rem; margin-top:0.1rem; flex-shrink:0; }
+  .contact-detail-text { font-size:0.88rem; color:rgba(245,240,232,0.65); line-height:1.5; }
+  .contact-detail-text a { color:var(--cream); text-decoration:none; }
+  .contact-detail-text a:hover { color:var(--gold); }
+  .contact-social { display:flex; gap:1rem; margin-top:2rem; }
+  .contact-social a {
+    width:42px; height:42px;
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted); text-decoration:none; font-size:0.85rem;
+    transition:all 0.3s;
+  }
+  .contact-social a:hover { border-color:var(--gold); color:var(--gold); background:rgba(184,146,74,0.08); }
+
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.5rem; }
+  .form-group.full { grid-column:span 2; }
+  .form-label {
+    font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(184,146,74,0.2);
+    color: var(--cream);
+    padding: 0.9rem 1.1rem;
+    font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:300;
+    outline: none;
+    transition: all 0.3s ease;
+    -webkit-appearance:none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--gold);
+    background: rgba(184,146,74,0.05);
+  }
+  .form-select { cursor:pointer; }
+  .form-select option { background:var(--charcoal); }
+  .form-textarea { resize:vertical; min-height:130px; line-height:1.6; }
+  .form-check { display:flex; align-items:center; gap:0.8rem; font-size:0.82rem; color:var(--muted); }
+  .form-check input[type=checkbox] {
+    width:18px; height:18px; border:1px solid var(--border); background:transparent;
+    -webkit-appearance:none; cursor:pointer; position:relative; flex-shrink:0;
+    transition:all 0.2s;
+  }
+  .form-check input[type=checkbox]:checked { background:var(--gold); border-color:var(--gold); }
+  .form-check input[type=checkbox]:checked::after {
+    content:'✓'; position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--dark); font-size:0.7rem; font-weight:700;
+  }
+  .btn-submit {
+    margin-top:0.5rem;
+    background:var(--gold); color:var(--dark); border:none; cursor:pointer;
+    font-family:'DM Sans',sans-serif; font-size:0.72rem;
+    letter-spacing:0.25em; text-transform:uppercase; font-weight:500;
+    padding:1.1rem 2.8rem;
+    transition:all 0.3s ease;
+    position:relative; overflow:hidden;
+  }
+  .btn-submit::before {
+    content:''; position:absolute; inset:0;
+    background:var(--gold-light);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform 0.35s ease; z-index:0;
+  }
+  .btn-submit:hover::before { transform:scaleX(1); }
+  .btn-submit span { position:relative; z-index:1; }
+  .btn-submit:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(184,146,74,0.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top:1px solid var(--border);
+    padding:3rem 4rem;
+  }
+  .footer-inner {
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:2rem;
+  }
+  .footer-logo {
+    display:flex; align-items:center; gap:1rem;
+    color:var(--gold); text-decoration:none;
+  }
+  .footer-links { display:flex; gap:2rem; }
+  .footer-links a {
+    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--muted); text-decoration:none; transition:color 0.3s;
+  }
+  .footer-links a:hover { color:var(--gold); }
+  .footer-copy {
+    font-size:0.72rem; color:rgba(122,112,104,0.5); letter-spacing:0.05em;
+  }
+  .footer-marquee-wrap { overflow:hidden; padding:1.5rem 0; border-top:1px solid var(--border); }
+  .footer-marquee {
+    display:flex; gap:4rem;
+    animation: marquee 28s linear infinite;
+    white-space:nowrap; opacity:0.3;
+  }
+  .footer-marquee img { height:38px; width:auto; filter:invert(1) sepia(1) saturate(0.55) brightness(1.3); flex-shrink:0; }
+  .footer-brand-note {
+    font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,240,232,0.56);
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── NAVBAR ── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img class="brand-mark" src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Textiles logo">
+    <span class="brand-text">
+      <span class="brand-kicker">Surat, India</span>
+      <span class="brand-name">Shiveshwar Textiles</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#infrastructure">Infrastructure</a></li>
+    <li><a href="#quality">Quality</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact Us</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69d08aab1e14cd492e736468_ChatGPT%20Image%20Feb%2024%2C%202026%2C%2006_40_44%20PM.png" alt="Shiveshwar Textiles" id="heroBgImg">
+  </div>
+  <div class="hero-lines">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-since">Since 2021 &nbsp;·&nbsp; Surat, India</div>
+    <h1 class="hero-title">SHIVESHWAR<br><span>TEXTILES</span></h1>
+    <p class="hero-sub">Precision manufacturing, dependable supply, and fabric built for scale. Up to 1 million meters monthly.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary"><span>Explore Products</span></a>
+      <div class="hero-social">
+        <a href="https://www.linkedin.com/company/shiveshwar-textiles/" target="_blank" title="LinkedIn">in</a>
+        <a href="https://wa.link/xv04fy" target="_blank" title="WhatsApp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/shiveshwartextiles" target="_blank" title="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="mailto:parthmangukiya@shiveshwartextiles.com" title="Email">✉</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Cotton Fabrics</span><span class="dot">◆</span>
+    <span>Polyester Fabrics</span><span class="dot">◆</span>
+    <span>Blended Fabrics</span><span class="dot">◆</span>
+    <span>Custom Development</span><span class="dot">◆</span>
+    <span>GSM 50–250</span><span class="dot">◆</span>
+    <span>1M Meters / Month</span><span class="dot">◆</span>
+    <span>Surat, India</span><span class="dot">◆</span>
+    <span>B2B Bulk Supply</span><span class="dot">◆</span>
+    <!-- duplicate for seamless loop -->
+    <span>Cotton Fabrics</span><span class="dot">◆</span>
+    <span>Polyester Fabrics</span><span class="dot">◆</span>
+    <span>Blended Fabrics</span><span class="dot">◆</span>
+    <span>Custom Development</span><span class="dot">◆</span>
+    <span>GSM 50–250</span><span class="dot">◆</span>
+    <span>1M Meters / Month</span><span class="dot">◆</span>
+    <span>Surat, India</span><span class="dot">◆</span>
+    <span>B2B Bulk Supply</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-tag reveal">Our Story</div>
+  <div class="about-layout">
+    <div class="about-text reveal-left">
+      <h2 class="section-title">Founded on <em>precision</em>,<br>built for reliability.</h2>
+      <p class="section-body">Founded with a clear vision to deliver dependable fabric solutions, Shiveshwar Textiles is a growing textile manufacturing unit focused on quality, precision, and long-term business relationships.</p>
+      <p class="section-body" style="margin-top:1rem;">We operate with a strong commitment to disciplined production and consistent standards. Every order is handled with direct involvement, ensuring accurate GSM control, clean finishing, and reliable delivery timelines.</p>
+    </div>
+    <div class="about-grid reveal-right">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0c7119263b15e0d55044e_IMG_0661.jpg" alt="Factory">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0bbc9f986125431f4dc5e_IMG_0676.jpg" alt="Fabric">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0bbd4b0a77eae0b328da9_IMG_0669.jpg" alt="Production">
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="team-section">
+    <div class="section-tag reveal">Core Management</div>
+    <div class="team-grid">
+      <div class="team-card reveal" style="transition-delay:0.1s">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0b33bb678b3610fc96196_8EEC1158-D63D-45C3-8912-C6278FF0F6B6.JPEG" alt="Prakashbhai M. Mangukiya">
+        <div class="team-card-info">
+          <div class="team-name">Prakashbhai M. Mangukiya</div>
+          <div class="team-role">Founder</div>
+          <div class="team-quote">Provides strategic direction and oversees sourcing and overall operational discipline. Ensures production standards, quality control, and long-term stability.</div>
+        </div>
+      </div>
+      <div class="team-card reveal" style="transition-delay:0.2s">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0b267548d236482a03b3a_2483CA4D-93B6-46E6-A5F8-00A5BB52C568.JPG" alt="Parth P. Mangukiya">
+        <div class="team-card-info">
+          <div class="team-name">Parth P. Mangukiya</div>
+          <div class="team-role">Director</div>
+          <div class="team-quote">Leads business development, client coordination, and growth planning. Focuses on building reliable partnerships and expanding market presence.</div>
+        </div>
+      </div>
+      <div class="team-card reveal" style="transition-delay:0.3s">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0b47d2f8adb3525789c71_5e66cb27-8dd5-499e-a66f-fc78eb84b372.jpg" alt="Fenil M. Mangukiya">
+        <div class="team-card-info">
+          <div class="team-name">Fenil M. Mangukiya</div>
+          <div class="team-role">Production Manager</div>
+          <div class="team-quote">Supervises daily manufacturing operations and workflow execution. Maintains strict quality checks, timely dispatch control, and production efficiency.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS ── -->
+<section id="products">
+  <div class="products-header">
+    <div>
+      <div class="section-tag reveal">What We Make</div>
+      <h2 class="section-title reveal" style="margin-bottom:0">Our <em>Product</em> Range</h2>
+    </div>
+    <p class="reveal" style="font-size:0.85rem;color:var(--muted);max-width:260px;text-align:right;line-height:1.6;">Cotton, Polyester, Blended & Custom Development — built for B2B bulk supply.</p>
+  </div>
+  <div class="products-grid">
+    <a href="https://shiveshwartextiles.com/products/cotton-fabrics" target="_blank" class="product-card reveal" style="transition-delay:0.05s">
+      <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d41725e55a6fa6b34401c0_IMG_4578.JPG" alt="Cotton Fabrics">
+      <div class="product-card-overlay">
+        <span class="product-num">01</span>
+        <div class="product-arrow">↗</div>
+        <div class="product-name">Cotton<br>Fabrics</div>
+        <div class="product-sub">100–150 GSM · View Range →</div>
+      </div>
+    </a>
+    <a href="https://shiveshwartextiles.com/products/polyster-fabrics" target="_blank" class="product-card reveal" style="transition-delay:0.1s">
+      <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d4174501addf7b2249c368_IMG_4580.JPG" alt="Polyester Fabrics">
+      <div class="product-card-overlay">
+        <span class="product-num">02</span>
+        <div class="product-arrow">↗</div>
+        <div class="product-name">Polyester<br>Fabrics</div>
+        <div class="product-sub">50–250 GSM · View Range →</div>
+      </div>
+    </a>
+    <a href="https://shiveshwartextiles.com/products/blended-fabrics" target="_blank" class="product-card reveal" style="transition-delay:0.15s">
+      <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d74a5359b7eb61b0060dce_Untitled%20design%20(33)1775508183.jpg" alt="Blended Fabrics">
+      <div class="product-card-overlay">
+        <span class="product-num">03</span>
+        <div class="product-arrow">↗</div>
+        <div class="product-name">Blended<br>Fabrics</div>
+        <div class="product-sub">Custom GSM · View Range →</div>
+      </div>
+    </a>
+    <a href="https://shiveshwartextiles.com/products/custom-development-of-fabric" target="_blank" class="product-card reveal" style="transition-delay:0.2s">
+      <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69a096da7a6b26e1b628d2fe_Untitled%20design%20(21)%20(1).png" alt="Custom Development">
+      <div class="product-card-overlay">
+        <span class="product-num">04</span>
+        <div class="product-arrow">↗</div>
+        <div class="product-name">Custom<br>Development</div>
+        <div class="product-sub">Bespoke Specs · Learn More →</div>
+      </div>
+    </a>
+  </div>
+  <a href="#contact" class="cta-strip reveal">
+    <div class="cta-strip-text">Ready to build a <em>reliable supply</em> partnership?</div>
+    <div class="btn-primary"><span>Get in Touch &nbsp;→</span></div>
+  </a>
+</section>
+
+<!-- ── INFRASTRUCTURE ── -->
+<section id="infrastructure">
+  <div class="section-tag reveal">Capabilities</div>
+  <div class="infra-layout">
+    <div class="reveal-left">
+      <h2 class="section-title">Built for <em>Scale</em>.<br>Managed with Precision.</h2>
+      <p class="section-body">Integrated power loom and waterjet production with disciplined manufacturing operations and quality control processes at every stage.</p>
+      <div class="infra-stat-row">
+        <div class="infra-stat">
+          <strong>1M+</strong>
+          <span>Meters / Month</span>
+        </div>
+        <div class="infra-stat">
+          <strong>2021</strong>
+          <span>Established</span>
+        </div>
+        <div class="infra-stat">
+          <strong>3</strong>
+          <span>Fabric Types</span>
+        </div>
+      </div>
+    </div>
+    <div class="infra-gallery reveal-right">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a481180d61ac1d5340aa1e_PHOTO-2026-02-10-15-49-02.jpg" alt="Infrastructure">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0c710cef29f7ffeadedfe_IMG_0653.jpg" alt="Factory">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a483bdd8b87082bab902dd_566BC337-549E-42E5-8AA0-65BAB9B977EF.JPEG" alt="Operations">
+    </div>
+  </div>
+</section>
+
+<!-- ── QUALITY ── -->
+<section id="quality">
+  <div class="section-tag reveal">Standards</div>
+  <div class="quality-layout">
+    <div class="reveal-left">
+      <h2 class="section-title">Consistency in <em>Every Meter</em>.</h2>
+      <p class="section-body">Structured inspection processes ensure accurate GSM, uniform weave, and reliable batch quality across all production runs.</p>
+      <p class="section-body" style="margin-top:1rem;">At Shiveshwar Textiles, quality is maintained through disciplined monitoring at every stage of production. Our structured inspection checkpoints ensure fabric consistency, accurate measurements, and controlled finishing before dispatch.</p>
+      <div class="quality-pillars">
+        <div class="pillar reveal" style="transition-delay:0.1s">
+          <div class="pillar-title">GSM Accuracy</div>
+          <div class="pillar-desc">Each production batch is monitored to maintain precise GSM control within defined tolerances to ensure structural consistency.</div>
+        </div>
+        <div class="pillar reveal" style="transition-delay:0.2s">
+          <div class="pillar-title">Weave & Alignment Inspection</div>
+          <div class="pillar-desc">Fabric is checked for uniform weave structure and alignment to prevent irregularities across bulk production.</div>
+        </div>
+        <div class="pillar reveal" style="transition-delay:0.3s">
+          <div class="pillar-title">Pre-Dispatch Verification</div>
+          <div class="pillar-desc">Before shipment, rolls are verified for measurement accuracy and batch consistency to maintain delivery reliability.</div>
+        </div>
+      </div>
+    </div>
+    <div class="quality-images reveal-right">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a483bdd8b87082bab902dd_566BC337-549E-42E5-8AA0-65BAB9B977EF.JPEG" alt="QC 1">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a481bccd58eb2a0cd63f93_FFB41501-33AD-4C86-83F6-8CC206047FC9.JPEG" alt="QC 2">
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-tag reveal">Get in Touch</div>
+  <div class="contact-layout">
+    <div class="reveal-left">
+      <h2 class="section-title">Let's discuss<br>your <em>requirements</em>.</h2>
+      <p class="section-body">Share your fabric specifications, quantity, and timeline — our team will respond promptly.</p>
+      <br><br>
+      <h3>Contact Details</h3>
+      <div class="contact-detail">
+        <span class="contact-detail-icon">📍</span>
+        <div class="contact-detail-text"><a href="https://maps.app.goo.gl/T35zEz5dXCPAy9oy7" target="_blank">Surat, Gujarat, India</a></div>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-icon">✉</span>
+        <div class="contact-detail-text"><a href="mailto:parthmangukiya@shiveshwartextiles.com">parthmangukiya@shiveshwartextiles.com</a></div>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-icon">🕐</span>
+        <div class="contact-detail-text">Monday – Friday &nbsp;·&nbsp; 11 AM – 8 PM IST</div>
+      </div>
+      <div class="contact-social">
+        <a href="https://www.linkedin.com/company/shiveshwar-textiles/" target="_blank" title="LinkedIn">in</a>
+        <a href="https://wa.link/xv04fy" target="_blank" title="WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/shiveshwartextiles" target="_blank" title="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="mailto:parthmangukiya@shiveshwartextiles.com" title="Email">✉</a>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Subject</label>
+            <select class="form-select">
+              <option value="general">General Inquiry</option>
+              <option value="business">Business Inquiry</option>
+              <option value="complain">Complaint</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Your Message</label>
+            <textarea class="form-textarea" placeholder="Share your fabric specifications, quantity, and timeline..." required></textarea>
+          </div>
+          <div class="form-group full">
+            <label class="form-check">
+              <input type="checkbox" required>
+              <span>I confirm I am a human</span>
+            </label>
+          </div>
+          <div class="form-group full">
+            <button type="submit" class="btn-submit"><span>Send Inquiry →</span></button>
+          </div>
+        </div>
+      </form>
+      <div id="formSuccess" style="display:none; padding:2rem; border:1px solid var(--gold); background:rgba(184,146,74,0.06); text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);margin-bottom:0.5rem;">Thank you.</div>
+        <div style="font-size:0.85rem;color:var(--muted);">Your message has been received. We'll get back to you promptly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<div class="footer-marquee-wrap" style="background:var(--dark);">
+  <div class="footer-marquee">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Logo">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png" alt="Logo">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1e09bcb79a8d4f8a55957_textile.png" alt="Textile">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Logo">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png" alt="Logo">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1e09bcb79a8d4f8a55957_textile.png" alt="Textile">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Logo">
+    <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png" alt="Logo">
+  </div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <a href="#hero" class="footer-logo">
+      <img class="brand-mark" src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Textiles logo">
+      <span class="brand-text">
+        <span class="brand-kicker">Built for Scale</span>
+        <span class="brand-name">Shiveshwar Textiles</span>
+      </span>
+    </a>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#infrastructure">Infrastructure</a>
+      <a href="#quality">Quality</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div>
+      <div class="footer-copy">© 2024 Shiveshwar Textiles · Surat, India</div>
+      <div class="footer-brand-note">Cotton · Polyester · Blended · Custom Development</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX; my=e.clientY;
+    cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;
+  });
+  function animRing(){
+    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+    ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a,button,.product-card,.team-card,.pillar').forEach(el=>{
+    el.addEventListener('mouseenter',()=>ring.classList.add('hovered'));
+    el.addEventListener('mouseleave',()=>ring.classList.remove('hovered'));
+  });
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll',()=>{
+    navbar.classList.toggle('scrolled', window.scrollY>60);
+  });
+
+  // Hero parallax
+  const heroBg = document.getElementById('heroBgImg');
+  window.addEventListener('scroll',()=>{
+    const s = window.scrollY;
+    if(heroBg) heroBg.style.transform=`translateY(${s*0.3}px) scale(1.1)`;
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+  revealEls.forEach(el=>observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e){
+    e.preventDefault();
+    document.getElementById('contactForm').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  }
+</script>
+</body>
+</html>

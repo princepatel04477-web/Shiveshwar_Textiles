@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shiveshwar Textiles — Fabric Built for Scale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --off-white: #f8f5f0;
+      --linen-cream: #f5f0e6;
+      --charcoal: #0a0a0a;
+      --gold: #b09a6f;
+      --gold-light: #d4c9b8;
+      --gold-dark: #8a7a5f;
+      --dark-charcoal: #0c0c0c;
+      --light-gray: #e0d8cc;
+      --medium-gray: #a0988c;
+      --light-charcoal: #2a2a2a;
+      --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--dark-charcoal);
+      color: var(--off-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+    }
+
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .font-serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(12, 12, 12, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(176, 154, 111, 0.1);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--off-white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      position: relative;
+      transition: var(--transition-fast);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: var(--gold-light);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .location-tag {
+      color: var(--gold);
+      font-size: 0.8rem;
+      text-decoration: none;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 10, 0.7);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 4rem 5rem;
+      max-width: 700px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      font-weight: 700;
+      line-height: 0.95;
+      margin-bottom: 1rem;
+      color: var(--off-white);
+    }
+
+    .hero-title span {
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--light-gray);
+      max-width: 500px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: transparent;
+      color: var(--off-white);
+      border: 1px solid var(--gold);
+      padding: 0.8rem 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold);
+      color: var(--dark-charcoal);
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: -1;
+    }
+
+    .hero-cta:hover::before {
+      opacity: 1;
+    }
+
+    .hero-social {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .hero-social a {
+      color: var(--gold-light);
+      font-size: 1rem;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .hero-social a:hover {
+      color: var(--gold);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-top {
+      background: var(--gold);
+      padding: 0.75rem 0;
+      overflow: hidden;
+    }
+
+    .marquee-content {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+
+    .marquee-content span {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dark-charcoal);
+      padding: 0 1.5rem;
+      flex: 0 0 auto;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 3rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--off-white);
+    }
+
+    .section-title em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--light-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--linen-cream);
+      color: var(--charcoal);
+    }
+
+    .about .section-title,
+    .about .section-header {
+      color: var(--charcoal);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .about-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .about-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-fast);
+    }
+
+    .about-images img:hover {
+      transform: scale(1.03);
+    }
+
+    .about-images img:first-child {
+      grid-column: span 2;
+    }
+
+    /* ── TEAM ── */
+    .team {
+      margin-top: 4rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      text-align: center;
+    }
+
+    .team-member img {
+      width: 100%;
+      object-fit: cover;
+      transition: var(--transition-fast);
+    }
+
+    .team-member img:hover {
+      transform: scale(1.03);
+    }
+
+    .team-member h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin: 1rem 0 0.5rem;
+      color: var(--charcoal);
+    }
+
+    .team-member .role {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 1rem;
+    }
+
+    .team-member .quote {
+      font-size: 0.9rem;
+      color: var(--medium-gray);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* ── PRODUCTS ── */
+    .products {
+      background: var(--dark-charcoal);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+      opacity: 0.7;
+    }
+
+    .product-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, transparent 100%);
+      transform: translateY(100%);
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-overlay {
+      transform: translateY(0);
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--off-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-link {
+      color: var(--gold-light);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+    }
+
+    .product-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: var(--transition-fast);
+    }
+
+    .product-link:hover::after {
+      width: 100%;
+    }
+
+    /* ── INFRASTRUCTURE ── */
+    .infrastructure {
+      background: var(--charcoal);
+    }
+
+    .infra-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .infra-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .infra-stats {
+      display: flex;
+      gap: 3rem;
+      margin: 2rem 0;
+    }
+
+    .infra-stat {
+      text-align: center;
+    }
+
+    .infra-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .infra-stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--medium-gray);
+    }
+
+    .infra-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .infra-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-fast);
+    }
+
+    .infra-gallery img:hover {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+
+    /* ── QUALITY ── */
+    .quality {
+      background: var(--linen-cream);
+      color: var(--charcoal);
+    }
+
+    .quality .section-title {
+      color: var(--charcoal);
+    }
+
+    .quality-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .quality-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .quality-text p {
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .quality-features {
+      margin-top: 2rem;
+    }
+
+    .quality-feature {
+      border-left: 2px solid var(--gold);
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      background: rgba(245, 240, 230, 0.7);
+    }
+
+    .quality-feature h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+
+    .quality-feature p {
+      color: var(--charcoal);
+      margin: 0;
+    }
+
+    .quality-images {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .quality-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-fast);
+    }
+
+    .quality-images img:hover {
+      transform: scale(1.03);
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--dark-charcoal);
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .contact-detail-text {
+      font-size: 0.9rem;
+      color: var(--light-gray);
+    }
+
+    .contact-detail-text a {
+      color: var(--off-white);
+      text-decoration: none;
+    }
+
+    .contact-detail-text a:hover {
+      color: var(--gold);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--medium-gray);
+    }
+
+    .form-control {
+      background: transparent;
+      border: 1px solid var(--gold-dark);
+      padding: 0.8rem;
+      color: var(--off-white);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .form-control:focus {
+      outline: 1px solid var(--gold);
+      border-color: var(--gold);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .checkbox-group input {
+      width: 20px;
+      height: 20px;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      color: var(--light-gray);
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      background: var(--gold);
+      color: var(--dark-charcoal);
+      border: none;
+      padding: 1rem 2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gold-light);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--dark-charcoal);
+    }
+
+    .btn:hover::before {
+      opacity: 0.3;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem;
+      border-top: 1px solid var(--gold);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      transition: var(--transition-fast);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-copyright {
+      text-align: center;
+      color: var(--medium-gray);
+      font-size: 0.8rem;
+    }
+
+    .marquee-bottom {
+      background: var(--charcoal);
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--gold);
+      overflow: hidden;
+      margin: 2rem 0 0;
+    }
+
+    .marquee-bottom-content {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 25s linear infinite;
+    }
+
+    .marquee-bottom-content img {
+      height: 30px;
+      opacity: 0.4;
+      filter: grayscale(100%);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .infra-content,
+      .quality-content,
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-images {
+        grid-template-columns: 1fr;
+      }
+      
+      .infra-gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ── HEADER ── -->
+  <header>
+    <a href="#hero" class="logo">Shiveshwar Textiles</a>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#infrastructure">Infrastructure</a></li>
+        <li><a href="#quality">Quality</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+    <a href="https://maps.app.goo.gl/rwKBXoFXEG8AZBp27" target="_blank" class="location-tag">Surat, India</a>
+  </header>
+
+  <!-- ── MARQUEE TOP ── -->
+  <div class="marquee-top">
+    <div class="marquee-content">
+      <span>Cotton Fabrics</span>
+      <span>Polyester Fabrics</span>
+      <span>Blended Fabrics</span>
+      <span>Custom Development</span>
+      <span>GSM 50–250</span>
+      <span>1M Meters / Month</span>
+      <span>Surat, India</span>
+      <span>B2B Bulk Supply</span>
+      <span>Since 2021</span>
+      <!-- Duplicate for seamless loop -->
+      <span>Cotton Fabrics</span>
+      <span>Polyester Fabrics</span>
+      <span>Blended Fabrics</span>
+      <span>Custom Development</span>
+      <span>GSM 50–250</span>
+      <span>1M Meters / Month</span>
+      <span>Surat, India</span>
+      <span>B2B Bulk Supply</span>
+      <span>Since 2021</span>
+    </div>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-video-container">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="https://cdn.pixabay.com/video/2023/03/01/100013-817480921_tiny.jpg" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title font-display">SHIVESHWAR<br><span>TEXTILES</span></h1>
+      <p class="hero-subtitle">Step into a world of precision manufacturing, dependable supply, and fabric built for scale. (Since 2021)</p>
+      <a href="#products" class="hero-cta">Explore Products</a>
+      <div class="hero-social">
+        <a href="https://www.linkedin.com/company/shiveshwar-textiles/" target="_blank">LinkedIn</a>
+        <a href="https://wa.link/xv04fy" target="_blank">WhatsApp</a>
+        <a href="https://www.instagram.com/shiveshwartextiles" target="_blank">Instagram</a>
+        <a href="mailto:parthmangukiya@shiveshwartextiles.com">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="about" id="about">
+    <div class="section-header">
+      <h2 class="section-title">Our <em>Story</em></h2>
+      <p class="section-subtitle">Crafting quality textiles with precision since 2021</p>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Founded with a clear vision to deliver dependable fabric solutions, Shiveshwar Textiles is a growing textile manufacturing unit focused on quality, precision, and long-term business relationships. We operate with a strong commitment to disciplined production and consistent standards. Every order is handled with direct involvement, ensuring accurate GSM control, clean finishing, and reliable delivery timelines.</p>
+        <div class="team">
+          <h3 class="section-title">Core <em>Management</em></h3>
+          <div class="team-grid">
+            <div class="team-member">
+              <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0b47d2f8adb3525789c71_5e66cb27-8dd5-499e-a66f-fc78eb84b372.jpg" alt="Prakashbhai M. Mangukiya">
+              <h3>Prakashbhai M. Mangukiya</h3>
+              <div class="role">Founder</div>
+              <p class="quote">Provides strategic direction and oversees sourcing and overall operational discipline. Ensures production standards, quality control, and long-term stability of the business.</p>
+            </div>
+            <div class="team-member">
+              <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0b267548d236482a03b3a_2483CA4D-93B6-46E6-A5F8-00A5BB52C568.JPG" alt="Parth P. Mangukiya">
+              <h3>Parth P. Mangukiya</h3>
+              <div class="role">Director</div>
+              <p class="quote">Leads business development, client coordination, and growth planning. Focuses on building reliable partnerships and expanding market presence.</p>
+            </div>
+            <div class="team-member">
+              <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0b33bb678b3610fc96196_8EEC1158-D63D-45C3-8912-C6278FF0F6B6.JPEG" alt="Fenil M. Mangukiya">
+              <h3>Fenil M. Mangukiya</h3>
+              <div class="role">Production Manager</div>
+              <p class="quote">Supervises daily manufacturing operations and workflow execution. Maintains strict quality checks, timely dispatch control, and production efficiency.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-images">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0c7119263b15e0d55044e_IMG_0661.jpg" alt="Factory">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0bbc9f986125431f4dc5e_IMG_0676.jpg" alt="Fabric">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0bbd4b0a77eae0b328da9_IMG_0669.jpg" alt="Production">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0c710cef29f7ffeadedfe_IMG_0653.jpg" alt="Team">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRODUCTS ── -->
+  <section class="products" id="products">
+    <div class="section-header">
+      <h2 class="section-title">Our <em>Products</em></h2>
+      <p class="section-subtitle">Premium fabrics for discerning clients</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <a href="https://shiveshwartextiles.com/products/cotton-fabrics" target="_blank">
+          <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d41725e55a6fa6b34401c0_IMG_4578.JPG" alt="Cotton Fabrics">
+          <div class="product-overlay">
+            <h3 class="product-name">Cotton Fabrics</h3>
+            <a href="https://shiveshwartextiles.com/products/cotton-fabrics" class="product-link">View Range</a>
+          </div>
+        </a>
+      </div>
+      <div class="product-card">
+        <a href="https://shiveshwartextiles.com/products/polyster-fabrics" target="_blank">
+          <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d4174501addf7b2249c368_IMG_4580.JPG" alt="Polyester Fabrics">
+          <div class="product-overlay">
+            <h3 class="product-name">Polyester Fabrics</h3>
+            <a href="https://shiveshwartextiles.com/products/polyster-fabrics" class="product-link">View Range</a>
+          </div>
+        </a>
+      </div>
+      <div class="product-card">
+        <a href="https://shiveshwartextiles.com/products/blended-fabrics" target="_blank">
+          <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d74a5359b7eb61b0060dce_Untitled%20design%20(33)1775508183.jpg" alt="Blended Fabrics">
+          <div class="product-overlay">
+            <h3 class="product-name">Blended Fabrics</h3>
+            <a href="https://shiveshwartextiles.com/products/blended-fabrics" class="product-link">View Range</a>
+          </div>
+        </a>
+      </div>
+      <div class="product-card">
+        <a href="https://shiveshwartextiles.com/products/custom-development-of-fabric" target="_blank">
+          <img src="https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69a096da7a6b26e1b628d2fe_Untitled%20design%20(21)%20(1).png" alt="Custom Development">
+          <div class="product-overlay">
+            <h3 class="product-name">Custom Development</h3>
+            <a href="https://shiveshwartextiles.com/products/custom-development-of-fabric" class="product-link">Learn More</a>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INFRASTRUCTURE ── -->
+  <section class="infrastructure" id="infrastructure">
+    <div class="section-header">
+      <h2 class="section-title">Built for <em>Scale</em></h2>
+      <p class="section-subtitle">Managed with Precision</p>
+    </div>
+    <div class="infra-content">
+      <div class="infra-text">
+        <p>Integrated power loom and waterjet production with capacity up to 1 million meters monthly.</p>
+        <div class="infra-stats">
+          <div class="infra-stat">
+            <div class="infra-stat-value">1M+</div>
+            <div class="infra-stat-label">Meters/month</div>
+          </div>
+          <div class="infra-stat">
+            <div class="infra-stat-value">2021</div>
+            <div class="infra-stat-label">Est. 2021</div>
+          </div>
+          <div class="infra-stat">
+            <div class="infra-stat-value">3</div>
+            <div class="infra-stat-label">Fabric Types</div>
+          </div>
+        </div>
+      </div>
+      <div class="infra-gallery">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a481180d61ac1d5340aa1e_PHOTO-2026-02-10-15-49-02.jpg" alt="Infrastructure">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0c710cef29f7ffeadedfe_IMG_0653.jpg" alt="Factory">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a483bdd8b87082bab902dd_566BC337-549E-42E5-8AA0-65BAB9B977EF.JPEG" alt="Operations">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUALITY ── -->
+  <section class="quality" id="quality">
+    <div class="section-header">
+      <h2 class="section-title">Consistency in <em>Every Meter</em></h2>
+      <p class="section-subtitle">Maintaining the highest standards of quality control</p>
+    </div>
+    <div class="quality-content">
+      <div class="quality-text">
+        <p>Disciplined monitoring ensures accurate GSM, uniform weave, and reliable batch quality across all production runs. At Shiveshwar Textiles, quality is maintained through disciplined monitoring at every stage of production. Our structured inspection checkpoints ensure fabric consistency, accurate measurements, and controlled finishing before dispatch.</p>
+        <div class="quality-features">
+          <div class="quality-feature">
+            <h3>GSM Accuracy</h3>
+            <p>Each production batch is monitored to maintain precise GSM control within defined tolerances to ensure structural consistency.</p>
+          </div>
+          <div class="quality-feature">
+            <h3>Weave & Alignment Inspection</h3>
+            <p>Fabric is checked for uniform weave structure and alignment to prevent irregularities across bulk production.</p>
+          </div>
+          <div class="quality-feature">
+            <h3>Pre-Dispatch Verification</h3>
+            <p>Before shipment, rolls are verified for measurement accuracy and batch consistency to maintain delivery reliability.</p>
+          </div>
+        </div>
+      </div>
+      <div class="quality-images">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a483bdd8b87082bab902dd_566BC337-549E-42E5-8AA0-65BAB9B977EF.JPEG" alt="QC 1">
+        <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a481bccd58eb2a0cd63f93_FFB41501-33AD-4C86-83F6-8CC206047FC9.JPEG" alt="QC 2">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact" id="contact">
+    <div class="section-header">
+      <h2 class="section-title">Let's discuss your <em>Requirements</em></h2>
+      <p class="section-subtitle">Share your fabric specifications, quantity, and timeline — our team will respond promptly</p>
+    </div>
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Contact Details</h3>
+        <div class="contact-detail">
+          <div class="contact-detail-text">📍 <a href="https://maps.app.goo.gl/rwKBXoFXEG8AZBp27" target="_blank">Surat, Gujarat, India</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-text">✉ <a href="mailto:parthmangukiya@shiveshwartextiles.com">parthmangukiya@shiveshwartextiles.com</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-text">🕐 Monday–Friday 11AM–8PM</div>
+        </div>
+        <div class="contact-social">
+          <a href="https://www.linkedin.com/company/shiveshwar-textiles/" target="_blank">LinkedIn</a>
+          <a href="https://wa.link/xv04fy" target="_blank">WhatsApp</a>
+          <a href="https://www.instagram.com/shiveshwartextiles" target="_blank">Instagram</a>
+          <a href="mailto:parthmangukiya@shiveshwartextiles.com">Email</a>
+        </div>
+      </div>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" class="form-control" required>
+            <option value="general">General Inquiry</option>
+            <option value="business">Business Inquiry</option>
+            <option value="complain">Complaint</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" class="form-control" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="human-check" required>
+            <label for="human-check">I confirm I am a human</label>
+          </div>
+        </div>
+        <button type="submit" class="btn">Send Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <div class="marquee-bottom">
+    <div class="marquee-bottom-content">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Brand">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png" alt="Brand">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1e09bcb79a8d4f8a55957_textile.png" alt="Textile">
+      <!-- Duplicate for seamless loop -->
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Brand">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png" alt="Brand">
+      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1e09bcb79a8d4f8a55957_textile.png" alt="Textile">
+    </div>
+  </div>
+  <footer>
+    <div class="footer-content">
+      <a href="#hero" class="footer-logo">Shiveshwar Textiles</a>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#infrastructure">Infrastructure</a></li>
+        <li><a href="#quality">Quality</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-copyright">
+      <p>© 2024 Shiveshwar Textiles · Surat, India</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple JavaScript for form submission and animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Form submission
+      const contactForm = document.querySelector('.contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          // In a real implementation, you would handle the form submission here
+          alert('Thank you for your inquiry! Our team will get back to you soon.');
+          contactForm.reset();
+        });
+      }
+
+      // Simple scroll animation
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      // Observe elements with animate-on-scroll class
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
