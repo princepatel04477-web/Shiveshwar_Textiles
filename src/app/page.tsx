@@ -12,16 +12,40 @@ const heroImage =
 
 const fabricSwatches = [
   {
-    name: 'Raw Cotton',
+    name: 'Cotton Weave',
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d41725e55a6fa6b34401c0_IMG_4578.JPG',
     gsm: '120 GSM',
+    width: '150 cm',
+    moq: '500m',
+    slug: 'cotton-fabrics',
     class: 'floating-swatch-1'
   },
   {
     name: 'Polyester Filament',
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d4174501addf7b2249c368_IMG_4580.JPG',
     gsm: '180 GSM',
+    width: '150 cm',
+    moq: '1000m',
+    slug: 'polyester-fabrics',
     class: 'floating-swatch-2'
+  },
+  {
+    name: 'Blended Weave',
+    image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d74a5359b7eb61b0060dce_Untitled%20design%20(33)1775508183.jpg',
+    gsm: '220 GSM',
+    width: '150 cm',
+    moq: '800m',
+    slug: 'blended-fabrics',
+    class: 'floating-swatch-3'
+  },
+  {
+    name: 'Custom Weaving',
+    image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69a096da7a6b26e1b628d2fe_Untitled%20design%20(21)%20(1).png',
+    gsm: 'Custom GSM',
+    width: 'Custom Width',
+    moq: '1500m',
+    slug: 'custom-development',
+    class: 'floating-swatch-4'
   }
 ];
 
@@ -239,6 +263,7 @@ export default function HomePage() {
   const [samplingCount, setSamplingCount] = useState(0);
   const [yearsCount, setYearsCount] = useState(0);
   const [statsTriggered, setStatsTriggered] = useState(false);
+  const [activeHeroSwatchIndex, setActiveHeroSwatchIndex] = useState(0);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
   // States for Step 2 Trust Section
@@ -367,15 +392,16 @@ export default function HomePage() {
 
   }, []);
 
-  // 2. Parallax scroll effect (direct manipulation for peak performance)
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY;
       const swatch1 = document.querySelector('.floating-swatch-1') as HTMLElement;
       const swatch2 = document.querySelector('.floating-swatch-2') as HTMLElement;
-      const bg = document.querySelector('.hero-zoom-bg') as HTMLElement;
+      const bgs = document.querySelectorAll('.hero-zoom-bg');
 
-      if (bg) bg.style.transform = `translateY(${scrolled * 0.35}px) scale(1.05)`;
+      bgs.forEach((bg) => {
+        (bg as HTMLElement).style.transform = `translateY(${scrolled * 0.35}px) scale(1.05)`;
+      });
       if (swatch1) swatch1.style.transform = `translateY(${scrolled * 0.1 - 10}px) rotate(-4deg)`;
       if (swatch2) swatch2.style.transform = `translateY(${scrolled * 0.12 + 10}px) rotate(4deg)`;
     };
@@ -572,12 +598,18 @@ export default function HomePage() {
       {/* 1. Cinematic Luxury Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-between overflow-hidden px-4 md:px-8 max-w-7xl mx-auto w-full">
         
-        {/* Layered background with Ken Burns zoom */}
+        {/* Layered background with crossfade on selection */}
         <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl border border-[#b8924a]/15 shadow-2xl">
-          <div 
-            className="hero-zoom-bg absolute inset-0 bg-cover bg-center opacity-30 scale-105"
-            style={{ backgroundImage: `url("${heroImage}")` }}
-          />
+          {fabricSwatches.map((swatch, idx) => (
+            <div 
+              key={idx}
+              className="hero-zoom-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1000ms] ease-in-out"
+              style={{ 
+                backgroundImage: `url("${swatch.image}")`,
+                opacity: activeHeroSwatchIndex === idx ? 0.35 : 0
+              }}
+            />
+          ))}
           {/* Layered dark overlays */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/40 to-transparent" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(212,169,106,0.12),transparent_50%)]" />
@@ -597,15 +629,16 @@ export default function HomePage() {
             </span>
             
             <h1 className="hero-title-main font-serif text-4xl uppercase leading-[1.1] tracking-[0.06em] text-[#faf8f4] sm:text-5xl md:text-6xl lg:text-7xl">
-              Premium Indian Textile Manufacturing For Global Markets
+              Global Weaving. <br />
+              <span className="text-[#d4a96a] font-light italic">Direct Mill Access.</span>
             </h1>
             
             <p className="hero-subtitle opacity-0 max-w-2xl text-sm leading-relaxed text-[#f5f0e8]/75 sm:text-base md:text-lg font-light">
-              Export-quality fabrics engineered for global buyers, wholesalers, and apparel brands. Designed to meet strict GSM weight standards, color coordinated, and shipped worldwide.
+              Premium Indian fabrics engineered for global brands and wholesale buyers. Direct from our Surat mill.
             </p>
 
             {/* CTAs with Magnetic Animation */}
-            <div className="hero-ctas opacity-0 pt-6 flex flex-wrap gap-4 items-center">
+            <div className="hero-ctas opacity-0 pt-4 flex flex-wrap gap-4 items-center">
               <button
                 onClick={openDrawer}
                 onMouseMove={handleMagneticMove}
@@ -636,28 +669,114 @@ export default function HomePage() {
                 WhatsApp Inquiry
               </a>
             </div>
+
+            {/* Mobile interactive thumbnails */}
+            <div className="lg:hidden mt-8 flex flex-col items-start w-full gap-2.5">
+              <span className="text-[9px] font-mono uppercase tracking-widest text-[#d4a96a]/70">Tap to Preview Fabric & Specs</span>
+              <div className="flex gap-3 justify-start items-center">
+                {fabricSwatches.map((swatch, idx) => {
+                  const isActive = activeHeroSwatchIndex === idx;
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveHeroSwatchIndex(idx)}
+                      className={`relative w-11 h-11 border rounded-sm overflow-hidden transition-all duration-300 cursor-pointer ${
+                        isActive ? 'border-[#d4a96a] scale-115 shadow-lg' : 'border-[#b8924a]/20 opacity-60'
+                      }`}
+                    >
+                      <img src={swatch.image} alt={swatch.name} className="w-full h-full object-cover" />
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="bg-[#121110]/95 border border-[#b8924a]/20 p-4 mt-2 text-xs space-y-2 w-full max-w-sm shadow-xl backdrop-blur-md">
+                <div className="flex justify-between items-center text-[10px] font-mono border-b border-[#b8924a]/10 pb-1.5">
+                  <span className="text-[#d4a96a]/70 uppercase">Weave Type:</span>
+                  <span className="text-white font-medium">{fabricSwatches[activeHeroSwatchIndex].name}</span>
+                </div>
+                <div className="flex justify-between items-center text-[10px] font-mono border-b border-[#b8924a]/10 pb-1.5">
+                  <span className="text-[#d4a96a]/70 uppercase">GSM / Width:</span>
+                  <span className="text-white font-medium">{fabricSwatches[activeHeroSwatchIndex].gsm} / {fabricSwatches[activeHeroSwatchIndex].width}</span>
+                </div>
+                <button
+                  onClick={() => {
+                    const active = fabricSwatches[activeHeroSwatchIndex];
+                    addItem({
+                      id: active.slug,
+                      name: active.name,
+                      gsm: active.gsm,
+                      image: active.image
+                    }, parseInt(active.moq));
+                    openDrawer();
+                  }}
+                  className="w-full text-center border border-[#b8924a] bg-[#b8924a] text-[#0f0e0c] font-bold py-2 text-[9px] uppercase tracking-widest hover:bg-[#d4a96a] transition"
+                >
+                  Add Swatch To RFQ
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Floating Swatch Suspended Layer */}
-          <div className="hidden lg:flex flex-col gap-6 justify-center items-end relative h-96">
-            {fabricSwatches.map((swatch, idx) => (
-              <div 
-                key={idx}
-                className={`${swatch.class} backdrop-blur-md bg-black/60 border border-[#b8924a]/20 p-4 shadow-2xl flex items-center gap-4 w-64 select-none transform hover:border-[#d4a96a]/50 transition-all duration-300`}
-                style={{ transformStyle: 'preserve-3d', perspective: '500px' }}
-              >
-                <img 
-                  src={swatch.image} 
-                  alt={swatch.name} 
-                  className="w-16 h-16 object-cover border border-[#b8924a]/25" 
-                />
-                <div>
-                  <span className="text-[9px] uppercase tracking-wider text-[#d4a96a] font-mono block">Weave Swatch</span>
-                  <h4 className="font-serif text-sm text-white font-medium">{swatch.name}</h4>
-                  <span className="text-[10px] text-white/50 font-mono block mt-0.5">{swatch.gsm}</span>
-                </div>
+          {/* Interactive Fabric Selector & B2B Spec Card */}
+          <div className="hidden lg:flex flex-col gap-4 justify-center items-end relative z-20">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#d4a96a]/80 mb-2">Select Fabric Line</span>
+            <div className="space-y-3 w-72">
+              {fabricSwatches.map((swatch, idx) => {
+                const isActive = activeHeroSwatchIndex === idx;
+                return (
+                  <button 
+                    key={idx}
+                    onClick={() => setActiveHeroSwatchIndex(idx)}
+                    className={`w-full text-left backdrop-blur-md border p-3 flex items-center gap-3 transition-all duration-300 cursor-pointer ${
+                      isActive 
+                        ? 'bg-[#b8924a]/15 border-[#d4a96a] shadow-[0_0_20px_rgba(212,169,106,0.15)] scale-[1.02]' 
+                        : 'bg-black/40 border-[#b8924a]/15 hover:border-[#b8924a]/40 hover:bg-black/60'
+                    }`}
+                  >
+                    <img 
+                      src={swatch.image} 
+                      alt={swatch.name} 
+                      className={`w-12 h-12 object-cover border transition-colors ${
+                        isActive ? 'border-[#d4a96a]' : 'border-[#b8924a]/20'
+                      }`} 
+                    />
+                    <div className="flex-grow">
+                      <h4 className={`font-serif text-xs uppercase tracking-wider transition-colors ${
+                        isActive ? 'text-[#d4a96a] font-bold' : 'text-white'
+                      }`}>{swatch.name}</h4>
+                      <div className="flex gap-2 text-[9px] text-white/50 font-mono mt-0.5">
+                        <span>{swatch.gsm}</span>
+                        <span>•</span>
+                        <span>Width: {swatch.width}</span>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            
+            {/* Spec Details Card */}
+            <div className="w-72 bg-[#121110]/95 border border-[#b8924a]/20 p-4 mt-2 text-xs space-y-3 shadow-xl backdrop-blur-md">
+              <div className="flex justify-between items-center text-[10px] font-mono border-b border-[#b8924a]/10 pb-2">
+                <span className="text-[#d4a96a]/70 uppercase tracking-wider">Target MOQ:</span>
+                <span className="text-white font-medium">{fabricSwatches[activeHeroSwatchIndex].moq}</span>
               </div>
-            ))}
+              <button
+                onClick={() => {
+                  const active = fabricSwatches[activeHeroSwatchIndex];
+                  addItem({
+                    id: active.slug,
+                    name: active.name,
+                    gsm: active.gsm,
+                    image: active.image
+                  }, parseInt(active.moq));
+                  openDrawer();
+                }}
+                className="w-full text-center border border-[#b8924a] bg-[#b8924a] text-[#0f0e0c] font-bold py-2.5 text-[10px] uppercase tracking-widest hover:bg-[#d4a96a] transition cursor-pointer"
+              >
+                Add Swatch To RFQ
+              </button>
+            </div>
           </div>
 
         </div>
