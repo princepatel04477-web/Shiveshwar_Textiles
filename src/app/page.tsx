@@ -154,11 +154,11 @@ function CanvasParticles() {
     window.addEventListener('resize', handleResize);
 
     // Build particle configurations
-    const particles = Array.from({ length: 30 }, () => ({
+    const particles = Array.from({ length: 45 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.5 + 0.2
+      r: Math.random() * 1.5 + 0.8,
+      opacity: Math.random() * 0.4 + 0.35
     }));
 
     // Coordinate floating movement animations using Anime.js
@@ -166,7 +166,7 @@ function CanvasParticles() {
       animate(p, {
         x: [p.x, Math.random() * width],
         y: [p.y, Math.random() * height],
-        opacity: [p.opacity, Math.random() * 0.8 + 0.1],
+        opacity: [p.opacity, Math.random() * 0.4 + 0.35],
         duration: () => Math.random() * 8000 + 4000,
         ease: 'inOutSine',
         loop: true,
