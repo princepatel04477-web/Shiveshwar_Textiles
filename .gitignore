@@ -19,3 +19,5 @@ Thumbs.db
 .env.production.local
 
 ruvector.db
+.vercel
+tsconfig.tsbuildinfo

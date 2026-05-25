@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --font-serif: var(--font-cormorant), serif;
+  --font-sans: var(--font-dm-sans), sans-serif;
+  --animate-marquee: marquee 28s linear infinite;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -25,6 +31,8 @@ a {
   text-decoration: none;
 }
 
+
+
 @keyframes reveal-up {
   from {
     opacity: 0;
@@ -45,6 +53,43 @@ a {
   to {
     transform: translateX(-50%);
   }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
 }
 
 .reveal-fade {
@@ -92,9 +137,34 @@ img,
   }
 
   .reveal-fade,
-  .marquee-track {
-    animation: none;
-    opacity: 1;
-    transform: none;
+  .marquee-track,
+  .animate-shake,
+  .animate-slide-in,
+  .animate-scale-in,
+  .animate-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
+
+@keyframes route-dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-route-dash {
+  animation: route-dash 3s linear infinite;
+  stroke-dasharray: 8, 4;
+}
+
+/* Hide scrollbars but keep functionality */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
