@@ -7,7 +7,7 @@ import { useCart } from '@/context/CartContext';
 import { ArrowRight, CheckCircle2, Factory, Shield, Truck, Sparkles, MessageSquare, Download, X, Award, Clock, Users, Globe, Layers, ChevronDown, ChevronUp } from 'lucide-react';
 import { animate, createTimeline, stagger } from 'animejs';
 import dynamic from 'next/dynamic';
-import ManufacturingExcellence from '@/components/ManufacturingExcellence';
+
 
 const GlobalNetworkGlobe = dynamic(
   () => import('@/components/GlobalNetworkGlobe'),
@@ -757,8 +757,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. Manufacturing Excellence Section */}
-      <ManufacturingExcellence />
+
 
       {/* 5.1 Global Network Section (3D Connected Cities Globe) */}
       <GlobalNetworkGlobe />
