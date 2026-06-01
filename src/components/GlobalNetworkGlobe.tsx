@@ -24,6 +24,135 @@ const cities: City[] = [
   { name: 'Amsterdam', lat: 52.3676, lon: 4.9041, region: 'Europe', transit: '5–7 Days (Air)' }
 ];
 
+interface LandCircle {
+  lat: number;
+  lon: number;
+  rad: number;
+}
+
+const landCircles: LandCircle[] = [
+  // --- NORTH AMERICA ---
+  { lat: 64, lon: -150, rad: 12 },  // Alaska
+  { lat: 60, lon: -120, rad: 18 },  // NW Canada
+  { lat: 60, lon: -85, rad: 16 },   // NE Canada / Hudson Bay
+  { lat: 50, lon: -100, rad: 20 },  // Central Canada
+  { lat: 45, lon: -115, rad: 12 },  // Western US / Oregon
+  { lat: 40, lon: -95, rad: 14 },   // Central US
+  { lat: 38, lon: -78, rad: 12 },   // Eastern US
+  { lat: 28, lon: -110, rad: 8 },   // NW Mexico / Baja
+  { lat: 22, lon: -100, rad: 8 },   // Southern Mexico
+  { lat: 14, lon: -90, rad: 5 },    // Central America (Guatemala)
+  { lat: 9, lon: -80, rad: 4 },     // Panama
+  { lat: 26, lon: -80, rad: 5 },    // Florida / Bahamas
+  { lat: 72, lon: -40, rad: 12 },   // Greenland South
+  { lat: 78, lon: -40, rad: 10 },   // Greenland North
+
+  // --- SOUTH AMERICA ---
+  { lat: 8, lon: -70, rad: 8 },     // Colombia / Venezuela
+  { lat: -3, lon: -65, rad: 12 },   // NW Brazil / Amazon
+  { lat: -5, lon: -45, rad: 10 },   // NE Brazil
+  { lat: -12, lon: -62, rad: 12 },  // Central South America
+  { lat: -15, lon: -48, rad: 10 },  // Eastern Brazil
+  { lat: -22, lon: -60, rad: 10 },  // Paraguay / Bolivia
+  { lat: -30, lon: -62, rad: 8 },   // Argentina North
+  { lat: -40, lon: -68, rad: 6 },   // Argentina Central
+  { lat: -50, lon: -71, rad: 4 },   // Patagonia
+
+  // --- EUROPE ---
+  { lat: 46, lon: 2, rad: 6 },      // France
+  { lat: 40, lon: -4, rad: 5 },     // Spain
+  { lat: 42, lon: 13, rad: 4 },     // Italy
+  { lat: 52, lon: 15, rad: 8 },     // Germany / Poland
+  { lat: 48, lon: 25, rad: 8 },     // Ukraine / Romania
+  { lat: 54, lon: -2, rad: 4.5 },   // UK
+  { lat: 53, lon: -8, rad: 3.5 },   // Ireland
+  { lat: 62, lon: 10, rad: 5 },     // Norway
+  { lat: 62, lon: 18, rad: 5 },     // Sweden
+  { lat: 64, lon: 26, rad: 5 },     // Finland
+  { lat: 64, lon: -18, rad: 3.5 },  // Iceland
+
+  // --- AFRICA ---
+  { lat: 30, lon: 5, rad: 8 },      // Morocco / Algeria
+  { lat: 26, lon: 25, rad: 10 },    // Libya / Egypt
+  { lat: 20, lon: 0, rad: 12 },     // Mali / Mauritania
+  { lat: 18, lon: 18, rad: 12 },    // Niger / Chad
+  { lat: 8, lon: -5, rad: 8 },      // Ivory Coast / Guinea
+  { lat: 6, lon: 10, rad: 8 },      // Nigeria / Cameroon
+  { lat: 2, lon: 22, rad: 10 },     // Congo / Central Africa
+  { lat: 6, lon: 35, rad: 8 },      // Ethiopia / South Sudan
+  { lat: 4, lon: 45, rad: 6 },      // Somalia
+  { lat: -6, lon: 22, rad: 10 },    // Angola / DRC
+  { lat: -10, lon: 35, rad: 8 },    // Tanzania / Zambia
+  { lat: -22, lon: 20, rad: 8 },    // Namibia / Botswana
+  { lat: -28, lon: 26, rad: 6.5 },  // South Africa
+  { lat: -19, lon: 47, rad: 5 },    // Madagascar
+
+  // --- ASIA / MIDDLE EAST ---
+  { lat: 38, lon: 35, rad: 8 },     // Turkey
+  { lat: 24, lon: 45, rad: 8.5 },   // Saudi Arabia
+  { lat: 28, lon: 55, rad: 7 },     // Iran / UAE / Oman (covers Dubai)
+  { lat: 34, lon: 68, rad: 8 },     // Afghanistan / Pakistan
+  { lat: 22, lon: 77, rad: 9.5 },   // India Central
+  { lat: 12, lon: 78, rad: 6 },     // India South
+  { lat: 7, lon: 81, rad: 2.5 },    // Sri Lanka
+  { lat: 28, lon: 90, rad: 6 },     // Tibet / Nepal / Bangladesh
+  { lat: 58, lon: 70, rad: 16 },    // West Siberia
+  { lat: 62, lon: 100, rad: 16 },   // Central Siberia
+  { lat: 62, lon: 130, rad: 14 },   // East Siberia
+  { lat: 52, lon: 85, rad: 12 },    // Kazakhstan / Altai
+  { lat: 46, lon: 105, rad: 12 },   // Mongolia
+  { lat: 38, lon: 105, rad: 10 },   // NW China
+  { lat: 30, lon: 112, rad: 9.5 },  // Central China
+  { lat: 22, lon: 105, rad: 6 },    // Southeast Asia (Vietnam/Laos)
+  { lat: 13, lon: 101, rad: 5 },    // Indochina (Thailand/Cambodia)
+  { lat: 2, lon: 102, rad: 4.5 },   // Malaysia (covers Singapore)
+  { lat: 37, lon: 127, rad: 3 },     // Korea
+  { lat: 37, lon: 138, rad: 5 },     // Japan (Honshu)
+  { lat: 43, lon: 143, rad: 3 },     // Japan (Hokkaido)
+  { lat: 24, lon: 121, rad: 2.2 },   // Taiwan
+  { lat: 13, lon: 122, rad: 5.5 },   // Philippines
+  { lat: 0, lon: 114, rad: 6.5 },    // Borneo
+  { lat: -2, lon: 102, rad: 5.5 },   // Sumatra
+  { lat: -7, lon: 110, rad: 4 },     // Java
+  { lat: -3, lon: 120, rad: 4.5 },   // Sulawesi
+  { lat: -3, lon: 140, rad: 7 },     // New Guinea
+
+  // --- OCEANIA / AUSTRALIA ---
+  { lat: -20, lon: 122, rad: 8 },    // NW Australia
+  { lat: -20, lon: 138, rad: 8 },    // NE Australia / Queensland
+  { lat: -30, lon: 122, rad: 7 },    // SW Australia
+  { lat: -30, lon: 142, rad: 8.5 },  // SE Australia / NSW
+  { lat: -33, lon: 151, rad: 4 },    // Sydney area
+  { lat: -42, lon: 147, rad: 2.2 },  // Tasmania
+  { lat: -38, lon: 175, rad: 3.5 },  // New Zealand North Island
+  { lat: -44, lon: 170, rad: 3.5 },  // New Zealand South Island
+
+  // --- ANTARCTICA ---
+  { lat: -85, lon: 0, rad: 14 },
+  { lat: -82, lon: 70, rad: 14 },
+  { lat: -82, lon: -70, rad: 14 },
+  { lat: -82, lon: 140, rad: 14 },
+  { lat: -82, lon: -140, rad: 14 }
+];
+
+interface ProcessedLandCircle {
+  x: number;
+  y: number;
+  z: number;
+  cosRad: number;
+}
+
+const processedLandCircles: ProcessedLandCircle[] = landCircles.map(c => {
+  const phi = (90 - c.lat) * (Math.PI / 180);
+  const theta = (c.lon + 180) * (Math.PI / 180);
+  return {
+    x: -(Math.sin(phi) * Math.sin(theta)),
+    y: Math.cos(phi),
+    z: Math.sin(phi) * Math.cos(theta),
+    cosRad: Math.cos(c.rad * Math.PI / 180)
+  };
+});
+
 function latLonToVector3(lat: number, lon: number, radius: number): THREE.Vector3 {
   const phi = (90 - lat) * (Math.PI / 180);
   const theta = (lon + 180) * (Math.PI / 180);
@@ -141,13 +270,43 @@ export default function GlobalNetworkGlobe() {
     const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
     globeGroup.add(sphereMesh);
 
-    // Outer dot-grid sphere
-    const dotsGeo = new THREE.SphereGeometry(radius, 40, 30);
+    // Outer dot-grid sphere representing the 7 continents
+    const vertices: number[] = [];
+    for (let lat = -80; lat <= 80; lat += 2.0) {
+      const latRad = lat * Math.PI / 180;
+      const cosLat = Math.cos(latRad);
+      const stepLon = cosLat > 0.08 ? (2.0 / cosLat) : 360;
+      
+      for (let lon = -180; lon < 180; lon += stepLon) {
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lon + 180) * (Math.PI / 180);
+        const ux = -(Math.sin(phi) * Math.sin(theta));
+        const uy = Math.cos(phi);
+        const uz = Math.sin(phi) * Math.cos(theta);
+
+        let isLand = false;
+        for (let i = 0; i < processedLandCircles.length; i++) {
+          const c = processedLandCircles[i];
+          if (ux * c.x + uy * c.y + uz * c.z >= c.cosRad) {
+            isLand = true;
+            break;
+          }
+        }
+
+        if (isLand) {
+          vertices.push(ux * radius, uy * radius, uz * radius);
+        }
+      }
+    }
+
+    const dotsGeo = new THREE.BufferGeometry();
+    dotsGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
     const dotsMat = new THREE.PointsMaterial({
       color: 0xd4a96a,
-      size: 0.045,
+      size: 0.055,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.55,
       depthWrite: false
     });
     const dotsMesh = new THREE.Points(dotsGeo, dotsMat);
