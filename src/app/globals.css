@@ -190,3 +190,36 @@ img,
   opacity: 1 !important;
 }
 
+/* Luxury gold divider with scanning shine animation */
+.gold-divider-shine {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(184, 146, 74, 0.35) 50%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-divider-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(250, 248, 244, 0.6), transparent);
+  animation: scanning-divider 5s infinite linear;
+}
+
+@keyframes scanning-divider {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+
