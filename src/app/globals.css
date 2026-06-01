@@ -168,3 +168,25 @@ img,
   scrollbar-width: none;
 }
 
+/* ── BRAND STRIP LUXURY ANIMATIONS ── */
+@keyframes gold-glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(212, 169, 106, 0.15)) sepia(0.2) brightness(1.1);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(212, 169, 106, 0.5)) sepia(0.2) brightness(1.2);
+  }
+}
+
+.logo-pulse-glow {
+  animation: gold-glow-pulse 4s ease-in-out infinite;
+  transition: filter 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
+}
+
+.logo-pulse-glow:hover {
+  animation-play-state: paused;
+  filter: drop-shadow(0 0 22px rgba(212, 169, 106, 0.85)) sepia(0.2) brightness(1.3) !important;
+  transform: scale(1.05);
+  opacity: 1 !important;
+}
+

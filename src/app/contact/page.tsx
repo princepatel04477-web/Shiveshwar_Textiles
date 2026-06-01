@@ -4,6 +4,7 @@ import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
 import { Mail, Phone, MapPin, Clock, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { submitInquiry } from '@/app/actions/submitInquiry';
 
 function ContactFormSection() {
   const { t, language } = useLanguage();
@@ -22,6 +23,15 @@ function ContactFormSection() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   // Pre-fill form from URL query parameters
   useEffect(() => {
@@ -44,15 +54,73 @@ function ContactFormSection() {
     return () => clearTimeout(timer);
   }, [searchParams, language]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.isHuman) {
-      alert(language === 'EN' ? 'Please verify you are human.' : 'Bitte bestätigen Sie, dass Sie ein Mensch sind.');
+      setToast({
+        type: 'error',
+        message: language === 'EN' 
+          ? 'Please verify that this is a professional business inquiry.' 
+          : 'Bitte bestätigen Sie, dass dies eine professionelle Geschäftsanfrage ist.'
+      });
       return;
     }
-    
-    // Simulate sending structured RFQ email
-    setIsSubmitted(true);
+
+    setIsSubmitting(true);
+    setToast(null);
+
+    try {
+      const formPayload = new FormData();
+      formPayload.append('fullName', formData.fullName);
+      formPayload.append('email', formData.email);
+      formPayload.append('companyName', formData.companyName);
+      formPayload.append('subject', formData.subject);
+      formPayload.append('country', formData.country);
+      formPayload.append('vatNumber', formData.vatNumber);
+      formPayload.append('referral', formData.referral);
+      formPayload.append('message', formData.message);
+      formPayload.append('isHuman', String(formData.isHuman));
+      
+      const formEl = e.currentTarget as HTMLFormElement;
+      formPayload.append('website', formEl.website.value);
+
+      const result = await submitInquiry(null, formPayload);
+
+      if (result.success) {
+        setToast({
+          type: 'success',
+          message: language === 'EN'
+            ? 'Your inquiry has been submitted successfully. Our team will contact you shortly.'
+            : 'Ihre Anfrage wurde erfolgreich übermittelt. Unser Team wird Sie in Kürze kontaktieren.'
+        });
+        setIsSubmitted(true);
+        setFormData({
+          fullName: '',
+          email: '',
+          subject: 'General Inquiry',
+          companyName: '',
+          country: '',
+          vatNumber: '',
+          message: '',
+          referral: 'LinkedIn',
+          isHuman: false
+        });
+        formEl.reset();
+      } else {
+        setToast({
+          type: 'error',
+          message: result.error || (language === 'EN' ? 'Submission failed.' : 'Übermittlung fehlgeschlagen.')
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      setToast({
+        type: 'error',
+        message: language === 'EN' ? 'An unexpected error occurred.' : 'Ein unerwarteter Fehler ist aufgetreten.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -77,7 +145,7 @@ function ContactFormSection() {
             <div className="space-y-1">
               <span className="text-white/45 uppercase text-[10px] block">Global Manufacturing Hub</span>
               <a 
-                href="https://maps.app.goo.gl/jFP2M13dAcPW2XH58" 
+                href="https://www.google.com/maps/place/SHIVESHWAR+TEXTILES/@21.3251,72.8748276,17z/data=!3m1!4b1!4m6!3m5!1s0x3be049e2c904bbc1:0xdbe4fe76ba7bb75!8m2!3d21.3251!4d72.8748276!16s%2Fg%2F11qs0vbflr?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="text-white hover:text-[#d4a96a] transition"
@@ -289,16 +357,56 @@ function ContactFormSection() {
               <span>I confirm that this is a professional business inquiry.</span>
             </label>
 
+            {/* Honeypot hidden input */}
+            <input 
+              type="text" 
+              name="website" 
+              tabIndex={-1} 
+              autoComplete="off" 
+              className="hidden" 
+              style={{ display: 'none' }} 
+            />
+
             {/* Submit CTA */}
             <button
               type="submit"
-              className="w-full bg-[#b8924a] hover:bg-[#d4a96a] text-[#0f0e0c] font-bold uppercase tracking-widest text-xs py-3.5 transition"
+              disabled={isSubmitting}
+              className="w-full bg-[#b8924a] hover:bg-[#d4a96a] disabled:bg-[#b8924a]/50 text-[#0f0e0c] font-bold uppercase tracking-widest text-xs py-3.5 transition disabled:cursor-not-allowed"
             >
-              Send Wholesale Inquiry
+              {isSubmitting 
+                ? (language === 'EN' ? 'Submitting Inquiry...' : 'Anfrage wird gesendet...') 
+                : (language === 'EN' ? 'Send Wholesale Inquiry' : 'Großhandelsanfrage senden')}
             </button>
           </form>
         )}
       </div>
+
+      {/* Floating Toast Notification */}
+      {toast && (
+        <div 
+          className={`fixed bottom-8 right-8 z-[9999] p-4 border rounded shadow-2xl flex items-center justify-between gap-4 animate-slide-in max-w-md ${
+            toast.type === 'success' 
+              ? 'bg-[#11100e] border-[#b8924a] text-[#f5f0e8]' 
+              : 'bg-[#1d1616] border-red-500/40 text-red-100'
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            {toast.type === 'success' ? (
+              <span className="text-[#d4a96a] font-bold">✓</span>
+            ) : (
+              <span className="text-red-500 font-bold">✕</span>
+            )}
+            <span className="text-xs leading-relaxed font-sans">{toast.message}</span>
+          </div>
+          <button 
+            type="button"
+            onClick={() => setToast(null)} 
+            className="text-white/40 hover:text-white transition-colors text-xs font-bold leading-none cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </section>
   );
 }
@@ -333,7 +441,7 @@ export default function ContactPage() {
           
           <div className="border border-[#b8924a]/15 h-[450px] w-full overflow-hidden grayscale hover:grayscale-0 transition duration-700">
             <iframe
-              src="https://maps.google.com/maps?q=Shree%20Shiveshwar%20Weavetech%20Gujarat%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=SHIVESHWAR%20TEXTILES&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}

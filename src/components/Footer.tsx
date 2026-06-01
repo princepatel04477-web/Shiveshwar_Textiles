@@ -9,22 +9,33 @@ import { animate } from 'animejs';
 const logo =
   'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png';
 
-const marqueeItems = [
-  { src: logo, alt: 'Shiveshwar logo' },
-  { src: logo, alt: 'Shiveshwar logo' },
-  { src: logo, alt: 'Shiveshwar logo' },
-  { src: logo, alt: 'Shiveshwar logo' },
-  { src: logo, alt: 'Shiveshwar logo' },
-  { src: logo, alt: 'Shiveshwar logo' },
-];
-
 export default function Footer() {
   const { t, language } = useLanguage();
   const gradientRef = useRef<HTMLDivElement>(null);
+  const brandStripRef = useRef<HTMLDivElement>(null);
   const [currentYear, setCurrentYear] = useState<number | string>('2026');
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
+  }, []);
+
+  useEffect(() => {
+    const el = brandStripRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -45,8 +56,7 @@ export default function Footer() {
     {
       name: 'Prakashbhai Mangukiya',
       role: 'FOUNDER',
-      email: 'prakashbhai@shiveshwartextiles.com',
-      phone: '+919904255555',
+      badge: '◆ Founder & Vision Lead',
     },
     {
       name: 'Parth P. Mangukiya',
@@ -80,21 +90,42 @@ export default function Footer() {
       />
 
       {/* Brand Scrolling Marquee */}
-      <div className="border-b border-[#b8924a]/10 bg-[#11100e] py-5 overflow-hidden relative z-10">
-        <div className="flex w-max items-center gap-16 px-4 animate-marquee">
+      <div 
+        ref={brandStripRef}
+        className={`border-t border-b border-[#b8924a]/20 bg-[#11100e] py-6 overflow-hidden relative z-10 transition-all duration-1000 ease-out transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
+        <div className="flex w-max items-center gap-16 animate-marquee whitespace-nowrap">
           {/* Loop 1 */}
           <div className="flex shrink-0 items-center gap-16">
-            {[...marqueeItems, ...marqueeItems].map((item, idx) => (
-              <div key={`m1-${idx}`} className="flex items-center gap-12">
-                <img src={item.src} alt={item.alt} className="h-8 w-auto opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition duration-300 object-contain" />
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={`m1-${idx}`} className="flex items-center gap-6 group cursor-pointer">
+                <img 
+                  src={logo} 
+                  alt="Shiveshwar logo" 
+                  className="h-8 w-auto object-contain logo-pulse-glow" 
+                />
+                <span className="font-serif text-sm md:text-base uppercase tracking-[0.25em] text-[#d4a96a] transition duration-300 group-hover:text-[#faf8f4]">
+                  Shiveshwar Textiles
+                </span>
+                <span className="text-[#b8924a]/40 text-xs ml-4">◆</span>
               </div>
             ))}
           </div>
           {/* Loop 2 */}
           <div className="flex shrink-0 items-center gap-16">
-            {[...marqueeItems, ...marqueeItems].map((item, idx) => (
-              <div key={`m2-${idx}`} className="flex items-center gap-12">
-                <img src={item.src} alt={item.alt} className="h-8 w-auto opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition duration-300 object-contain" />
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div key={`m2-${idx}`} className="flex items-center gap-6 group cursor-pointer">
+                <img 
+                  src={logo} 
+                  alt="Shiveshwar logo" 
+                  className="h-8 w-auto object-contain logo-pulse-glow" 
+                />
+                <span className="font-serif text-sm md:text-base uppercase tracking-[0.25em] text-[#d4a96a] transition duration-300 group-hover:text-[#faf8f4]">
+                  Shiveshwar Textiles
+                </span>
+                <span className="text-[#b8924a]/40 text-xs ml-4">◆</span>
               </div>
             ))}
           </div>
@@ -152,18 +183,27 @@ export default function Footer() {
                 >
                   <p className="font-bold text-[#faf8f4] group-hover:text-[#d4a96a] transition-colors">{c.name}</p>
                   <p className="text-[10px] text-[#f5f0e8]/50 uppercase tracking-wider">{c.role}</p>
-                  <div className="flex flex-col gap-1 pt-1.5 font-mono text-[10px] text-[#d4a96a]/90">
-                    {'email' in c && c.email && (
-                      <a href={`mailto:${c.email}`} className="flex items-center gap-1 hover:text-white transition">
-                        <Mail className="h-3 w-3 shrink-0" />
-                        <span>{c.email}</span>
-                      </a>
-                    )}
-                    <a href={`https://wa.me/${c.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition">
-                      <Phone className="h-3 w-3 shrink-0" />
-                      <span>{c.phone}</span>
-                    </a>
-                  </div>
+                  {'badge' in c && c.badge && (
+                    <p className="text-[9px] text-[#d4a96a] uppercase tracking-widest font-serif font-light mt-0.5">
+                      {c.badge}
+                    </p>
+                  )}
+                  {('email' in c || 'phone' in c) && (c.email || c.phone) && (
+                    <div className="flex flex-col gap-1 pt-1.5 font-mono text-[10px] text-[#d4a96a]/90">
+                      {'email' in c && c.email && (
+                        <a href={`mailto:${c.email}`} className="flex items-center gap-1 hover:text-white transition">
+                          <Mail className="h-3 w-3 shrink-0" />
+                          <span>{c.email}</span>
+                        </a>
+                      )}
+                      {'phone' in c && c.phone && (
+                        <a href={`https://wa.me/${c.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition">
+                          <Phone className="h-3 w-3 shrink-0" />
+                          <span>{c.phone}</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

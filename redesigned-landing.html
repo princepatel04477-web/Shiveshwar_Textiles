@@ -785,24 +785,72 @@
       font-size: 0.8rem;
     }
 
-    .marquee-bottom {
-      background: var(--charcoal);
-      padding: 1.2rem 0;
-      border-top: 1px solid var(--gold);
+    .brand-marquee-wrap {
+      background: #11100e;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(184, 146, 74, 0.2);
+      border-bottom: 1px solid rgba(184, 146, 74, 0.2);
       overflow: hidden;
       margin: 2rem 0 0;
     }
 
-    .marquee-bottom-content {
+    .brand-marquee-track {
       display: flex;
-      white-space: nowrap;
-      animation: marquee 25s linear infinite;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+      align-items: center;
     }
 
-    .marquee-bottom-content img {
-      height: 30px;
-      opacity: 0.4;
-      filter: grayscale(100%);
+    .brand-marquee-group {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 4rem;
+      padding-right: 4rem;
+    }
+
+    .brand-marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .brand-marquee-item img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      cursor: pointer;
+      animation: gold-glow-pulse 4s ease-in-out infinite;
+      transition: filter 0.5s ease, transform 0.5s ease;
+    }
+
+    .brand-marquee-item img:hover {
+      animation-play-state: paused;
+      filter: drop-shadow(0 0 20px rgba(212, 169, 106, 0.8)) sepia(0.2) brightness(1.2) !important;
+      transform: scale(1.05);
+    }
+
+    .brand-marquee-item span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-weight: 300;
+    }
+
+    .brand-marquee-item .divider {
+      color: rgba(184, 146, 74, 0.4);
+      font-size: 0.85rem;
+    }
+
+    @keyframes gold-glow-pulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 3px rgba(212, 169, 106, 0.15)) sepia(0.2) brightness(1.1);
+      }
+      50% {
+        filter: drop-shadow(0 0 15px rgba(212, 169, 106, 0.5)) sepia(0.2) brightness(1.2);
+      }
     }
 
     /* ── ANIMATIONS ── */
@@ -865,7 +913,7 @@
         <li><a href="#contact">Contact Us</a></li>
       </ul>
     </nav>
-    <a href="https://maps.app.goo.gl/rwKBXoFXEG8AZBp27" target="_blank" class="location-tag">Surat, India</a>
+    <a href="https://www.google.com/maps/place/SHIVESHWAR+TEXTILES/@21.3251,72.8748276,17z/data=!3m1!4b1!4m6!3m5!1s0x3be049e2c904bbc1:0xdbe4fe76ba7bb75!8m2!3d21.3251!4d72.8748276!16s%2Fg%2F11qs0vbflr?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="location-tag">Surat, India</a>
   </header>
 
   <!-- ── MARQUEE TOP ── -->
@@ -1075,7 +1123,7 @@
       <div class="contact-info">
         <h3>Contact Details</h3>
         <div class="contact-detail">
-          <div class="contact-detail-text">📍 <a href="https://maps.app.goo.gl/rwKBXoFXEG8AZBp27" target="_blank">Surat, Gujarat, India</a></div>
+          <div class="contact-detail-text">📍 <a href="https://www.google.com/maps/place/SHIVESHWAR+TEXTILES/@21.3251,72.8748276,17z/data=!3m1!4b1!4m6!3m5!1s0x3be049e2c904bbc1:0xdbe4fe76ba7bb75!8m2!3d21.3251!4d72.8748276!16s%2Fg%2F11qs0vbflr?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D" target="_blank">Surat, Gujarat, India</a></div>
         </div>
         <div class="contact-detail">
           <div class="contact-detail-text">✉ <a href="mailto:parthmangukiya@shiveshwartextiles.com">parthmangukiya@shiveshwartextiles.com</a></div>
@@ -1125,15 +1173,75 @@
   </section>
 
   <!-- ── FOOTER ── -->
-  <div class="marquee-bottom">
-    <div class="marquee-bottom-content">
-      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Brand">
-      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png" alt="Brand">
-      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1e09bcb79a8d4f8a55957_textile.png" alt="Textile">
-      <!-- Duplicate for seamless loop -->
-      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Brand">
-      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png" alt="Brand">
-      <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1e09bcb79a8d4f8a55957_textile.png" alt="Textile">
+  <!-- ── BRAND MARQUEE ── -->
+  <div class="brand-marquee-wrap animate-on-scroll">
+    <div class="brand-marquee-track">
+      <!-- Loop 1 -->
+      <div class="brand-marquee-group">
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+      </div>
+      <!-- Loop 2 -->
+      <div class="brand-marquee-group">
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+        <div class="brand-marquee-item">
+          <img src="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png" alt="Shiveshwar Logo">
+          <span>Shiveshwar Textiles</span>
+          <span class="divider">◆</span>
+        </div>
+      </div>
     </div>
   </div>
   <footer>
