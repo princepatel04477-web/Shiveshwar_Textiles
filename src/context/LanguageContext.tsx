@@ -34,10 +34,10 @@ const translations = {
     'stats.types_val': '500m',
     'stats.types_lbl': 'Minimum Order',
     // Badges strip
-    'badge.iso': 'ISO-Compliant Process',
+    'badge.iso': 'Audited Weave Quality',
     'badge.export': 'Export Since 2021',
     'badge.moq': 'MOQ from 500m',
-    'badge.shipping': 'DDP/FOB Shipping Available',
+    'badge.shipping': 'EXW/FOB Shipping Available',
     // Common CTAs
     'cta.inquire': 'Inquire Now',
     'cta.get_quote': 'Request Quote',
@@ -75,10 +75,10 @@ const translations = {
     'stats.types_val': '500m',
     'stats.types_lbl': 'Mindestbestellmenge',
     // Badges strip
-    'badge.iso': 'ISO-Konformer Prozess',
+    'badge.iso': 'Geprüfte Webqualität',
     'badge.export': 'Export seit 2021',
     'badge.moq': 'Mindestbestellmenge ab 500m',
-    'badge.shipping': 'DDP/FOB-Versand verfügbar',
+    'badge.shipping': 'EXW/FOB-Versand verfügbar',
     // Common CTAs
     'cta.inquire': 'Jetzt anfragen',
     'cta.get_quote': 'Angebot anfordern',

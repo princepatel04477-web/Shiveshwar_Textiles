@@ -29,7 +29,7 @@ export default function FloatingWhatsApp() {
       
       {/* Inner Glowing Trigger */}
       <a
-        href="https://wa.me/919924176337?text=Hi%2C%20I%20am%20interested%20in%20your%20fabrics%20from%20your%20B2B%20portal."
+        href="https://wa.me/919316189146?text=Hi%2C%20I%20am%20interested%20in%20your%20fabrics%20from%20your%20B2B%20portal."
         target="_blank"
         rel="noopener noreferrer"
         className="relative flex items-center justify-center w-12 h-12 rounded-full bg-[#0f0e0c] border border-[#d4a96a] text-[#d4a96a] shadow-[0_4px_20px_rgba(212,169,106,0.3)] hover:text-[#0f0e0c] hover:bg-[#d4a96a] hover:scale-105 transition-all duration-300 group"

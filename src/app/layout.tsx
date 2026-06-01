@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { CartProvider } from "@/context/CartContext";
@@ -24,13 +25,28 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Shiveshwar Textiles | Premium B2B Indian Fabric Supplier to Europe",
-  description: "Exporting premium Indian fabrics (Cotton, Polyester, Blends) direct from our Surat mill to Germany and the broader European market. Up to 1M meters/month capacity, ISO-compliant quality.",
+  title: "Shiveshwar Textiles | Premium Fabric Manufacturer & Distribution Network",
+  description: "Manufacturing premium fabrics (Cotton, Polyester, Blends) directly from our advanced mill infrastructure. Up to 1M meters/month capacity, high-performance quality standards.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`} suppressHydrationWarning>
+      <head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-D945CX8433"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-D945CX8433');
+          `}
+        </Script>
+      </head>
       <body className="font-sans antialiased bg-[#0f0e0c] text-[#f5f0e8] flex flex-col min-h-screen overflow-x-hidden">
         <LanguageProvider>
           <CartProvider>

@@ -22,7 +22,7 @@ const team = [
   {
     name: 'Fenil M. Mangukiya',
     role: 'Production Manager',
-    bio: 'Fenil supervises daily loom orchestration, GSM weight calibration, and batch consistency on our Surat factory floor. He ensures that every fabric roll complies with technical tolerances and is dispatched on schedule.',
+    bio: 'Fenil supervises daily loom orchestration, GSM weight calibration, and batch consistency on our factory floor. He ensures that every fabric roll complies with technical tolerances and is dispatched on schedule.',
     quote: 'Supervises daily manufacturing operations and workflow execution. Maintains strict quality checks, timely dispatch control, and production efficiency.',
     image: 'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0b47d2f8adb3525789c71_5e66cb27-8dd5-499e-a66f-fc78eb84b372.jpg',
   },
@@ -73,7 +73,7 @@ export default function AboutPage() {
         
         {/* Page Header */}
         <div className="mb-16 border-b border-[#b8924a]/15 pb-8 text-center sm:text-left">
-          <span className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">Surat, Gujarat (India)</span>
+          <span className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">Global Manufacturing & Export</span>
           <h1 className="font-serif text-3xl uppercase tracking-wide text-white md:text-5xl mt-2">
             Company <span className="text-[#d4a96a] font-light italic">Profile</span>
           </h1>
@@ -90,13 +90,13 @@ export default function AboutPage() {
               A commitment to <span className="text-[#d4a96a]">disciplined</span> weaving standards.
             </h2>
             <p className="text-sm leading-relaxed text-white/70 font-light">
-              Established in 2021 in Surat, Shiveshwar Textiles was founded with a singular focus: to bridge the gap between competitive raw material pricing and the rigid quality specifications demanded by global garment manufacturing grids.
+              Established in 2021, Shiveshwar Textiles was founded with a singular focus: to bridge the gap between competitive raw material pricing and the rigid quality specifications demanded by global garment manufacturing grids.
             </p>
             <p className="text-sm leading-relaxed text-white/70 font-light">
               Unlike local trading agencies, we operate directly at the factory floor level. This hands-on management approach allows us to supervise yarn selection, loom parameters, and finishing treatments. By removing middlemen, we provide premium fabrics with absolute quality ownership, from first sample to bulk container dispatch.
             </p>
             <p className="text-xs text-[#d4a96a]/70 uppercase tracking-widest font-mono">
-              Established 2021 · Direct Surat Weaving Mill Sourcing
+              Established 2021 · Direct Manufacturing & Mill Sourcing
             </p>
           </div>
           
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 <h4 className="font-serif text-lg text-white">Skilled Weaving Workforce</h4>
               </div>
               <p className="text-xs leading-relaxed text-white/60 font-light">
-                Surat is home to centuries of textile processing expertise. Our weavers manage complicated dobby and filament setups with high technical precision.
+                Our workforce integrates centuries of textile weaving expertise. Our weavers manage complicated dobby and filament setups with high technical precision.
               </p>
             </div>
 
@@ -195,7 +195,7 @@ export default function AboutPage() {
         {/* Factory Infrastructure Gallery */}
         <section className="space-y-8">
           <div className="text-center sm:text-left">
-            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono">Surat Facility</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono">Global Facility</span>
             <h2 className="font-serif text-2xl uppercase tracking-wide text-white md:text-4xl mt-1">Loom Infrastructure</h2>
           </div>
           

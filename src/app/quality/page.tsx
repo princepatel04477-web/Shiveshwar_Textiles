@@ -77,7 +77,7 @@ export default function QualityPage() {
         
         {/* Page Header */}
         <div className="mb-16 border-b border-[#b8924a]/15 pb-8 text-center sm:text-left">
-          <span className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">ISO-COMPLIANT QUALITY AUDITING</span>
+          <span className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">STANDARDIZED QUALITY AUDITING</span>
           <h1 className="font-serif text-3xl uppercase tracking-wide text-white md:text-5xl mt-2">
             Quality & <span className="text-[#d4a96a] font-light italic">Standards</span>
           </h1>

@@ -30,22 +30,22 @@ const fabricProducts: FabricProduct[] = [
     name: 'Cotton Fabrics',
     slug: 'cotton-fabrics',
     type: 'Cotton',
-    gsmMin: 100,
+    gsmMin: 50,
     gsmMax: 150,
     width: ['90cm', '110cm', '150cm'],
     colors: ['Greige', 'Dyed', 'Printed'],
     moq: 500,
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d41725e55a6fa6b34401c0_IMG_4578.JPG',
     detailImage: 'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a0bbc9f986125431f4dc5e_IMG_0676.jpg',
-    description: 'Manufactured within a 100–150 GSM range, offering breathability, structure, and high uniform weave quality. Ideal for shirting, garments, and workwear.',
+    description: 'Manufactured within a 50–150 GSM range, offering breathability, structure, and high uniform weave quality. Ideal for shirting, garments, and workwear.',
     blend: '100% Organic Cotton (Carded / Combed)',
     finish: 'Combed, Mercerized, Soft-Wash Finished',
     application: 'Premium Shirtings, Luxury Uniforms, Apparel',
-    export: 'Germany & broader European market (DDP / FOB)',
+    export: 'Germany & broader European market (EXW / FOB)',
     leadTime: '14–21 Business Days'
   },
   {
-    name: 'Polyester Fabrics',
+    name: 'Greig Polyster Fabric',
     slug: 'polyester-fabrics',
     type: 'Polyester',
     gsmMin: 50,
@@ -59,15 +59,15 @@ const fabricProducts: FabricProduct[] = [
     blend: '100% Filament Spun Polyester Weaves',
     finish: 'High-Density Calendered, Water-Repellent Coating',
     application: 'Heavy-Duty Workwear, Outerwear, Industrial Linings',
-    export: 'Germany, Poland, and Netherlands (CIF / FOB)',
+    export: 'Germany, Poland, and Netherlands (EXW / FOB)',
     leadTime: '14–21 Business Days'
   },
   {
     name: 'Blended Fabrics',
     slug: 'blended-fabrics',
     type: 'Blended',
-    gsmMin: 100,
-    gsmMax: 220,
+    gsmMin: 50,
+    gsmMax: 250,
     width: ['110cm', '150cm'],
     colors: ['Greige', 'Dyed'],
     moq: 800,
@@ -77,7 +77,7 @@ const fabricProducts: FabricProduct[] = [
     blend: '65% Polyester / 35% Organic Cotton',
     finish: 'Anti-Pilling, Pre-Shrunk, Shade-Locked',
     application: 'Corporate Weavers, Heavy Linens, Uniform Sets',
-    export: 'Direct EU Delivery hubs (DDP / CIF Hamburg)',
+    export: 'Global client warehouses (EXW / FOB)',
     leadTime: '21–28 Business Days'
   },
   {
@@ -95,7 +95,7 @@ const fabricProducts: FabricProduct[] = [
     blend: 'Bespoke Fiber Composition (Nylon, Stretch blends)',
     finish: 'Peach-Skin Finish, Flame-Retardant Chemical Weft',
     application: 'High-Fashion Labels, Technical Wear, Waterproof Lining',
-    export: 'Global air / ocean logistics (FOB JNPT / DDP Europe)',
+    export: 'Global air / ocean logistics (EXW / FOB)',
     leadTime: '28–35 Business Days'
   }
 ];
@@ -287,7 +287,7 @@ export default function ProductsPage() {
         {/* Page Header */}
         <div className="mb-12 border-b border-[#b8924a]/15 pb-8 flex flex-col justify-between items-start md:flex-row md:items-end gap-6">
           <div className="space-y-2">
-            <span className="text-xs uppercase tracking-[0.35em] text-[#d4a96a] font-mono">Surat Weaving Mill</span>
+            <span className="text-xs uppercase tracking-[0.35em] text-[#d4a96a] font-mono">Global Weaving Infrastructure</span>
             <h1 className="font-serif text-3xl uppercase tracking-wide text-white md:text-5xl mt-2">
               Export <span className="text-[#d4a96a] font-light italic">Catalog</span>
             </h1>
@@ -335,7 +335,7 @@ export default function ProductsPage() {
                       onChange={() => handleTypeChange(type)}
                       className="h-3.5 w-3.5 rounded-sm accent-[#d4a96a] border-[#b8924a]/30 bg-transparent cursor-pointer"
                     />
-                    <span>{type} Fabrics</span>
+                    <span>{type === 'Polyester' ? 'Greig Polyster Fabric' : `${type} Fabrics`}</span>
                   </label>
                 ))}
               </div>
@@ -608,13 +608,13 @@ export default function ProductsPage() {
               <span className="text-[10px] uppercase font-mono tracking-widest text-[#d4a96a] block">Interactive Catalog</span>
               <h3 className="font-serif text-2xl text-white">Shiveshwar Textiles Digital Catalog</h3>
               <p className="text-xs leading-relaxed text-white/70 font-light">
-                Our export catalog details the complete line of cotton, polyester, and blended fabrics produced in our Surat facility. We provide ISO certificates, weave layouts, finishing specs, and pricing terms.
+                Our product catalog details the complete line of cotton, polyester, and blended fabrics produced across our manufacturing facility network. We provide detailed weave layouts, finishing specs, and pricing terms.
               </p>
               
               <div className="border border-[#b8924a]/15 bg-[#1c1a17] p-4 rounded-xs flex items-center justify-between gap-4">
                 <div className="min-w-0">
                   <span className="text-[9px] uppercase tracking-wider text-[#d4a96a] font-mono block">File Spec</span>
-                  <span className="text-xs text-white truncate block">Shiveshwar_Export_Catalog_2026.pdf</span>
+                  <span className="text-xs text-white truncate block">Shiveshwar_Product_Catalog_2026.pdf</span>
                 </div>
                 <a 
                   href="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png"

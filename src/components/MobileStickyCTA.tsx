@@ -42,7 +42,7 @@ export default function MobileStickyCTA() {
       <div className="flex gap-3 max-w-md mx-auto">
         {/* WhatsApp Inquiry */}
         <a
-          href="https://wa.me/919924176337?text=Hi%2C%20I%20am%20interested%20in%20your%20fabrics%20from%20your%20B2B%20portal."
+          href="https://wa.me/919316189146?text=Hi%2C%20I%20am%20interested%20in%20your%20fabrics%20from%20your%20B2B%20portal."
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1 flex items-center justify-center gap-2 border border-[#25D366]/40 bg-[#25D366]/10 py-3 text-xs uppercase tracking-widest text-[#25D366] font-bold rounded-sm transition active:bg-[#25D366]/20"

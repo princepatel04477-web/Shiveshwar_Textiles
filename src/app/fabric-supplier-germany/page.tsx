@@ -21,7 +21,7 @@ export default function GermanyLandingPage() {
         'logo': 'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png',
         'contactPoint': {
           '@type': 'ContactPoint',
-          'telephone': '+919924176337',
+          'telephone': '+919316189146',
           'contactType': 'export sales',
           'areaServed': ['DE', 'EU'],
           'availableLanguage': ['en', 'de']
@@ -36,7 +36,7 @@ export default function GermanyLandingPage() {
             'name': 'Do you export to Germany?',
             'acceptedAnswer': {
               '@type': 'Answer',
-              'text': 'Yes, Shiveshwar Textiles exports fabrics directly to German ports (e.g., Hamburg, Bremen) and inland destinations under FOB, CIF, or DDP terms. We handle all custom export documentation including Certificate of Origin.'
+              'text': 'Yes, Shiveshwar Textiles exports fabrics directly under Ex-Works (EXW) and FOB terms. We handle all custom export documentation including Certificate of Origin.'
             }
           },
           {
@@ -49,10 +49,10 @@ export default function GermanyLandingPage() {
           },
           {
             '@type': 'Question',
-            'name': 'What certifications do you provide?',
+            'name': 'What quality assurance do you provide?',
             'acceptedAnswer': {
               '@type': 'Answer',
-              'text': 'We provide ISO 9001:2015 registration, test sheets for GSM & shrinkage, and we work with OEKO-TEX Standard 100 certified yarns for compliance with European market regulations.'
+              'text': 'We provide comprehensive test sheets for GSM & shrinkage, and we work with OEKO-TEX Standard 100 certified yarns for compliance with market regulations.'
             }
           },
           {
@@ -60,7 +60,7 @@ export default function GermanyLandingPage() {
             'name': 'How fast is sampling?',
             'acceptedAnswer': {
               '@type': 'Answer',
-              'text': 'We dispatch express fabric swatches via DHL/FedEx within 3-5 working days. Lab dips and custom handlooms take approximately 7-10 days.'
+              'text': 'We prepare and dispatch fabric swatches, lab dips, and custom handlooms within 20 days.'
             }
           },
           {

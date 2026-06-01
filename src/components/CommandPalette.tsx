@@ -58,19 +58,19 @@ export default function CommandPalette() {
       action: () => { openDrawer(); setIsOpen(false); }
     },
     {
-      name: 'Sourcing: Cotton Fabrics (100–150 GSM)',
+      name: 'Sourcing: Cotton Fabrics (50–150 GSM)',
       section: 'Fabrics Sourcing',
       icon: ShoppingBag,
       action: () => { router.push('/products/cotton-fabrics'); setIsOpen(false); }
     },
     {
-      name: 'Sourcing: Polyester Fabrics (50–250 GSM)',
+      name: 'Sourcing: Greig Polyster Fabric (50–250 GSM)',
       section: 'Fabrics Sourcing',
       icon: ShoppingBag,
       action: () => { router.push('/products/polyester-fabrics'); setIsOpen(false); }
     },
     {
-      name: 'Sourcing: Blended Fabrics (Custom GSM)',
+      name: 'Sourcing: Blended Fabrics (50/250 GSM)',
       section: 'Fabrics Sourcing',
       icon: ShoppingBag,
       action: () => { router.push('/products/blended-fabrics'); setIsOpen(false); }

@@ -51,10 +51,10 @@ export default function CartDrawer() {
 
   const getEstShipment = () => {
     if (totalMeters === 0) return '-';
-    if (totalMeters <= 1000) return 'LCL Sea Cargo / Air Freight (Pallet)';
-    if (totalMeters <= 5000) return 'LCL Sea Cargo (Part Container)';
-    if (totalMeters <= 22000) return '1x 20ft FCL Dry Container';
-    return '1x 40ft FCL High-Cube Container';
+    if (totalMeters <= 1000) return 'Express Courier / Air Freight (Pallet)';
+    if (totalMeters <= 5000) return 'Part Truckload (LTL Cargo)';
+    if (totalMeters <= 22000) return '1x 20ft Full Truckload (FTL Container Truck)';
+    return '1x 40ft Full Truckload (FTL Container Truck)';
   };
 
   const getEstLeadTime = () => {

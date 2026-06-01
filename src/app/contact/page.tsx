@@ -35,8 +35,8 @@ function ContactFormSection() {
 
       if (productParam) {
         const msg = language === 'EN'
-          ? `Dear Shiveshwar Textiles Team,\n\nWe are a wholesale buyer interested in the following fabric:\n- Fabric Category: ${productParam}\n\nPlease share the available specifications, MOQ adjustments, and FOB Surat/DDP Germany shipping options.\n\nBest regards.`
-          : `Sehr geehrtes Team von Shiveshwar Textiles,\n\nwir sind ein Großhandelskäufer und interessieren uns für folgenden Stoff:\n- Stoffkategorie: ${productParam}\n\nBitte senden Sie uns die verfügbaren Spezifikationen, MOQ-Optionen sowie FOB Surat/DDP Deutschland Versandbedingungen.\n\nMit freundlichen Grüßen.`;
+          ? `Dear Shiveshwar Textiles Team,\n\nWe are a wholesale buyer interested in the following fabric:\n- Fabric Category: ${productParam}\n\nPlease share the available specifications, MOQ adjustments, and EXW/FOB shipping options.\n\nBest regards.`
+          : `Sehr geehrtes Team von Shiveshwar Textiles,\n\nwir sind ein Großhandelskäufer und interessieren uns für folgenden Stoff:\n- Stoffkategorie: ${productParam}\n\nBitte senden Sie uns die verfügbaren Spezifikationen, MOQ-Optionen sowie EXW/FOB Versandbedingungen.\n\nMit freundlichen Grüßen.`;
         setFormData(prev => ({ ...prev, message: msg }));
       }
     }, 0);
@@ -75,14 +75,14 @@ function ContactFormSection() {
           <div className="flex gap-4 items-start border-l border-[#b8924a]/30 pl-4 py-1">
             <MapPin className="h-5 w-5 text-[#d4a96a] shrink-0" />
             <div className="space-y-1">
-              <span className="text-white/45 uppercase text-[10px] block">Mill Location</span>
+              <span className="text-white/45 uppercase text-[10px] block">Global Manufacturing Hub</span>
               <a 
-                href="https://maps.app.goo.gl/T35zEz5dXCPAy9oy7" 
+                href="https://maps.app.goo.gl/jFP2M13dAcPW2XH58" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="text-white hover:text-[#d4a96a] transition"
               >
-                Surat, Gujarat, India
+                Gujarat, India
               </a>
             </div>
           </div>
@@ -327,13 +327,13 @@ export default function ContactPage() {
         {/* Map Embed Section */}
         <section className="mt-24 space-y-8">
           <div className="text-center sm:text-left">
-            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono block font-medium">Surat Mill Location</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono block font-medium">Global Manufacturing Hub</span>
             <h3 className="font-serif text-2xl uppercase tracking-wide text-white mt-1">Loom Infrastructure & Sourcing Office</h3>
           </div>
           
           <div className="border border-[#b8924a]/15 h-[450px] w-full overflow-hidden grayscale hover:grayscale-0 transition duration-700">
             <iframe
-              src="https://maps.google.com/maps?q=Shree%20Shiveshwar%20Weavetech%20Surat%20Gujarat&t=&z=14&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=Shree%20Shiveshwar%20Weavetech%20Gujarat%20India&t=&z=14&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}

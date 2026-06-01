@@ -6,48 +6,63 @@ import { Anchor, FileText, Landmark, ShieldCheck, ChevronDown, ChevronUp } from 
 
 const faqs = [
   {
-    q: 'Do you ship to Germany?',
-    a: 'Yes, we regularly ship fabric containers to Germany and the broader European market. Direct sea freight routes run from Nhava Sheva (Mumbai) or Mundra ports in India to major European hubs like Hamburg and Rotterdam, with average maritime transit times of 25–30 days. Express air cargo is also available for urgent sample yardage.'
+    q: 'Do you deliver across India?',
+    a: 'Yes, we regularly ship fabric rolls and bulk consignments across all states in India. We coordinate with trusted national logistics partners to manage reliable surface transport, express cargo, and local warehouse deliveries directly to your factory door.'
   },
   {
     q: 'What is your Minimum Order Quantity (MOQ)?',
-    a: 'Our standard wholesale MOQs are: 500 meters for Cotton Fabrics, 1,000 meters for Polyester Fabrics, 800 meters for Blended Fabrics, and 1,500 meters for Custom Fabric Developments. MOQs are calculated per colorway / specification.'
+    a: 'Our standard wholesale MOQs are: 500 meters for Cotton Fabrics, 1,000 meters for Greig Polyster Fabric, 800 meters for Blended Fabrics, and 1,500 meters for Custom Fabric Developments. MOQs are calculated per colorway / specification.'
   },
   {
-    q: 'Can we request samples before placing a container order?',
-    a: 'Absolutely. We encourage European garment labels and fabric buyers to inspect our weave parity firsthand. We provide swatch cards (A4 size) or 1-meter sample hangers free of charge. You only cover the express shipping costs via DHL Express (typically 5–7 business days transit time).'
+    q: 'Can we request samples before placing a bulk order?',
+    a: 'Absolutely. We encourage buyers and garment brands to inspect our weave density and finishing parity firsthand. We provide swatch cards (A4 size) or 1-meter sample hangers free of charge. You only cover the express courier costs to your office.'
   },
   {
-    q: 'Do you provide GST-free export invoices?',
-    a: 'Yes. All international export orders are processed under the Indian Customs Letter of Undertaking (LUT) scheme. This enables us to invoice overseas wholesale buyers at zero-rated GST (0% Tax), ensuring direct financial clearance and compliance with B2B trade laws.'
+    q: 'Do you support GST billing for business buyers?',
+    a: 'Yes. All domestic wholesale orders are fully tax-compliant and invoiced with standard B2B tax invoices (with CGST/SGST or IGST depending on the state), enabling seamless input tax credit (ITC) claims for our business partners.'
   }
 ];
 
 const timelineSteps = [
   {
-    title: 'Surat Mill Dispatch',
-    desc: 'Fabric is rolled, packed in moisture-proof polyethylene sheets, and loaded into local Surat cargo containers.',
-    duration: 'Day 1–2'
+    title: 'Requirement Discussion',
+    desc: 'We review your fabric requirements, including composition, GSM, width, quantity, application, and delivery expectations to understand the project specifications.'
   },
   {
-    title: 'Mumbai Port Clearance (Nhava Sheva)',
-    desc: 'Containers arrive at Nhava Sheva port, undergoing customs checks and loading onto Hamburg-bound vessels.',
-    duration: 'Day 3–5'
+    title: 'Sample Development & Approval',
+    desc: 'Fabric samples are developed according to the required specifications and submitted for evaluation. As sample development is scheduled alongside ongoing production commitments, approval timelines may vary. Production begins only after sample approval and order confirmation.'
   },
   {
-    title: 'Ocean Transit (Arabian Sea & Suez Canal)',
-    desc: 'Vessel transits via the Suez Canal into the Mediterranean, heading towards Atlantic routes.',
-    duration: 'Day 6–25'
+    title: 'Yarn Procurement',
+    desc: 'Following sample approval, the required yarn and raw materials are sourced according to the finalized fabric construction and quality requirements.'
   },
   {
-    title: 'Hamburg Port Arrival',
-    desc: 'Vessel docks at Hamburg Port. Bill of Lading is processed, and container is offloaded to terminal warehouses.',
-    duration: 'Day 26–28'
+    title: 'Production Planning',
+    desc: 'Manufacturing schedules, loom allocation, and production parameters are organized to ensure efficient execution and consistent output.'
   },
   {
-    title: 'German Customs & Inland Delivery',
-    desc: 'LUT-certified invoices are checked, import clearance is completed, and truck delivery is sent directly to your warehouse.',
-    duration: 'Day 29–30'
+    title: 'Fabric Manufacturing',
+    desc: 'Fabric is manufactured according to approved specifications and order requirements. Production timelines vary depending on fabric construction, quantity, yarn availability, and current manufacturing commitments. Throughout the process, GSM, weave structure, and fabric consistency are continuously monitored.'
+  },
+  {
+    title: 'Quality Inspection',
+    desc: 'Each production batch undergoes inspection for GSM accuracy, weave alignment, surface consistency, and overall fabric quality before dispatch.'
+  },
+  {
+    title: 'Documentation & Export Preparation',
+    desc: 'Commercial invoices, packing lists, and export-related documentation are prepared according to buyer requirements and shipping terms.'
+  },
+  {
+    title: 'Packing & Dispatch',
+    desc: 'Finished fabric rolls are packed securely to maintain cleanliness, material integrity, and safe handling during transportation.'
+  },
+  {
+    title: 'Inland Transportation to Port',
+    desc: 'Cargo is transported by truck or rail to the designated Indian port, including Nhava Sheva (Mumbai), Mundra, Hazira, Chennai, or other buyer-specified FOB ports.'
+  },
+  {
+    title: 'FOB Handover',
+    desc: 'The shipment is delivered to the designated port and handed over according to agreed FOB shipping terms, completing our scope of supply.'
   }
 ];
 
@@ -85,7 +100,7 @@ function TimelineStep({ step, index, total }: { step: typeof timelineSteps[0]; i
         <div className={`h-6 w-6 rounded-full border flex items-center justify-center text-[10px] font-mono font-bold transition-all duration-500 ${
           active ? 'bg-[#d4a96a] text-[#0f0e0c] border-[#d4a96a]' : 'bg-transparent text-[#d4a96a]/70 border-[#b8924a]/30'
         }`}>
-          0{index + 1}
+          {String(index + 1).padStart(2, '0')}
         </div>
         {index < total - 1 && (
           <div className={`w-0.5 flex-grow border-l-2 border-dashed transition-colors duration-500 ${
@@ -102,7 +117,9 @@ function TimelineStep({ step, index, total }: { step: typeof timelineSteps[0]; i
           <h4 className={`font-serif text-base transition-colors duration-500 ${active ? 'text-white' : 'text-white/60'}`}>
             {step.title}
           </h4>
-          <span className="text-[10px] font-mono uppercase text-[#d4a96a]">{step.duration}</span>
+          <span className="text-[10px] font-mono uppercase text-[#d4a96a]">
+            Step {String(index + 1).padStart(2, '0')}
+          </span>
         </div>
         <p className="text-xs leading-relaxed text-white/50 mt-2 font-light">{step.desc}</p>
       </div>
@@ -140,12 +157,11 @@ export default function ShippingExportPage() {
             <Anchor className="h-6 w-6 text-[#d4a96a]" />
             <h3 className="font-serif text-lg text-white">Incoterms</h3>
             <p className="text-xs leading-relaxed text-white/70">
-              We offer standard B2B Incoterms to match your logistics grid:
+              We support flexible domestic and international trade arrangements based on customer requirements and logistics preferences:
             </p>
-            <ul className="text-xs space-y-1 text-white/80 font-mono">
-              <li>• FOB Surat (Surat Rail / Port)</li>
-              <li>• CIF Hamburg / Rotterdam</li>
-              <li>• DDP Germany (Delivery Duty Paid)</li>
+            <ul className="text-xs space-y-2.5 text-white/80 font-mono">
+              <li>• EX-WORKS (EXW) – Factory Pickup from Surat</li>
+              <li>• FOB Surat / Mumbai Port – Buyer Arranged Freight</li>
             </ul>
           </div>
 
@@ -154,11 +170,11 @@ export default function ShippingExportPage() {
             <Landmark className="h-6 w-6 text-[#d4a96a]" />
             <h3 className="font-serif text-lg text-white">Payment Terms</h3>
             <p className="text-xs leading-relaxed text-white/70">
-              Standard secure trade finance options:
+              Flexible payment options available based on order value, client profile, and commercial agreement:
             </p>
-            <ul className="text-xs space-y-1 text-white/80 font-mono">
-              <li>• 30% Advance + 70% before shipping (T/T Bank Transfer)</li>
-              <li>• Irrevocable Letter of Credit (L/C) at sight</li>
+            <ul className="text-xs space-y-2.5 text-white/80 font-mono">
+              <li>• 100% Advance Payment (Bank Transfer)</li>
+              <li>• Letter of Credit (L/C)</li>
             </ul>
           </div>
 
@@ -192,61 +208,45 @@ export default function ShippingExportPage() {
           </div>
         </section>
 
-        {/* Lead times & carriers strip */}
-        <section className="grid gap-12 lg:grid-cols-2 items-center mb-24">
+        {/* Lead times & timelines strip */}
+        <section className="max-w-2xl mx-auto mb-24">
           <div className="space-y-6">
             <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono block">Order Operations</span>
             <h2 className="font-serif text-2xl uppercase tracking-wide text-white md:text-3xl">
-              Lead Times & Carriers
+              Lead Times & Timelines
             </h2>
-            <p className="text-sm leading-relaxed text-white/70">
-              Average production lead times depend on your specific batch size:
+            <p className="text-sm leading-relaxed text-white/70 font-light">
+              Production timelines vary based on order volume, fabric specifications, yarn availability, processing requirements, and finishing requirements.
             </p>
             <div className="space-y-3 font-mono text-xs text-white/80">
               <div className="flex justify-between border-b border-[#b8924a]/10 pb-2">
-                <span>Small Batches (&lt;5,000m)</span>
-                <span className="text-[#d4a96a]">14–21 Business Days</span>
+                <span>Small Batches (Up to 50,000m)</span>
+                <span className="text-[#d4a96a]">30–45 Days</span>
               </div>
               <div className="flex justify-between border-b border-[#b8924a]/10 pb-2">
-                <span>Medium Orders (5,000m - 20,000m)</span>
-                <span className="text-[#d4a96a]">21–28 Business Days</span>
+                <span>Medium Batches (50,000m – 200,000m)</span>
+                <span className="text-[#d4a96a]">60–75 Days</span>
               </div>
               <div className="flex justify-between border-b border-[#b8924a]/10 pb-2">
-                <span>Full Containers (&gt;20,000m)</span>
-                <span className="text-[#d4a96a]">30–45 Business Days</span>
+                <span>Large Production Runs (1,000,000m+)</span>
+                <span className="text-[#d4a96a]">90 Days</span>
               </div>
             </div>
             <p className="text-xs text-white/50 italic leading-relaxed pt-2">
-              Note: Lead times exclude ocean freight duration (approx. 25–30 days Mumbai to Hamburg/Rotterdam).
+              Note: Production timelines are indicative and may vary based on order specifications, seasonality, yarn procurement, dyeing schedules, and finishing requirements.
             </p>
-          </div>
-
-          <div className="border border-[#b8924a]/15 bg-[#171513] p-8 space-y-4">
-            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono block">Logistic Partners</span>
-            <h3 className="font-serif text-xl text-white">Carrier Alliances</h3>
-            <p className="text-xs leading-relaxed text-white/70 font-light">
-              For ocean freight containers, we utilize primary global shipping carriers to guarantee container space, reliable transit times, and low cargo insurance rates:
-            </p>
-            <div className="grid grid-cols-2 gap-4 text-xs font-mono text-white/80 pt-2">
-              <div>• Maersk Line</div>
-              <div>• MSC (Mediterranean Shipping)</div>
-              <div>• CMA CGM</div>
-              <div>• Hapag-Lloyd</div>
-              <div>• DHL Express (Air Swatches)</div>
-              <div>• FedEx Express (Air Swatches)</div>
-            </div>
           </div>
         </section>
 
-        {/* Maritime Cargo Timeline Visualizer */}
+        {/* Order to FOB Delivery Process Visualizer */}
         <section className="mb-24 space-y-12">
           <div className="text-center">
-            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono block">Logistics Route</span>
+            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono block">ORDER OPERATIONS</span>
             <h2 className="font-serif text-2xl uppercase tracking-wide text-white md:text-4xl mt-1">
-              Surat to Hamburg Transit Path
+              Order to FOB Delivery Process
             </h2>
-            <p className="text-xs text-white/50 uppercase tracking-widest font-mono mt-1">
-              Track our export cargo delivery process step-by-step.
+            <p className="text-xs text-white/50 max-w-xl mx-auto mt-2 leading-relaxed font-sans">
+              From sample development to port delivery, every stage is managed through a structured manufacturing, quality control, and logistics process.
             </p>
           </div>
 

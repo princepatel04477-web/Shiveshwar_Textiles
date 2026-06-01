@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { Mail, Phone, MapPin, Award, Globe, Ship } from 'lucide-react';
@@ -8,20 +8,24 @@ import { animate } from 'animejs';
 
 const logo =
   'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png';
-const logo11 =
-  'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1dbe03c948290cf27de22_SHIWESHWAR-11.png';
-const logoTextile =
-  'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a1e09bcb79a8d4f8a55957_textile.png';
 
 const marqueeItems = [
   { src: logo, alt: 'Shiveshwar logo' },
-  { src: logo11, alt: 'Shiveshwar 11' },
-  { src: logoTextile, alt: 'WeaveTech logo' },
+  { src: logo, alt: 'Shiveshwar logo' },
+  { src: logo, alt: 'Shiveshwar logo' },
+  { src: logo, alt: 'Shiveshwar logo' },
+  { src: logo, alt: 'Shiveshwar logo' },
+  { src: logo, alt: 'Shiveshwar logo' },
 ];
 
 export default function Footer() {
   const { t, language } = useLanguage();
   const gradientRef = useRef<HTMLDivElement>(null);
+  const [currentYear, setCurrentYear] = useState<number | string>('2026');
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   useEffect(() => {
     if (gradientRef.current) {
@@ -39,22 +43,31 @@ export default function Footer() {
 
   const coordinators = [
     {
-      name: 'Parth P. Mangukiya',
-      role: 'Export Director',
-      email: 'parthmangukiya@shiveshwartextiles.com',
-      phone: '+919924176337',
-    },
-    {
       name: 'Prakashbhai Mangukiya',
-      role: 'Managing Partner / Production Lead',
+      role: 'FOUNDER',
       email: 'prakashbhai@shiveshwartextiles.com',
       phone: '+919904255555',
     },
     {
+      name: 'Parth P. Mangukiya',
+      role: 'DIRECTOR',
+      email: 'parthmangukiya@shiveshwartextiles.com',
+      phone: '+919316189146',
+    },
+    {
       name: 'Fenil Mangukiya',
-      role: 'Operations & Logistics Manager',
-      email: 'fenil@shiveshwartextiles.com',
-      phone: '+919726880009',
+      role: 'OPERATIONS & LOGISTICS MANAGER',
+      phone: '+918155962069',
+    },
+    {
+      name: 'Ayush Kanani',
+      role: 'MARKETING HEAD',
+      phone: '+919586054194',
+    },
+    {
+      name: 'Dhruv Patel',
+      role: 'EXPORT GUIDE',
+      phone: '+917600381234',
     }
   ];
 
@@ -74,7 +87,6 @@ export default function Footer() {
             {[...marqueeItems, ...marqueeItems].map((item, idx) => (
               <div key={`m1-${idx}`} className="flex items-center gap-12">
                 <img src={item.src} alt={item.alt} className="h-8 w-auto opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition duration-300 object-contain" />
-                <span className="font-serif text-[10px] uppercase tracking-[0.3em] text-[#d4a96a]/30">Shiveshwar Textiles</span>
               </div>
             ))}
           </div>
@@ -83,7 +95,6 @@ export default function Footer() {
             {[...marqueeItems, ...marqueeItems].map((item, idx) => (
               <div key={`m2-${idx}`} className="flex items-center gap-12">
                 <img src={item.src} alt={item.alt} className="h-8 w-auto opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition duration-300 object-contain" />
-                <span className="font-serif text-[10px] uppercase tracking-[0.3em] text-[#d4a96a]/30">Shiveshwar Textiles</span>
               </div>
             ))}
           </div>
@@ -104,21 +115,6 @@ export default function Footer() {
             <p className="text-xs leading-relaxed text-[#f5f0e8]/65">
               Premium wholesale fabric supplier from Surat, India, exporting high-performance textiles to Germany, Europe, and global industrial hubs.
             </p>
-            {/* Certifications & Badges */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              <span className="border border-[#b8924a]/25 bg-[#b8924a]/5 px-2.5 py-1 text-[9px] uppercase tracking-wider text-[#d4a96a] flex items-center gap-1">
-                <Award className="h-3 w-3" />
-                <span>ISO 9001:2015</span>
-              </span>
-              <span className="border border-[#b8924a]/25 bg-[#b8924a]/5 px-2.5 py-1 text-[9px] uppercase tracking-wider text-[#d4a96a] flex items-center gap-1">
-                <Globe className="h-3 w-3" />
-                <span>OEKO-TEX Yarn</span>
-              </span>
-              <span className="border border-[#b8924a]/25 bg-[#b8924a]/5 px-2.5 py-1 text-[9px] uppercase tracking-wider text-[#d4a96a] flex items-center gap-1">
-                <Ship className="h-3 w-3" />
-                <span>FOB / DDP EU</span>
-              </span>
-            </div>
           </div>
 
           {/* Column 2: Navigation Links */}
@@ -127,7 +123,6 @@ export default function Footer() {
             <ul className="space-y-2.5 text-xs">
               <li><Link href="/" className="hover:text-[#d4a96a] transition duration-200">Startseite</Link></li>
               <li><Link href="/products" className="hover:text-[#d4a96a] transition duration-200">Fabric Catalogue</Link></li>
-              <li><Link href="/fabric-supplier-germany" className="hover:text-[#d4a96a] transition duration-200 font-medium text-[#d4a96a]/90">Germany & Europe Portal</Link></li>
               <li><Link href="/about" className="hover:text-[#d4a96a] transition duration-200">Company Profile</Link></li>
               <li><Link href="/quality" className="hover:text-[#d4a96a] transition duration-200">Quality Management</Link></li>
               <li><Link href="/shipping-export" className="hover:text-[#d4a96a] transition duration-200">Logistics & Freight</Link></li>
@@ -139,9 +134,9 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-serif text-sm uppercase tracking-[0.2em] text-[#d4a96a]">Fabric Lines</h4>
             <ul className="space-y-2.5 text-xs text-[#f5f0e8]/75">
-              <li><Link href="/products/cotton-fabrics" className="hover:text-[#d4a96a] transition">Cotton Fabrics (100–150 GSM)</Link></li>
-              <li><Link href="/products/polyester-fabrics" className="hover:text-[#d4a96a] transition">Polyester Fabrics (50–250 GSM)</Link></li>
-              <li><Link href="/products/blended-fabrics" className="hover:text-[#d4a96a] transition">Blended Fabrics (Custom GSM)</Link></li>
+              <li><Link href="/products/cotton-fabrics" className="hover:text-[#d4a96a] transition">Cotton Fabrics (50–150 GSM)</Link></li>
+              <li><Link href="/products/polyester-fabrics" className="hover:text-[#d4a96a] transition">Greig Polyster Fabric (50–250 GSM)</Link></li>
+              <li><Link href="/products/blended-fabrics" className="hover:text-[#d4a96a] transition">Blended Fabrics (50/250 GSM)</Link></li>
               <li><Link href="/products/custom-development" className="hover:text-[#d4a96a] transition">Bespoke Mill Weaving</Link></li>
             </ul>
           </div>
@@ -158,10 +153,12 @@ export default function Footer() {
                   <p className="font-bold text-[#faf8f4] group-hover:text-[#d4a96a] transition-colors">{c.name}</p>
                   <p className="text-[10px] text-[#f5f0e8]/50 uppercase tracking-wider">{c.role}</p>
                   <div className="flex flex-col gap-1 pt-1.5 font-mono text-[10px] text-[#d4a96a]/90">
-                    <a href={`mailto:${c.email}`} className="flex items-center gap-1 hover:text-white transition">
-                      <Mail className="h-3 w-3 shrink-0" />
-                      <span>{c.email}</span>
-                    </a>
+                    {'email' in c && c.email && (
+                      <a href={`mailto:${c.email}`} className="flex items-center gap-1 hover:text-white transition">
+                        <Mail className="h-3 w-3 shrink-0" />
+                        <span>{c.email}</span>
+                      </a>
+                    )}
                     <a href={`https://wa.me/${c.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition">
                       <Phone className="h-3 w-3 shrink-0" />
                       <span>{c.phone}</span>
@@ -179,7 +176,7 @@ export default function Footer() {
             All international exports are executed under Indian Customs LUT — Zero-rated GST for overseas B2B buyers.
           </p>
           <p className="mt-4 text-[10px] text-[#f5f0e8]/45 sm:mt-0 font-mono">
-            © {new Date().getFullYear()} Shiveshwar Textiles. Surat, Gujarat, India.
+            © {currentYear} Shiveshwar Textiles. Surat, Gujarat, India.
           </p>
         </div>
       </div>

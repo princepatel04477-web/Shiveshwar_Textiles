@@ -22,8 +22,8 @@ interface ProductDetails {
 const productsData: Record<string, ProductDetails> = {
   'cotton-fabrics': {
     name: 'Cotton Fabrics',
-    tagline: '100% Organic & Carded Cotton options from Surat',
-    description: 'Our cotton fabrics are manufactured within a 100–150 GSM range, offering a balanced combination of breathability, durability, and structure. This GSM range is ideal for shirting, uniforms, light workwear, and general garment applications where comfort and consistent performance are essential. We maintain strict GSM control and finishing standards to ensure uniform texture, clean weave structure, and dependable batch consistency for bulk supply.',
+    tagline: '100% Organic & Carded Cotton Options',
+    description: 'Our cotton fabrics are manufactured within a 50–150 GSM range, offering a balanced combination of breathability, durability, and structure. This GSM range is ideal for shirting, uniforms, light workwear, and general garment applications where comfort and consistent performance are essential. We maintain strict GSM control and finishing standards to ensure uniform texture, clean weave structure, and dependable batch consistency for bulk supply.',
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d41725e55a6fa6b34401c0_IMG_4578.JPG',
     gallery: [
       'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d41725e55a6fa6b34401c0_IMG_4578.JPG',
@@ -32,17 +32,17 @@ const productsData: Record<string, ProductDetails> = {
     ],
     specs: [
       { label: 'Composition', value: '100% Carded / Combed Cotton' },
-      { label: 'GSM Range', value: '100–150 GSM (Precise control)' },
+      { label: 'GSM Range', value: '50–150 GSM (Precise control)' },
       { label: 'Width Options', value: '90cm / 110cm / 150cm' },
       { label: 'Weave Type', value: 'Plain Weave / Twill Weave' },
       { label: 'Available Colors', value: 'Greige (Raw), Piece-Dyed, Printed' },
       { label: 'Minimum Order Quantity', value: '500 meters per color/spec' },
-      { label: 'Lead Time', value: '14–21 business days (FOB Surat)' },
-      { label: 'Shipping Terms', value: 'FOB Surat / CIF Hamburg / DDP Germany' }
+      { label: 'Lead Time', value: '14–21 business days' },
+      { label: 'Shipping Terms', value: 'EXW / FOB Shipping' }
     ]
   },
   'polyester-fabrics': {
-    name: 'Polyester Fabrics',
+    name: 'Greig Polyster Fabric',
     tagline: 'High-density filament & spun polyester built for longevity',
     description: 'We produce polyester fabrics ranging from 50–250 GSM, covering lightweight lining materials to heavier structured applications. The lighter GSM range is suitable for lining and technical uses, while mid to higher GSM fabrics offer improved strength and form stability for uniforms, outerwear, and industrial requirements. Our production process ensures smooth surface finish, consistent density, and controlled quality parameters for reliable large-volume supply.',
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d4174501addf7b2249c368_IMG_4580.JPG',
@@ -58,8 +58,8 @@ const productsData: Record<string, ProductDetails> = {
       { label: 'Weave Type', value: 'Plain / Satin / Ripstop / Drill' },
       { label: 'Available Colors', value: 'Greige, Dyed, Sublimation-Printed' },
       { label: 'Minimum Order Quantity', value: '1,000 meters per color/spec' },
-      { label: 'Lead Time', value: '14–21 business days (FOB Surat)' },
-      { label: 'Shipping Terms', value: 'FOB Surat / CIF Hamburg / DDP Germany' }
+      { label: 'Lead Time', value: '14–21 business days' },
+      { label: 'Shipping Terms', value: 'EXW / FOB Shipping' }
     ]
   },
   'blended-fabrics': {
@@ -74,13 +74,13 @@ const productsData: Record<string, ProductDetails> = {
     ],
     specs: [
       { label: 'Composition', value: 'Poly-Cotton (PC 65/35, 50/50), Cotton-Poly Blends' },
-      { label: 'GSM Range', value: '100–220 GSM (High stability control)' },
+      { label: 'GSM Range', value: '50/250 GSM (High stability control)' },
       { label: 'Width Options', value: '110cm / 150cm' },
       { label: 'Weave Type', value: 'Plain / Twill / Matty / Oxford' },
       { label: 'Available Colors', value: 'Greige, Dyed' },
       { label: 'Minimum Order Quantity', value: '800 meters per color/spec' },
-      { label: 'Lead Time', value: '21–28 business days (FOB Surat)' },
-      { label: 'Shipping Terms', value: 'FOB Surat / CIF Hamburg / DDP Germany' }
+      { label: 'Lead Time', value: '21–28 business days' },
+      { label: 'Shipping Terms', value: 'EXW / FOB Shipping' }
     ]
   },
   'custom-development': {
@@ -100,8 +100,8 @@ const productsData: Record<string, ProductDetails> = {
       { label: 'Weave Type', value: 'Dobby, Jaquard, Custom weave structures' },
       { label: 'Available Colors', value: 'Bespoke dye lots, specific pigments, patterns' },
       { label: 'Minimum Order Quantity', value: '1,500 meters' },
-      { label: 'Lead Time', value: '28–35 business days (FOB Surat)' },
-      { label: 'Shipping Terms', value: 'FOB Surat / CIF Hamburg / DDP Germany' }
+      { label: 'Lead Time', value: '28–35 business days' },
+      { label: 'Shipping Terms', value: 'EXW / FOB Shipping' }
     ]
   }
 };

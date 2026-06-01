@@ -26,7 +26,7 @@ export default function GermanyLandingClient() {
     company: '',
     fabricType: 'Cotton',
     quantity: '1000',
-    deliveryTerms: 'DDP',
+    deliveryTerms: 'EXW',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
@@ -41,7 +41,7 @@ export default function GermanyLandingClient() {
       secTrustTitle: "Why European Buyers Choose Us",
       secTrustSub: "Adhering to strict European quality standards with reliable Indian manufacturing efficiency.",
       timelineTitle: "Our B2B Shipping & Export Process",
-      timelineSub: "From Surat looms to your German warehouse: timeline, customs clearing, and ocean corridors.",
+      timelineSub: "From our high-speed looms to your German warehouse: timeline, customs clearing, and ocean corridors.",
       rfqTitle: "Request a Custom Quote / Swatch",
       rfqSub: "Provide your target specifications. Our export desk responds in 1 business day.",
       faqTitle: "Frequently Asked Questions",
@@ -49,22 +49,22 @@ export default function GermanyLandingClient() {
       cards: [
         { title: "Standard 100 Yarns", desc: "We utilize yarns matching OEKO-TEX Standard 100 for high human-ecological safety." },
         { title: "German Documentation Support", desc: "Full Certificate of Origin, Mill Test Reports, Bill of Lading, and Customs Clearance forms." },
-        { title: "Low MOQ & Fast Sampling", desc: "Flexible MOQs starting at 500m per color. Express A4 swatch dispatch within 3-5 days." },
-        { title: "Direct Mill Pricing", desc: "Eliminate agents. Source direct from Surat's high-tech industrial weaving setup." }
+        { title: "Low MOQ & Fast Sampling", desc: "Flexible MOQs starting at 500m per color. Express A4 swatch dispatch within 20 days." },
+        { title: "Direct Mill Pricing", desc: "Eliminate agents. Source direct from our high-tech industrial weaving setup." }
       ],
       timeline: [
-        { step: "01", title: "Surat Mill Packing", desc: "Fabric is rolled and packed in dual-layer moisture-proof polyethylene sheets." },
-        { step: "02", title: "Port Loading & Export Clearance", desc: "Containers arrive at Nhava Sheva (Mumbai) port. LUT-certified export documentation processed." },
-        { step: "03", title: "Suez Canal Transit", desc: "Ocean freight transits via Suez Canal direct to European cargo networks." },
-        { step: "04", title: "Hamburg Terminal Arrival", desc: "Vessel docks at Hamburg Port. Import customs processing and offloading." },
-        { step: "05", title: "Inland Delivery (DDP/DAP)", desc: "Scheduled container truck delivery direct to your warehouse or factory floor." }
+        { step: "01", title: "Requirement & Sample Approval", tag: "Inquiry", desc: "We review project specifications and develop fabric samples for evaluation. Bulk production is scheduled only after buyer approval." },
+        { step: "02", title: "Yarn Procurement & Weaving", tag: "Production", desc: "Raw materials are sourced based on the approved construction. Weaving is carried out under controlled yarn tension and loom parameters." },
+        { step: "03", title: "Quality Inspection & Packing", tag: "Quality", desc: "Each production batch is checked for GSM accuracy, weave alignment, and surface consistency before packing in protective wraps." },
+        { step: "04", title: "Customs Clearance & Documentation", tag: "Customs", desc: "Commercial invoices, packing lists, and Certificate of Origin are prepared. LUT-certified export documentation processed for export clearance." },
+        { step: "05", title: "Inland Port Handover (FOB)", tag: "Handover", desc: "Consignments are transported to the designated port (such as Mumbai or Mundra) and loaded onto the vessel according to FOB terms." }
       ],
       faqs: [
-        { q: "Do you export to Germany?", a: "Yes. We regularly ship FCL (Full Container Load) and LCL (Less than Container Load) shipments to Hamburg and Bremen ports. We also support inland DDP delivery to anywhere in Germany." },
+        { q: "Do you export to Germany?", a: "Yes. We regularly ship bulk wholesale orders under Ex-Works (EXW) and FOB terms, providing complete export documentation for smooth import processing." },
         { q: "What is your MOQ?", a: "For European buyers, we support an entry-level MOQ of 500 meters per colorway for stock yarn designs, and 1500 meters for bespoke blends." },
-        { q: "What certifications do you provide?", a: "We provide ISO 9001:2015 certificates, mill test sheets for shrinkage, GSM and colorfastness, and certificate of origin." },
-        { q: "How fast is sampling?", a: "We courier A4 swatches and fabric hangers via DHL Express, arriving at European offices within 3 to 5 business days." },
-        { q: "What are your payment terms?", a: "Our standard terms for new European customers are 30% advance T/T, 70% against Bill of Lading, or 100% LC at sight. Letter of credit can be opened via major European banks." }
+        { q: "What quality assurance do you provide?", a: "We provide detailed mill test sheets for fabric shrinkage, GSM tolerance, and colorfastness, along with standard Certificate of Origin documentation." },
+        { q: "How fast is sampling?", a: "We courier A4 swatches and fabric hangers via DHL Express, arriving at European offices within 20 days." },
+        { q: "What are your payment terms?", a: "Our standard terms are 100% advance payment via Bank Transfer or Letter of Credit (L/C), depending on the order size and custom weaving agreement." }
       ]
     },
     DE: {
@@ -75,7 +75,7 @@ export default function GermanyLandingClient() {
       secTrustTitle: "Warum europäische Einkäufer uns wählen",
       secTrustSub: "Einhaltung strenger europäischer Qualitätsstandards kombiniert mit effizienter indischer Produktion.",
       timelineTitle: "Unser B2B-Versand- & Exportprozess",
-      timelineSub: "Von den Webstühlen in Surat bis zu Ihrem Lager in Deutschland: Ablauf, Zollabwicklung und Seewege.",
+      timelineSub: "Von unseren modernen Webstühlen bis zu Ihrem Lager in Deutschland: Ablauf, Zollabwicklung und Seewege.",
       rfqTitle: "Angebot / Stoffmuster anfordern",
       rfqSub: "Geben Sie Ihre Spezifikationen an. Unser Export-Team antwortet innerhalb von 1 Werktag.",
       faqTitle: "Häufig gestellte Fragen (FAQ)",
@@ -83,22 +83,22 @@ export default function GermanyLandingClient() {
       cards: [
         { title: "Standard 100 Garne", desc: "Wir verwenden Garne, die dem OEKO-TEX Standard 100 für hohe humanökologische Sicherheit entsprechen." },
         { title: "Deutsche Zollabwicklung", desc: "Vollständiges Ursprungszeugnis, Werksprüfberichte, Frachtbriefe und zollrelevante Dokumente." },
-        { title: "Kleine MOQ & Schnelle Muster", desc: "Flexible MOQs ab 500m pro Farbe. Express-Zustellung von A4-Mustern in 3-5 Tagen." },
-        { title: "Preise direkt ab Werk", desc: "Keine Zwischenhändler. Kaufen Sie direkt aus unserer modernen Weberei in Surat." }
+        { title: "Kleine MOQ & Schnelle Muster", desc: "Flexible MOQs ab 500m pro Farbe. Express-Zustellung von A4-Mustern in 20 Tagen." },
+        { title: "Preise direkt ab Werk", desc: "Keine Zwischenhändler. Kaufen Sie direkt aus unserer modernen Weberei." }
       ],
       timeline: [
-        { step: "01", title: "Verpackung im Werk Surat", desc: "Die Stoffe werden gerollt und in feuchtigkeitsbeständige PE-Schläuche doppelt verpackt." },
-        { step: "02", title: "Hafenverladung & Zoll", desc: "Die Container treffen am Hafen Nhava Sheva (Mumbai) ein. Zollabfertigung und LUT-Bescheinigung." },
-        { step: "03", title: "Transport über Suezkanal", desc: "Seeschiff-Transit über den Suezkanal direkt in das europäische Transportnetzwerk." },
-        { step: "04", title: "Ankunft im Hafen Hamburg", desc: "Das Schiff legt im Hamburger Hafen an. Zollabfertigung und Entladung des Containers." },
-        { step: "05", title: "Inlandslieferung (DDP/DAP)", desc: "Zugeordneter Containertransport direkt vor Ihre Haustür, Ihr Lager oder Ihre Fabrik." }
+        { step: "01", title: "Spezifikation & Musterfreigabe", tag: "Anfrage", desc: "Wir prüfen die Projektanforderungen und entwickeln Stoffmuster zur Bewertung. Die Serienproduktion startet erst nach Freigabe durch den Käufer." },
+        { step: "02", title: "Garnbeschaffung & Weben", tag: "Produktion", desc: "Rohstoffe werden basierend auf der freigegebenen Konstruktion beschafft. Das Weben erfolgt unter kontrollierten Fadenspannungs- und Webstuhlparametern." },
+        { step: "03", title: "Qualitätsprüfung & Verpackung", tag: "Qualität", desc: "Jede Produktionscharge wird vor der Verpackung in Schutzfolien auf GSM-Genauigkeit, Gewebeausrichtung und Oberflächenkonsistenz geprüft." },
+        { step: "04", title: "Zollabfertigung & Dokumente", tag: "Zoll", desc: "Handelsrechnungen, Packlisten und Ursprungszeugnisse werden vorbereitet. LUT-zertifizierte Exportdokumente werden für die Zollabfertigung bearbeitet." },
+        { step: "05", title: "Hafenübergabe (FOB)", tag: "Übergabe", desc: "Die Sendungen werden zum vereinbarten Hafen (wie Mumbai oder Mundra) transportiert und gemäß FOB-Bedingungen an den Käufer übergeben." }
       ],
       faqs: [
-        { q: "Exportieren Sie nach Deutschland?", a: "Ja. Wir versenden regelmäßig FCL- und LCL-Lieferungen an die Häfen Hamburg und Bremen. Wir unterstützen auch die DDP-Lieferung im Inland nach ganz Deutschland." },
+        { q: "Exportieren Sie nach Deutschland?", a: "Ja. Wir versenden regelmäßig Großbestellungen zu Ex-Works (EXW) und FOB Bedingungen und stellen vollständige Exportdokumente für eine reibungslose Einfuhr zur Verfügung." },
         { q: "Wie hoch ist die Mindestbestellmenge (MOQ)?", a: "Für europäische Abnehmer unterstützen wir eine Mindestbestellmenge von 500 Metern pro Farbe bei Standardgarnen und 1500 Metern bei Sondermischungen." },
-        { q: "Welche Zertifikate stellen Sie bereit?", a: "Wir liefern ISO 9001:2015-Zertifikate, Qualitätsprüfberichte über Krumpfung, GSM und Farbechtheit sowie Ursprungszeugnisse." },
-        { q: "Wie schnell ist die Musterbereitstellung?", a: "Wir versenden A4-Musterkarten und Stoffhänger per DHL Express. Diese treffen innerhalb von 3 bis 5 Werktagen bei Ihnen ein." },
-        { q: "Wie lauten Ihre Zahlungsbedingungen?", a: "Unsere Standardkonditionen für europäische Neukunden sind 30% Anzahlung per T/T, 70% gegen Frachtbrief (B/L) oder 100% unwiderrufliches Akkreditiv (L/C)." }
+        { q: "Welche Qualitätssicherung bieten Sie an?", a: "Wir liefern detaillierte Werksprüfberichte über Krumpfung, GSM-Toleranz und Farbechtheit sowie Ursprungszeugnisse." },
+        { q: "Wie schnell ist die Musterbereitstellung?", a: "Wir versenden A4-Musterkarten und Stoffhänger per DHL Express. Diese treffen innerhalb von 20 Tagen bei Ihnen ein." },
+        { q: "Wie lauten Ihre Zahlungsbedingungen?", a: "Unsere Standardkonditionen sind 100% Vorauszahlung per Banküberweisung oder Akkreditiv (L/C), abhängig vom Auftragsvolumen und der Webvereinbarung." }
       ]
     }
   };
@@ -152,7 +152,7 @@ export default function GermanyLandingClient() {
         company: '',
         fabricType: 'Cotton',
         quantity: '1000',
-        deliveryTerms: 'DDP',
+        deliveryTerms: 'EXW',
         message: ''
       });
     }, 5000);
@@ -259,7 +259,7 @@ export default function GermanyLandingClient() {
                     {step.title}
                   </h3>
                   <span className="text-[10px] bg-[#b8924a]/10 border border-[#b8924a]/30 px-2 py-0.5 text-[#d4a96a] rounded-full uppercase tracking-wider font-mono">
-                    {idx === 0 ? "Dispatch" : idx === 4 ? "Delivery" : "Transit"}
+                    {step.tag}
                   </span>
                 </div>
                 <p className="text-xs md:text-sm text-[#f5f0e8]/60 leading-relaxed">
@@ -336,7 +336,7 @@ export default function GermanyLandingClient() {
                     className="w-full bg-[#0f0e0c] border border-[#b8924a]/20 px-4 py-2.5 text-xs text-[#f5f0e8] focus:border-[#d4a96a] focus:outline-none transition-colors"
                   >
                     <option value="Cotton">Cotton Fabrics</option>
-                    <option value="Polyester">Polyester Fabrics</option>
+                    <option value="Polyester">Greig Polyster Fabric</option>
                     <option value="Blends">Blends (CVC, PC)</option>
                     <option value="Custom">Custom Mill Design</option>
                   </select>
@@ -348,9 +348,8 @@ export default function GermanyLandingClient() {
                     onChange={(e) => setFormData({ ...formData, deliveryTerms: e.target.value })}
                     className="w-full bg-[#0f0e0c] border border-[#b8924a]/20 px-4 py-2.5 text-xs text-[#f5f0e8] focus:border-[#d4a96a] focus:outline-none transition-colors"
                   >
-                    <option value="DDP">DDP (Customs Paid)</option>
+                    <option value="EXW">Ex-Works (EXW)</option>
                     <option value="FOB">FOB (India Port)</option>
-                    <option value="CIF">CIF (German Port)</option>
                   </select>
                 </div>
               </div>

@@ -4,8 +4,15 @@ import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
-import { ArrowRight, CheckCircle2, Factory, Shield, Truck, Sparkles, MessageSquare, Download, X, Award, Clock, Users, Globe } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Factory, Shield, Truck, Sparkles, MessageSquare, Download, X, Award, Clock, Users, Globe, Layers, ChevronDown, ChevronUp } from 'lucide-react';
 import { animate, createTimeline, stagger } from 'animejs';
+import dynamic from 'next/dynamic';
+import ManufacturingExcellence from '@/components/ManufacturingExcellence';
+
+const GlobalNetworkGlobe = dynamic(
+  () => import('@/components/GlobalNetworkGlobe'),
+  { ssr: false }
+);
 
 const heroImage =
   'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69d08aab1e14cd492e736468_ChatGPT%20Image%20Feb%2024%2C%202026%2C%2006_40_44%20PM.png';
@@ -21,7 +28,7 @@ const fabricSwatches = [
     class: 'floating-swatch-1'
   },
   {
-    name: 'Polyester Filament',
+    name: 'Greig Polyster Fabric',
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d4174501addf7b2249c368_IMG_4580.JPG',
     gsm: '180 GSM',
     width: '150 cm',
@@ -53,12 +60,12 @@ const products = [
   {
     name: 'Cotton Fabrics',
     slug: 'cotton-fabrics',
-    detail: '100-150 GSM',
+    detail: '50-150 GSM',
     moq: 500,
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d41725e55a6fa6b34401c0_IMG_4578.JPG',
   },
   {
-    name: 'Polyester Fabrics',
+    name: 'Greig Polyster Fabric',
     slug: 'polyester-fabrics',
     detail: '50-250 GSM',
     moq: 1000,
@@ -67,7 +74,7 @@ const products = [
   {
     name: 'Blended Fabrics',
     slug: 'blended-fabrics',
-    detail: 'Custom GSM',
+    detail: '50/250 GSM',
     moq: 800,
     image: 'https://cdn.prod.website-files.com/699c95632d9783a33a533c4d/69d74a5359b7eb61b0060dce_Untitled%20design%20(33)1775508183.jpg',
   },
@@ -86,170 +93,7 @@ const infrastructureImages = [
   'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/69a483bdd8b87082bab902dd_566BC337-549E-42E5-8AA0-65BAB9B977EF.JPEG',
 ];
 
-const trustCards = [
-  {
-    icon: Globe,
-    title: 'Export Ready',
-    description: '100% compliant with EU REACH standards, absolute chemical audit safety, and direct zero-GST LUT export pathways.',
-    metric: 'Zero-GST LUT Setup'
-  },
-  {
-    icon: Factory,
-    title: 'Bulk Manufacturing',
-    description: 'Operating high-speed Rapier and Waterjet loom lines in Surat with automated weaving configurations.',
-    metric: '1,000,000m+/mo Scale'
-  },
-  {
-    icon: CheckCircle2,
-    title: 'Quality Inspected',
-    description: 'Strict 4-point inspection system checking GSM weight uniformity, color fastness, and defect-free weave density.',
-    metric: '<0.5% Defect Rate'
-  },
-  {
-    icon: Clock,
-    title: 'Fast Sampling',
-    description: 'Rapid development loop with air courier swatch books dispatched via DHL Express to Europe in 48 hours.',
-    metric: '48h Dispatch Loop'
-  },
-  {
-    icon: Truck,
-    title: 'Global Logistics',
-    description: 'Integrated freight forwarding. Flexible DDP, FOB, and CIF ocean shipping routes directly to European ports.',
-    metric: 'FOB / CIF / DDP Ports'
-  },
-  {
-    icon: Users,
-    title: 'Dedicated Support',
-    description: 'Direct round-the-clock WhatsApp & email correspondence with partners Parth Patel and Fenil Patel for custom weave runs.',
-    metric: 'Direct Executive Line'
-  }
-];
 
-const trustVisuals = [
-  {
-    title: 'Weaving Mill',
-    desc: 'Our state-of-the-art weaving loom mill floor in Surat, India.',
-    image: '/images/trust/factory.png'
-  },
-  {
-    title: 'Waterjet Loom Machinery',
-    desc: 'Advanced waterjet technology running at 600+ RPM for uniform weave.',
-    image: '/images/trust/machinery.png'
-  },
-  {
-    title: 'Fabric Roll Inspection',
-    desc: 'Meticulous 4-point check to audit batch consistency before packing.',
-    image: '/images/trust/warehouse.png'
-  },
-  {
-    title: 'Heavy-Duty Packaging',
-    desc: 'Secure moisture-proof tube packaging ready for international cargo container transport.',
-    image: '/images/trust/packaging.png'
-  },
-  {
-    title: 'Ocean Cargo Freight',
-    desc: 'Seamless ocean shipment routes from Mumbai (JNPT) port direct to Germany.',
-    image: '/images/trust/shipping.png'
-  },
-  {
-    title: 'Surat Storage Facility',
-    desc: 'Extensive inventory warehouse holding ready-to-ship cotton and polyester fabrics.',
-    image: '/images/trust/warehouse.png'
-  }
-];
-
-function CanvasParticles() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = (canvas.width = canvas.offsetWidth);
-    let height = (canvas.height = canvas.offsetHeight);
-
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    // Build particle configurations
-    const particles = Array.from({ length: 45 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      r: Math.random() * 1.5 + 0.8,
-      opacity: Math.random() * 0.4 + 0.35
-    }));
-
-    // Coordinate floating movement animations using Anime.js
-    particles.forEach((p) => {
-      animate(p, {
-        x: [p.x, Math.random() * width],
-        y: [p.y, Math.random() * height],
-        opacity: [p.opacity, Math.random() * 0.4 + 0.35],
-        duration: () => Math.random() * 8000 + 4000,
-        ease: 'inOutSine',
-        loop: true,
-        alternate: true
-      });
-    });
-
-    // Mesh technical lines shift coordinates using Anime.js
-    const meshState = { offset: 0 };
-    animate(meshState, {
-      offset: [0, 60],
-      duration: 12000,
-      ease: 'linear',
-      loop: true
-    });
-
-    let active = true;
-    const tick = () => {
-      if (!active) return;
-      ctx.clearRect(0, 0, width, height);
-
-      // Draw technical grid lines offset by the animated meshState
-      ctx.strokeStyle = 'rgba(184, 146, 74, 0.025)';
-      ctx.lineWidth = 1;
-      const step = 60;
-      const offset = meshState.offset;
-      for (let x = offset % step; x < width; x += step) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-        ctx.stroke();
-      }
-      for (let y = offset % step; y < height; y += step) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.stroke();
-      }
-
-      // Draw floating golden particles
-      particles.forEach((p) => {
-        ctx.fillStyle = `rgba(212, 169, 106, ${p.opacity})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      requestAnimationFrame(tick);
-    };
-    tick();
-
-    return () => {
-      active = false;
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-85" />;
-}
 
 export default function HomePage() {
   const { t, language } = useLanguage();
@@ -259,44 +103,80 @@ export default function HomePage() {
 
   // States for counters
   const [variantCount, setVariantCount] = useState(0);
-  const [regionCount, setRegionCount] = useState(0);
   const [samplingCount, setSamplingCount] = useState(0);
   const [yearsCount, setYearsCount] = useState(0);
   const [statsTriggered, setStatsTriggered] = useState(false);
   const [activeHeroSwatchIndex, setActiveHeroSwatchIndex] = useState(0);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
+  const toggleHomeFaq = (idx: number) => {
+    setActiveFaqIndex(prev => prev === idx ? null : idx);
+  };
+
+  const homeFaqs = [
+    {
+      q: "What types of fabrics do you manufacture?",
+      a: "We manufacture cotton fabrics (100–150 GSM), polyester fabrics (50–250 GSM), and blended fabrics for various industrial, apparel, and commercial applications."
+    },
+    {
+      q: "What is your production capacity?",
+      a: "Our manufacturing setup supports production volumes of up to 1 million meters per month, enabling us to handle substantial bulk requirements efficiently."
+    },
+    {
+      q: "Do you accept custom fabric requirements?",
+      a: "Yes. We support custom fabric development based on GSM, composition, width, and specific application requirements, subject to technical feasibility."
+    },
+    {
+      q: "Do you supply fabrics for export markets?",
+      a: "Yes. We work with international buyers and support export-oriented supply requirements with structured production and dispatch processes."
+    },
+    {
+      q: "What is your minimum order quantity (MOQ)?",
+      a: "MOQ depends on the fabric type, specification, and order requirements. Please contact our team with your requirements for detailed information."
+    },
+    {
+      q: "How do you ensure fabric quality?",
+      a: "Each production batch undergoes quality checks for GSM accuracy, weave consistency, alignment, and overall fabric appearance before dispatch."
+    },
+    {
+      q: "What fabric compositions do you offer?",
+      a: "We manufacture cotton, polyester, and blended fabric constructions. Additional specifications can be discussed based on project requirements."
+    }
+  ];
 
   // States for Step 2 Trust Section
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
-  const [hoveredPort, setHoveredPort] = useState<string | null>(null);
-  const [trustStatsTriggered, setTrustStatsTriggered] = useState(false);
-  const [capacityVal, setCapacityVal] = useState(0);
-  const [countriesVal, setCountriesVal] = useState(0);
-  const [ordersVal, setOrdersVal] = useState(0);
-  const [retentionVal, setRetentionVal] = useState(0);
+
 
   // 1. Text reveal & floating layers animations on mount
   useEffect(() => {
-    // Split heading letters for staggered animation
-    const heading = document.querySelector('.hero-title-main');
-    if (heading && heading.textContent) {
-      const text = heading.textContent;
-      heading.innerHTML = text
-        .split('')
-        .map((char) => `<span class="letter inline-block opacity-0">${char === ' ' ? '&nbsp;' : char}</span>`)
-        .join('');
-    }
+    // Split heading lines individually — wrap by WORD first so words never break mid-character
+    const lines = document.querySelectorAll('.hero-title-line span.line-text');
+    lines.forEach((line) => {
+      if (line && line.textContent && !line.querySelector('.word')) {
+        const text = line.textContent;
+        line.innerHTML = text
+          .split(' ')
+          .map((word) => {
+            const letters = word
+              .split('')
+              .map((char) => `<span class="letter inline-block opacity-0">${char}</span>`)
+              .join('');
+            return `<span class="word inline-block whitespace-nowrap">${letters}</span>`;
+          })
+          .join('<span class="word-space inline-block opacity-0">&nbsp;</span>');
+      }
+    });
 
     // Hero Entry Timeline (Anime.js v4 createTimeline)
     const tl = createTimeline({
       autoplay: true
     });
 
-    tl.add('.hero-title-main .letter', {
-      translateY: [40, 0],
+    tl.add('.hero-title-line .letter, .hero-title-line .word-space', {
+      translateY: [28, 0],
       opacity: [0, 1],
-      delay: stagger(15),
-      duration: 1000,
+      delay: stagger(10),
+      duration: 1100,
       ease: 'outExpo'
     })
     .add('.hero-subtitle', {
@@ -304,17 +184,30 @@ export default function HomePage() {
       translateY: [20, 0],
       duration: 800,
       ease: 'outExpo'
-    }, '-=700')
+    }, '-=800')
     .add('.hero-ctas .magnetic-btn', {
       opacity: [0, 1],
       translateY: [15, 0],
       delay: stagger(80),
       duration: 800,
       ease: 'outExpo'
+    }, '-=600')
+    .add('.hero-trust-bar', {
+      opacity: [0, 1],
+      translateY: [15, 0],
+      duration: 800,
+      ease: 'outExpo'
+    }, '-=700')
+    .add('.hero-trust-bar .trust-item', {
+      opacity: [0, 0.8],
+      translateY: [10, 0],
+      delay: stagger(100),
+      duration: 800,
+      ease: 'outExpo'
     }, '-=500');
 
     // Slow Ken Burns background zoom
-    animate('.hero-zoom-bg', {
+    animate('.hero-zoom-bg, .hero-video-bg', {
       scale: [1, 1.08],
       duration: 35000,
       ease: 'linear',
@@ -381,15 +274,6 @@ export default function HomePage() {
       ease: 'outSine'
     });
 
-    // Floating ISO badge alignment using Anime.js
-    animate('.iso-badge', {
-      translateY: [-3, 3],
-      duration: 3500,
-      alternate: true,
-      loop: true,
-      ease: 'inOutSine'
-    });
-
   }, []);
 
   useEffect(() => {
@@ -397,7 +281,7 @@ export default function HomePage() {
       const scrolled = window.scrollY;
       const swatch1 = document.querySelector('.floating-swatch-1') as HTMLElement;
       const swatch2 = document.querySelector('.floating-swatch-2') as HTMLElement;
-      const bgs = document.querySelectorAll('.hero-zoom-bg');
+      const bgs = document.querySelectorAll('.hero-zoom-bg, .hero-video-bg');
 
       bgs.forEach((bg) => {
         (bg as HTMLElement).style.transform = `translateY(${scrolled * 0.35}px) scale(1.05)`;
@@ -433,20 +317,18 @@ export default function HomePage() {
   useEffect(() => {
     if (!statsTriggered) return;
 
-    const statsObj = { variants: 0, regions: 0, sampling: 0, years: 0 };
+    const statsObj = { variants: 0, sampling: 0, years: 0 };
     animate(statsObj, {
       variants: 650,
-      regions: 25,
-      sampling: 48,
-      years: 10,
+      sampling: 20,
+      years: 5,
       round: 1,
       ease: 'outExpo',
       duration: 2000,
       onUpdate: () => {
-        setVariantCount(statsObj.variants);
-        setRegionCount(statsObj.regions);
-        setSamplingCount(statsObj.sampling);
-        setYearsCount(statsObj.years);
+        setVariantCount(Math.round(statsObj.variants));
+        setSamplingCount(Math.round(statsObj.sampling));
+        setYearsCount(Math.round(statsObj.years));
       }
     });
 
@@ -462,109 +344,7 @@ export default function HomePage() {
     });
   }, [statsTriggered]);
 
-  // 4b. Step 2 Trust Stats trigger intersection observer
-  useEffect(() => {
-    const el = trustStatsRef.current;
-    if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTrustStatsTriggered(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // 4c. Step 2 Trust counters and cards animations
-  useEffect(() => {
-    if (!trustStatsTriggered) return;
-
-    const trustStatsObj = { capacity: 0, countries: 0, orders: 0, retention: 0 };
-    animate(trustStatsObj, {
-      capacity: 1000000,
-      countries: 25,
-      orders: 1200,
-      retention: 94,
-      round: 1,
-      ease: 'outExpo',
-      duration: 2500,
-      onUpdate: () => {
-        setCapacityVal(trustStatsObj.capacity);
-        setCountriesVal(trustStatsObj.countries);
-        setOrdersVal(trustStatsObj.orders);
-        setRetentionVal(trustStatsObj.retention);
-      }
-    });
-
-    // Staggered reveal for trust cards with Anime.js
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    animate('.trust-card', {
-      opacity: [0, 1],
-      translateY: [isMobile ? 15 : 35, 0],
-      scale: [isMobile ? 0.98 : 0.95, 1],
-      delay: stagger(isMobile ? 40 : 90),
-      duration: isMobile ? 700 : 900,
-      ease: 'outExpo'
-    });
-  }, [trustStatsTriggered]);
-
-  // 4e. Operational visual crossfade transition using Anime.js
-  useEffect(() => {
-    animate(`.operational-view-img-${activeCardIndex}`, {
-      opacity: [0, 1],
-      scale: [1.04, 1.0],
-      duration: 600,
-      ease: 'outQuad'
-    });
-  }, [activeCardIndex]);
-
-  // 4d. Card hover & tilt animations using Anime.js
-  const handleCardEnter = (e: React.MouseEvent<HTMLDivElement>, idx: number) => {
-    setActiveCardIndex(idx);
-    
-    // Scale up, glow border, and transition background using Anime.js
-    animate(e.currentTarget, {
-      scale: 1.03,
-      borderColor: 'rgba(212, 169, 106, 0.5)',
-      backgroundColor: 'rgba(22, 21, 19, 0.95)',
-      duration: 300,
-      ease: 'outQuad'
-    });
-  };
-
-  const handleCardLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Reset scale, borders, backgrounds and rotations smoothly with Anime.js
-    animate(e.currentTarget, {
-      scale: 1.0,
-      borderColor: 'rgba(184, 146, 74, 0.15)',
-      backgroundColor: 'rgba(18, 17, 16, 0.8)',
-      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)',
-      duration: 400,
-      ease: 'outQuad'
-    });
-  };
-
-  const handleCardTilt = (e: React.MouseEvent<HTMLDivElement>, cardTitle: string) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rotateX = ((y - rect.height / 2) / rect.height) * -8;
-    const rotateY = ((x - rect.width / 2) / rect.width) * 8;
-    
-    // Smooth transform animation using Anime.js for fluid response
-    animate(card, {
-      transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`,
-      duration: 150,
-      ease: 'outQuad'
-    });
-  };
 
   // 5. Magnetic CTA Mouse Handlers (Anime.js v4 translation animation)
   const handleMagneticMove = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
@@ -596,84 +376,127 @@ export default function HomePage() {
     <main className="min-h-screen bg-[#070706] text-[#f5f0e8] pt-28 overflow-x-hidden">
       
       {/* 1. Cinematic Luxury Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-between overflow-hidden px-4 md:px-8 max-w-7xl mx-auto w-full">
+      <section className="relative min-h-screen flex items-center overflow-hidden w-full">
         
         {/* Layered background with crossfade on selection */}
-        <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl border border-[#b8924a]/15 shadow-2xl">
+        <div className="absolute inset-0 z-0 overflow-hidden bg-[#070706]">
+          {/* Base cinematic weaving loop footage */}
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            className="hero-video-bg absolute inset-0 w-full h-full object-cover opacity-[0.22] mix-blend-luminosity"
+          >
+            <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c05d00db84373111b5190a747cae3558&profile_id=139&oauth2_token_id=57447761" type="video/mp4" />
+          </video>
+
+          {/* Active swatch image crossfade overlay */}
           {fabricSwatches.map((swatch, idx) => (
             <div 
               key={idx}
-              className="hero-zoom-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1000ms] ease-in-out"
+              className="hero-zoom-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1000ms] ease-in-out mix-blend-luminosity"
               style={{ 
                 backgroundImage: `url("${swatch.image}")`,
-                opacity: activeHeroSwatchIndex === idx ? 0.35 : 0
+                opacity: activeHeroSwatchIndex === idx ? 0.38 : 0
               }}
             />
           ))}
-          {/* Layered dark overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/40 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(212,169,106,0.12),transparent_50%)]" />
+
+          {/* Layered dark overlays for contrast & luxury depth */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#070706] via-[#070706]/80 to-[#070706]/20 hidden lg:block" />
+          <div className="absolute inset-0 bg-[#070706]/80 lg:hidden" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-transparent to-[#070706]/50" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_20%_50%,rgba(212,169,106,0.08),transparent)]" />
           
+          {/* Subtle weaving grid structure overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(184,146,74,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(184,146,74,0.025)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+
           {/* Animated gradients */}
           <div className="shifting-gradient-1 absolute -top-[20%] -left-[20%] w-[60%] h-[60%] bg-[#b8924a]/5 blur-[120px] rounded-full" />
           <div className="shifting-gradient-2 absolute -bottom-[25%] -right-[20%] w-[65%] h-[65%] bg-[#d4a96a]/5 blur-[140px] rounded-full" />
         </div>
 
         {/* Hero Content Grid */}
-        <div className="relative z-10 w-full grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center py-12 px-6 sm:px-12">
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto grid lg:grid-cols-[3fr_2fr] gap-8 xl:gap-16 items-center py-20 px-6 sm:px-10 lg:px-16">
           
-          <div className="space-y-6 select-none">
+          <div className="space-y-8 select-none w-full text-center lg:text-left flex flex-col justify-center lg:items-start items-center">
             <span className="hero-subtitle opacity-0 inline-flex items-center gap-2 border border-[#b8924a]/30 bg-[#b8924a]/10 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.35em] text-[#d4a96a]">
-              <Sparkles className="h-3 w-3" />
-              Surat Weaving Powerhouse
+              <Sparkles className="h-3.5 w-3.5 animate-pulse" />
+              Global Textile Powerhouse
             </span>
             
-            <h1 className="hero-title-main font-serif text-4xl uppercase leading-[1.1] tracking-[0.06em] text-[#faf8f4] sm:text-5xl md:text-6xl lg:text-7xl">
-              Global Weaving. <br />
-              <span className="text-[#d4a96a] font-light italic">Direct Mill Access.</span>
+            <h1 className="hero-title-main font-serif uppercase leading-[1.1] tracking-[0.03em] text-[#faf8f4] flex flex-col gap-2" style={{fontSize: 'clamp(2.5rem, 5.5vw, 5rem)'}}>
+              <span className="hero-title-line block">
+                <span className="line-text inline">Premium Fabrics</span>
+              </span>
+              <span className="hero-title-line block text-[#d4a96a] font-light italic">
+                <span className="line-text inline">For Global Buyers</span>
+              </span>
             </h1>
             
-            <p className="hero-subtitle opacity-0 max-w-2xl text-sm leading-relaxed text-[#f5f0e8]/75 sm:text-base md:text-lg font-light">
-              Premium Indian fabrics engineered for global brands and wholesale buyers. Direct from our Surat mill.
+            <p className="hero-subtitle opacity-0 max-w-2xl text-sm leading-relaxed text-[#f5f0e8]/70 sm:text-base lg:text-lg font-light">
+              Direct mill access to Surat&apos;s finest weaving lines — export-grade cotton, polyester &amp; blends with compliant customs documentation, 20-day sampling, and flexible MOQs.
             </p>
 
-            {/* CTAs with Magnetic Animation */}
-            <div className="hero-ctas opacity-0 pt-4 flex flex-wrap gap-4 items-center">
+            {/* CTAs with Magnetic Animation & Glassmorphism */}
+            <div className="hero-ctas opacity-0 pt-2 flex flex-wrap gap-4 items-center justify-center lg:justify-start">
               <button
                 onClick={openDrawer}
                 onMouseMove={handleMagneticMove}
                 onMouseLeave={handleMagneticLeave}
-                className="magnetic-btn cursor-pointer bg-gradient-to-r from-[#b8924a] to-[#d4a96a] px-8 py-4 text-xs uppercase tracking-[0.25em] text-[#0f0e0c] font-bold shadow-lg transition-shadow duration-300 hover:shadow-[#b8924a]/25"
+                className="magnetic-btn cursor-pointer relative group overflow-hidden bg-gradient-to-r from-[#b8924a] to-[#d4a96a] text-[#0f0e0c] font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] shadow-[0_4px_20px_rgba(184,146,74,0.15)] hover:shadow-[0_0_30px_rgba(212,169,106,0.35)] transition-all duration-300 border border-[#b8924a]/30 rounded-sm"
               >
-                Request RFQ
+                <span className="relative z-10">Request Quote</span>
+                <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </button>
               
               <button
                 onClick={() => setIsCatalogOpen(true)}
                 onMouseMove={handleMagneticMove}
                 onMouseLeave={handleMagneticLeave}
-                className="magnetic-btn cursor-pointer border border-[#f5f0e8]/20 bg-[#f5f0e8]/5 px-8 py-4 text-xs uppercase tracking-[0.25em] text-[#f5f0e8]/90 font-bold transition hover:border-[#b8924a] hover:text-[#d4a96a]"
+                className="magnetic-btn cursor-pointer border border-[#f5f0e8]/25 bg-white/5 text-[#f5f0e8]/90 font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] backdrop-blur-md hover:bg-white/10 hover:border-[#b8924a] hover:text-[#d4a96a] shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_20px_rgba(212,169,106,0.1)] transition-all duration-300 rounded-sm"
               >
                 Download Catalog
               </button>
 
               <a
-                href="https://wa.me/919924517111?text=Hi%20Parth,%20interested%20in%20Shiveshwar%20Textiles%20fabrics."
+                href="https://wa.me/919316189146?text=Hi%20Parth,%20interested%20in%20Shiveshwar%20Textiles%20fabrics."
                 target="_blank"
                 rel="noopener noreferrer"
                 onMouseMove={handleMagneticMove}
                 onMouseLeave={handleMagneticLeave}
-                className="magnetic-btn cursor-pointer border border-[#25d366]/40 bg-[#25d366]/5 px-6 py-4 text-xs uppercase tracking-[0.2em] text-[#25d366] font-bold transition hover:bg-[#25d366] hover:text-white flex items-center gap-2"
+                className="magnetic-btn cursor-pointer border border-[#25d366]/30 bg-[#25d366]/5 text-[#25d366] font-bold px-6 py-4 text-xs uppercase tracking-[0.2em] backdrop-blur-md hover:bg-[#25d366]/15 hover:border-[#25d366]/60 flex items-center gap-2 shadow-[0_4px_15px_rgba(37,211,102,0.05)] hover:shadow-[0_0_25px_rgba(37,211,102,0.2)] transition-all duration-300 rounded-sm"
               >
                 <MessageSquare className="h-4 w-4" />
                 WhatsApp Inquiry
               </a>
             </div>
 
+            {/* Mini Premium B2B Trust Bar */}
+            <div className="hero-trust-bar opacity-0 pt-6 mt-6 border-t border-[#b8924a]/15 w-full flex flex-wrap gap-x-8 gap-y-4 items-center justify-center lg:justify-start">
+              <div className="trust-item flex items-center gap-2.5 text-[10px] sm:text-xs text-[#f5f0e8]/80 font-mono uppercase tracking-[0.15em]">
+                <Award className="h-4.5 w-4.5 text-[#d4a96a]" />
+                <span>Export Ready</span>
+              </div>
+              <div className="trust-item flex items-center gap-2.5 text-[10px] sm:text-xs text-[#f5f0e8]/80 font-mono uppercase tracking-[0.15em]">
+                <Layers className="h-4.5 w-4.5 text-[#d4a96a]" />
+                <span>MOQ Flexible</span>
+              </div>
+              <div className="trust-item flex items-center gap-2.5 text-[10px] sm:text-xs text-[#f5f0e8]/80 font-mono uppercase tracking-[0.15em]">
+                <Clock className="h-4.5 w-4.5 text-[#d4a96a]" />
+                <span>20 Days Sampling</span>
+              </div>
+              <div className="trust-item flex items-center gap-2.5 text-[10px] sm:text-xs text-[#f5f0e8]/80 font-mono uppercase tracking-[0.15em]">
+                <Globe className="h-4.5 w-4.5 text-[#d4a96a]" />
+                <span>Global Shipping</span>
+              </div>
+            </div>
+
             {/* Mobile interactive thumbnails */}
-            <div className="lg:hidden mt-8 flex flex-col items-start w-full gap-2.5">
+            <div className="lg:hidden mt-8 flex flex-col items-center w-full gap-2.5">
               <span className="text-[9px] font-mono uppercase tracking-widest text-[#d4a96a]/70">Tap to Preview Fabric & Specs</span>
-              <div className="flex gap-3 justify-start items-center">
+              <div className="flex gap-3 justify-center items-center">
                 {fabricSwatches.map((swatch, idx) => {
                   const isActive = activeHeroSwatchIndex === idx;
                   return (
@@ -717,49 +540,75 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Interactive Fabric Selector & B2B Spec Card */}
-          <div className="hidden lg:flex flex-col gap-4 justify-center items-end relative z-20">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#d4a96a]/80 mb-2">Select Fabric Line</span>
-            <div className="space-y-3 w-72">
+          {/* Interactive Fabric Selector & B2B Spec Card — Premium Configurator Panel */}
+          <div className="hidden lg:flex flex-col gap-3 justify-center items-stretch relative z-20 w-full max-w-[420px] ml-auto">
+            {/* Panel header */}
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#d4a96a]/80">Configure Your Order</span>
+              <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest">4 Fabric Lines</span>
+            </div>
+
+            {/* Swatch selector cards */}
+            <div className="space-y-2.5">
               {fabricSwatches.map((swatch, idx) => {
                 const isActive = activeHeroSwatchIndex === idx;
                 return (
                   <button 
                     key={idx}
                     onClick={() => setActiveHeroSwatchIndex(idx)}
-                    className={`w-full text-left backdrop-blur-md border p-3 flex items-center gap-3 transition-all duration-300 cursor-pointer ${
+                    className={`w-full text-left backdrop-blur-xl border p-3.5 flex items-center gap-4 transition-all duration-400 cursor-pointer rounded-sm ${
                       isActive 
-                        ? 'bg-[#b8924a]/15 border-[#d4a96a] shadow-[0_0_20px_rgba(212,169,106,0.15)] scale-[1.02]' 
-                        : 'bg-black/40 border-[#b8924a]/15 hover:border-[#b8924a]/40 hover:bg-black/60'
+                        ? 'bg-[#b8924a]/12 border-[#d4a96a]/70 shadow-[0_0_30px_rgba(212,169,106,0.18),inset_0_0_20px_rgba(212,169,106,0.04)] scale-[1.01]' 
+                        : 'bg-black/50 border-[#b8924a]/12 hover:border-[#b8924a]/35 hover:bg-black/70 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]'
                     }`}
                   >
-                    <img 
-                      src={swatch.image} 
-                      alt={swatch.name} 
-                      className={`w-12 h-12 object-cover border transition-colors ${
-                        isActive ? 'border-[#d4a96a]' : 'border-[#b8924a]/20'
-                      }`} 
-                    />
-                    <div className="flex-grow">
-                      <h4 className={`font-serif text-xs uppercase tracking-wider transition-colors ${
-                        isActive ? 'text-[#d4a96a] font-bold' : 'text-white'
+                    <div className={`relative w-14 h-14 flex-shrink-0 overflow-hidden border transition-all duration-300 rounded-sm ${
+                      isActive ? 'border-[#d4a96a]/80 shadow-[0_0_12px_rgba(212,169,106,0.3)]' : 'border-[#b8924a]/20'
+                    }`}>
+                      <img 
+                        src={swatch.image} 
+                        alt={swatch.name} 
+                        className="w-full h-full object-cover"
+                      />
+                      {isActive && (
+                        <div className="absolute inset-0 bg-[#d4a96a]/10" />
+                      )}
+                    </div>
+                    <div className="flex-grow min-w-0">
+                      <h4 className={`font-serif text-sm uppercase tracking-wider transition-colors truncate ${
+                        isActive ? 'text-[#d4a96a]' : 'text-white/90'
                       }`}>{swatch.name}</h4>
-                      <div className="flex gap-2 text-[9px] text-white/50 font-mono mt-0.5">
+                      <div className="flex gap-3 text-[9px] text-white/45 font-mono mt-1">
                         <span>{swatch.gsm}</span>
-                        <span>•</span>
-                        <span>Width: {swatch.width}</span>
+                        <span className="text-white/20">|</span>
+                        <span>{swatch.width}</span>
+                        <span className="text-white/20">|</span>
+                        <span className="text-[#d4a96a]/60">MOQ: {swatch.moq}</span>
                       </div>
                     </div>
+                    {isActive && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#d4a96a] flex-shrink-0 shadow-[0_0_6px_rgba(212,169,106,0.8)]" />
+                    )}
                   </button>
                 );
               })}
             </div>
             
-            {/* Spec Details Card */}
-            <div className="w-72 bg-[#121110]/95 border border-[#b8924a]/20 p-4 mt-2 text-xs space-y-3 shadow-xl backdrop-blur-md">
-              <div className="flex justify-between items-center text-[10px] font-mono border-b border-[#b8924a]/10 pb-2">
-                <span className="text-[#d4a96a]/70 uppercase tracking-wider">Target MOQ:</span>
-                <span className="text-white font-medium">{fabricSwatches[activeHeroSwatchIndex].moq}</span>
+            {/* Active Spec Summary + CTA */}
+            <div className="mt-1 bg-black/60 border border-[#b8924a]/20 backdrop-blur-xl p-4 space-y-3 rounded-sm shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="space-y-0.5">
+                  <div className="text-[8px] font-mono uppercase tracking-widest text-[#d4a96a]/50">Weight</div>
+                  <div className="text-xs font-medium text-white">{fabricSwatches[activeHeroSwatchIndex].gsm}</div>
+                </div>
+                <div className="space-y-0.5 border-x border-[#b8924a]/10">
+                  <div className="text-[8px] font-mono uppercase tracking-widest text-[#d4a96a]/50">Width</div>
+                  <div className="text-xs font-medium text-white">{fabricSwatches[activeHeroSwatchIndex].width}</div>
+                </div>
+                <div className="space-y-0.5">
+                  <div className="text-[8px] font-mono uppercase tracking-widest text-[#d4a96a]/50">Min. Order</div>
+                  <div className="text-xs font-medium text-white">{fabricSwatches[activeHeroSwatchIndex].moq}</div>
+                </div>
               </div>
               <button
                 onClick={() => {
@@ -772,9 +621,9 @@ export default function HomePage() {
                   }, parseInt(active.moq));
                   openDrawer();
                 }}
-                className="w-full text-center border border-[#b8924a] bg-[#b8924a] text-[#0f0e0c] font-bold py-2.5 text-[10px] uppercase tracking-widest hover:bg-[#d4a96a] transition cursor-pointer"
+                className="w-full text-center bg-gradient-to-r from-[#b8924a] to-[#d4a96a] border border-[#b8924a]/50 text-[#0f0e0c] font-bold py-3 text-[10px] uppercase tracking-[0.2em] hover:shadow-[0_0_20px_rgba(212,169,106,0.3)] transition-all duration-300 cursor-pointer rounded-sm"
               >
-                Add Swatch To RFQ
+                Add to Inquiry
               </button>
             </div>
           </div>
@@ -787,13 +636,13 @@ export default function HomePage() {
       <div className="w-full bg-[#121110] border-y border-[#b8924a]/15 py-3.5 mt-8 overflow-hidden select-none">
         <div className="flex marquee-track gap-12 whitespace-nowrap text-[9px] font-mono uppercase tracking-[0.25em] text-[#d4a96a]/80">
           {Array(6).fill([
-            "Cotton 100-150 GSM Weaving",
-            "Polyester Filament 50-250 GSM",
+            "Cotton 50-150 GSM Weaving",
+            "Greig Polyster Fabric 50-250 GSM",
             "Direct Mill-To-Buyer Logistics",
             "1,000,000 meters / Month Scale",
-            "ISO 9001:2015 Compliant Audits",
+            "Standardized Quality Control Audits",
             "Zero GST Letter of Undertaking",
-            "DHL Express Swatch Courier"
+            "Fast Courier Swatch Dispatch"
           ]).flat().map((spec, i) => (
             <span key={i} className="flex items-center gap-2">
               <span>★</span>
@@ -805,7 +654,7 @@ export default function HomePage() {
 
       {/* 3. Cinematic Stats Section */}
       <section ref={statsRef} className="max-w-7xl mx-auto px-4 md:px-8 py-24 select-none">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           
           {/* Card 1 */}
           <div className="stats-card opacity-0 border border-[#b8924a]/15 bg-[#121110] p-6 space-y-2 relative group hover:border-[#b8924a]/30 transition duration-300">
@@ -818,29 +667,20 @@ export default function HomePage() {
 
           {/* Card 2 */}
           <div className="stats-card opacity-0 border border-[#b8924a]/15 bg-[#121110] p-6 space-y-2 relative group hover:border-[#b8924a]/30 transition duration-300">
-            <span className="text-[10px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Global Footprint</span>
+            <span className="text-[10px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Sampling turnaround</span>
             <div className="font-serif text-4xl text-[#d4a96a] font-light">
-              {regionCount}+
+              {samplingCount} Days
             </div>
-            <p className="text-[11px] uppercase tracking-wider text-white/40">25+ Export Regions</p>
+            <p className="text-[11px] uppercase tracking-wider text-white/40">20 Day Sampling</p>
           </div>
 
           {/* Card 3 */}
-          <div className="stats-card opacity-0 border border-[#b8924a]/15 bg-[#121110] p-6 space-y-2 relative group hover:border-[#b8924a]/30 transition duration-300">
-            <span className="text-[10px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Sampling turnaround</span>
-            <div className="font-serif text-4xl text-[#d4a96a] font-light">
-              {samplingCount}h
-            </div>
-            <p className="text-[11px] uppercase tracking-wider text-white/40">48 Hour Sampling</p>
-          </div>
-
-          {/* Card 4 */}
           <div className="stats-card opacity-0 border border-[#b8924a]/15 bg-[#121110] p-6 space-y-2 relative group hover:border-[#b8924a]/30 transition duration-300">
             <span className="text-[10px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Mill operations</span>
             <div className="font-serif text-4xl text-[#d4a96a] font-light">
               {yearsCount}+ Years
             </div>
-            <p className="text-[11px] uppercase tracking-wider text-white/40">10+ Years Manufacturing</p>
+            <p className="text-[11px] uppercase tracking-wider text-white/40">5+ Years Manufacturing</p>
           </div>
 
         </div>
@@ -850,7 +690,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-16 border-b border-[#b8924a]/10 pb-8">
           <div className="space-y-3">
-            <p className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">Surat Loom Production</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">Global Fabric Production</p>
             <h2 className="font-serif text-3xl uppercase tracking-wide text-[#faf8f4] md:text-5xl">
               Fabric <span className="text-[#d4a96a] font-light italic">Categories</span>
             </h2>
@@ -917,288 +757,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. Trust & Export Credibility Section (Step 2) */}
-      <section ref={trustStatsRef} className="relative mx-auto max-w-7xl px-4 py-24 md:px-8 border-t border-[#b8924a]/10 overflow-hidden select-none">
-        
-        {/* Animated background canvas */}
-        <CanvasParticles />
-        
-        {/* Title area */}
-        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-16">
-          <div className="space-y-3">
-            <span className="text-xs uppercase tracking-[0.35em] text-[#d4a96a] font-mono">Export Credibility</span>
-            <h2 className="font-serif text-3xl uppercase tracking-wide text-[#faf8f4] md:text-5xl">
-              Why Global <span className="text-[#d4a96a] font-light italic">Buyers Trust Us</span>
-            </h2>
-          </div>
-          <p className="max-w-md text-xs leading-relaxed text-[#f5f0e8]/70 uppercase tracking-widest">
-            From our high-speed Surat looms to your Hamburg warehouse, we guarantee absolute quality consistency, ISO compliance, and seamless customs logistics.
-          </p>
-        </div>
+      {/* 5. Manufacturing Excellence Section */}
+      <ManufacturingExcellence />
 
-        {/* Core Layout Grid: Media & Map Panel + Trust Cards */}
-        <div className="relative z-10 grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-          
-          {/* Left Panel: Visuals & Interactive Cargo Map */}
-          <div className="flex flex-col gap-6">
-            
-            {/* Visual Crossfade Panel */}
-            <div className="relative h-80 border border-[#b8924a]/15 bg-[#121110]/95 overflow-hidden group">
-              {trustVisuals.map((visual, idx) => (
-                <div
-                  key={idx}
-                  className={`absolute inset-0 operational-view-img-${idx} ${
-                    activeCardIndex === idx ? 'z-10' : 'z-0 pointer-events-none'
-                  }`}
-                  style={{ opacity: activeCardIndex === idx ? 1 : 0 }}
-                >
-                  <img
-                    src={visual.image}
-                    alt={visual.title}
-                    className="w-full h-full object-cover grayscale hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0c]/90 via-[#0f0e0c]/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-[#d4a96a]">
-                      Operational View 0{idx + 1}
-                    </span>
-                    <h4 className="font-serif text-lg text-white font-medium">{visual.title}</h4>
-                    <p className="text-[11px] text-white/60 font-light mt-0.5">{visual.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Stylized Cargo Map */}
-            <div className="relative h-64 border border-[#b8924a]/15 bg-[#121110]/80 p-4 flex flex-col justify-between overflow-hidden">
-              <div className="absolute top-3 left-4 z-20">
-                <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-[#d4a96a]">
-                  Maritime Trade Corridor
-                </span>
-                <span className="text-[10px] text-white/50 block font-light">Surat Weaving Mill to European Ports</span>
-              </div>
-
-              {/* Vector Cargo Map SVG */}
-              <div className="w-full h-full flex items-center justify-center relative mt-4">
-                <svg
-                  viewBox="0 0 600 220"
-                  fill="none"
-                  className="w-full h-full max-w-[500px]"
-                >
-                  {/* Abstract Europe Continent Grid */}
-                  <path
-                    d="M 50,40 Q 60,30 80,40 T 120,30 T 160,50 T 140,90 T 100,100 Z"
-                    fill="rgba(184, 146, 74, 0.03)"
-                    stroke="rgba(184, 146, 74, 0.1)"
-                    strokeWidth="1"
-                  />
-                  {/* Abstract India Continent Grid */}
-                  <path
-                    d="M 400,170 Q 420,130 450,120 T 470,160 T 450,200 T 420,180 Z"
-                    fill="rgba(184, 146, 74, 0.03)"
-                    stroke="rgba(184, 146, 74, 0.1)"
-                    strokeWidth="1"
-                  />
-
-                  {/* Sea Route Path */}
-                  <path
-                    id="sea-route"
-                    d="M 450,150 C 370,160 250,200 120,80"
-                    stroke="#d4a96a"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeDasharray="8, 4"
-                    className="opacity-70"
-                  />
-
-                  {/* Air Route Path */}
-                  <path
-                    id="air-route"
-                    d="M 450,150 C 350,70 220,50 120,80"
-                    stroke="rgba(184, 146, 74, 0.4)"
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                    strokeDasharray="2, 4"
-                  />
-
-                  {/* Europe Port (Hamburg) Node */}
-                  <g
-                    className="cursor-pointer group/node"
-                    onMouseEnter={() => setHoveredPort('hamburg')}
-                    onMouseLeave={() => setHoveredPort(null)}
-                  >
-                    <circle cx="120" cy="80" r="4" fill="#d4a96a" className="port-pulse" />
-                    <circle cx="120" cy="80" r="4" fill="#b8924a" stroke="#fff" strokeWidth="1" />
-                    <text x="130" y="84" fill="#f5f0e8" fontSize="9" fontFamily="monospace" letterSpacing="0.1em">HAMBURG</text>
-                  </g>
-
-                  {/* India Port (Mumbai/Surat) Node */}
-                  <g
-                    className="cursor-pointer group/node"
-                    onMouseEnter={() => setHoveredPort('mumbai')}
-                    onMouseLeave={() => setHoveredPort(null)}
-                  >
-                    <circle cx="450" cy="150" r="4" fill="#d4a96a" className="port-pulse" />
-                    <circle cx="450" cy="150" r="4" fill="#b8924a" stroke="#fff" strokeWidth="1" />
-                    <text x="390" y="154" fill="#f5f0e8" fontSize="9" fontFamily="monospace" letterSpacing="0.1em">SURAT / JNPT</text>
-                  </g>
-                </svg>
-
-                {/* Interactive Tooltips */}
-                {hoveredPort === 'mumbai' && (
-                  <div className="absolute bottom-2 right-4 z-30 bg-[#141211]/95 border border-[#b8924a]/30 p-3 text-[10px] space-y-1 font-mono w-52 backdrop-blur-md shadow-xl transition-all duration-300">
-                    <span className="text-[#d4a96a] font-bold block">Surat Loom & Mumbai Port</span>
-                    <span className="text-white/60 block">Origin: Weave Factory (Surat)</span>
-                    <span className="text-white/60 block">FCL Capacity: 40+ Containers/Wk</span>
-                    <span className="text-white/60 block">Customs Clearance: Immediate</span>
-                  </div>
-                )}
-
-                {hoveredPort === 'hamburg' && (
-                  <div className="absolute top-2 left-4 z-30 bg-[#141211]/95 border border-[#b8924a]/30 p-3 text-[10px] space-y-1 font-mono w-52 backdrop-blur-md shadow-xl transition-all duration-300">
-                    <span className="text-[#d4a96a] font-bold block">Hamburg / Rotterdam</span>
-                    <span className="text-white/60 block">Transit Time: 21 Days (Sea)</span>
-                    <span className="text-white/60 block">Courier Transit: 3 Days (Air)</span>
-                    <span className="text-white/60 block">Inland: Direct DDP to Germany</span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-          </div>
-
-          {/* Right Panel: Six Grid Trust Cards */}
-          <div className="grid gap-4 sm:grid-cols-2">
-            {trustCards.map((card, idx) => {
-              const CardIcon = card.icon;
-              return (
-                <div
-                  key={idx}
-                  onMouseEnter={(e) => handleCardEnter(e, idx)}
-                  onMouseMove={(e) => handleCardTilt(e, card.title)}
-                  onMouseLeave={handleCardLeave}
-                  className="trust-card opacity-0 border border-[#b8924a]/15 bg-[#121110]/80 p-6 flex flex-col justify-between cursor-pointer group relative overflow-hidden"
-                  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
-                >
-                  {/* Subtle hover background glow */}
-                  <div className="absolute -inset-px bg-gradient-to-r from-[#b8924a]/0 via-[#b8924a]/5 to-[#b8924a]/0 opacity-0 group-hover:opacity-100 transition duration-500" />
-                  
-                  <div className="space-y-4 relative z-10">
-                    <div className="flex items-center justify-between">
-                      <div className="p-2 border border-[#b8924a]/20 bg-[#b8924a]/5 text-[#d4a96a] group-hover:bg-[#b8924a] group-hover:text-[#0f0e0c] transition duration-300">
-                        <CardIcon className="h-5 w-5" />
-                      </div>
-                      <span className="text-[10px] font-mono text-white/30">0{idx + 1}</span>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h3 className="font-serif text-lg text-white group-hover:text-[#d4a96a] transition duration-300">
-                        {card.title}
-                      </h3>
-                      <p className="text-[11px] leading-relaxed text-white/60 font-light">
-                        {card.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-3 border-t border-[#b8924a]/10 flex items-center justify-between relative z-10">
-                    <span className="text-[9px] font-mono text-[#d4a96a]/70 uppercase tracking-widest">
-                      {card.metric}
-                    </span>
-                    <span className="text-[9px] font-mono text-white/30 group-hover:text-[#d4a96a] transition duration-300">
-                      ★ Active
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-        </div>
-
-        {/* Bottom Panel: Dynamic Stats counters strip */}
-        <div className="relative z-10 grid grid-cols-2 gap-4 lg:grid-cols-4 mt-12 pt-12 border-t border-[#b8924a]/15 bg-[#121110]/40 p-6">
-          
-          <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[9px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Monthly Production Capacity</span>
-            <div className="font-serif text-3xl text-white font-light sm:text-4xl">
-              {capacityVal.toLocaleString()}+ Meters
-            </div>
-            <p className="text-[10px] uppercase tracking-wider text-white/40">Weaving Capacity Scale</p>
-          </div>
-
-          <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[9px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Countries Exported</span>
-            <div className="font-serif text-3xl text-white font-light sm:text-4xl">
-              {countriesVal}+ Countries
-            </div>
-            <p className="text-[10px] uppercase tracking-wider text-white/40">Global Logistics Delivery</p>
-          </div>
-
-          <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[9px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Orders Delivered</span>
-            <div className="font-serif text-3xl text-white font-light sm:text-4xl">
-              {ordersVal}+ FCL Shipments
-            </div>
-            <p className="text-[10px] uppercase tracking-wider text-white/40">Delivered Since 2021</p>
-          </div>
-
-          <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[9px] font-mono text-[#d4a96a]/70 uppercase tracking-widest block">Repeat Buyers</span>
-            <div className="font-serif text-3xl text-white font-light sm:text-4xl">
-              {retentionVal}% Repeat Rate
-            </div>
-            <p className="text-[10px] uppercase tracking-wider text-white/40">Wholesale Partner Loyalty</p>
-          </div>
-
-        </div>
-
-        {/* Bottom Compliance & Partner Logos strip */}
-        <div className="relative z-10 grid gap-8 md:grid-cols-[1.5fr_2.5fr] mt-12 items-center pt-8 border-t border-[#b8924a]/10">
-          
-          {/* ISO Certification details */}
-          <div className="iso-badge border border-[#b8924a]/20 bg-[#121110]/90 p-5 flex items-center gap-4">
-            <div className="p-2 border border-[#b8924a]/30 text-[#d4a96a] bg-[#b8924a]/5">
-              <Award className="h-8 w-8" />
-            </div>
-            <div>
-              <span className="text-[9px] font-mono uppercase tracking-widest text-[#d4a96a] block">Mill Accreditation</span>
-              <h4 className="font-serif text-sm text-white font-medium uppercase">ISO 9001:2015 & OEKO-TEX Standard 100</h4>
-              <p className="text-[10px] text-white/50 mt-0.5">Compliant yarn procurement and weft audits.</p>
-            </div>
-          </div>
-
-          {/* Partner Logistics Logos */}
-          <div className="flex flex-wrap items-center justify-between gap-6 px-4 py-2 border border-[#b8924a]/10 bg-[#121110]/30 select-none">
-            <span className="text-[9px] font-mono uppercase text-[#d4a96a]/50 tracking-wider">Logistics Integration</span>
-            <div className="flex items-center gap-6 text-[10px] font-mono text-white/40 uppercase tracking-widest">
-              <span className="hover:text-[#d4a96a] transition duration-300">DHL Express</span>
-              <span>•</span>
-              <span className="hover:text-[#d4a96a] transition duration-300">Maersk</span>
-              <span>•</span>
-              <span className="hover:text-[#d4a96a] transition duration-300">MSC Cargo</span>
-              <span>•</span>
-              <span className="hover:text-[#d4a96a] transition duration-300">Hapag-Lloyd</span>
-              <span>•</span>
-              <span className="hover:text-[#d4a96a] transition duration-300">FedEx</span>
-            </div>
-          </div>
-
-        </div>
-
-      </section>
+      {/* 5.1 Global Network Section (3D Connected Cities Globe) */}
+      <GlobalNetworkGlobe />
 
       {/* 6. Production scale & capabilities preview */}
       <section className="bg-[#121110] border-y border-[#b8924a]/10 py-24 select-none">
         <div className="mx-auto max-w-7xl px-4 md:px-8 grid gap-16 lg:grid-cols-2 items-center">
           <div className="space-y-6">
-            <p className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">Surat Infrastructure</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-[#d4a96a]">Global Infrastructure</p>
             <h2 className="font-serif text-3xl uppercase tracking-wide text-[#faf8f4] md:text-5xl leading-tight">
               Export Scale. <br />
               <span className="text-[#d4a96a] font-light italic">Direct Mill Access.</span>
             </h2>
             <p className="text-sm leading-relaxed text-[#f5f0e8]/75 font-light">
-              Operating state-of-the-art power looms and waterjet looms in Surat, India&apos;s textile capital. We offer European manufacturers direct factory prices, removing trading agents, while guaranteeing absolute batch compliance.
+              Operating state-of-the-art power looms and waterjet looms across our advanced manufacturing ecosystem. We offer global manufacturers direct factory prices, removing trading agents, while guaranteeing absolute batch compliance.
             </p>
             
             <div className="space-y-4 pt-4 text-xs tracking-wider">
@@ -1212,7 +787,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-3">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#d4a96a]" />
-                <span>Direct logistics routes from Surat mill to Hamburg & Rotterdam ports</span>
+                <span>Direct logistics routes from our manufacturing hubs to global ports</span>
               </div>
             </div>
 
@@ -1230,8 +805,48 @@ export default function HomePage() {
           {/* Infrastructure Images grid */}
           <div className="grid grid-cols-2 gap-4">
             <img src={infrastructureImages[0]} alt="Weaving looms" className="col-span-2 h-64 w-full object-cover border border-[#b8924a]/10 grayscale hover:grayscale-0 transition duration-700" />
-            <img src={infrastructureImages[1]} alt="Surat factory mill floor" className="h-44 w-full object-cover border border-[#b8924a]/10 grayscale hover:grayscale-0 transition duration-700" />
+            <img src={infrastructureImages[1]} alt="Global factory mill floor" className="h-44 w-full object-cover border border-[#b8924a]/10 grayscale hover:grayscale-0 transition duration-700" />
             <img src={infrastructureImages[2]} alt="Fabric rolls before packaging" className="h-44 w-full object-cover border border-[#b8924a]/10 grayscale hover:grayscale-0 transition duration-700" />
+          </div>
+        </div>
+      </section>
+
+      {/* 5.5 Frequently Asked Questions section */}
+      <section className="bg-[#0f0e0c] border-t border-[#b8924a]/10 py-24 select-none">
+        <div className="mx-auto max-w-4xl px-4 space-y-12">
+          <div className="text-center">
+            <span className="text-xs uppercase tracking-[0.3em] text-[#d4a96a] font-mono">Resolve Doubts</span>
+            <h2 className="font-serif text-3xl uppercase tracking-wide text-white md:text-5xl mt-1">
+              Frequently Asked Questions
+            </h2>
+          </div>
+
+          <div className="border border-[#b8924a]/15 bg-[#121110] divide-y divide-[#b8924a]/10">
+            {homeFaqs.map((faq, idx) => {
+              const isOpen = activeFaqIndex === idx;
+              return (
+                <div key={idx} className="p-5 space-y-2">
+                  <button 
+                    onClick={() => toggleHomeFaq(idx)}
+                    className="w-full flex items-center justify-between text-left focus:outline-none cursor-pointer"
+                  >
+                    <span className="font-serif text-base text-white hover:text-[#d4a96a] transition pr-4">
+                      {faq.q}
+                    </span>
+                    {isOpen ? (
+                      <ChevronUp className="h-4 w-4 text-[#d4a96a] shrink-0" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4 text-[#d4a96a] shrink-0" />
+                    )}
+                  </button>
+                  {isOpen && (
+                    <p className="text-xs leading-relaxed text-white/70 pt-2 animate-fade-in font-sans">
+                      {faq.a}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1281,13 +896,13 @@ export default function HomePage() {
               <span className="text-[10px] uppercase font-mono tracking-widest text-[#d4a96a] block">Interactive Catalog</span>
               <h3 className="font-serif text-2xl text-white">Shiveshwar Textiles Digital Catalog</h3>
               <p className="text-xs leading-relaxed text-white/70 font-light">
-                Our export catalog details the complete line of cotton, polyester, and blended fabrics produced in our Surat facility. We provide ISO certificates, weave layouts, finishing specs, and pricing terms.
+                Our product catalog details the complete line of cotton, polyester, and blended fabrics produced across our manufacturing facility network. We provide detailed weave layouts, finishing specs, and pricing terms.
               </p>
               
               <div className="border border-[#b8924a]/15 bg-[#1c1a17] p-4 rounded-xs flex items-center justify-between gap-4">
                 <div className="min-w-0">
                   <span className="text-[9px] uppercase tracking-wider text-[#d4a96a] font-mono block">File Spec</span>
-                  <span className="text-xs text-white truncate block">Shiveshwar_Export_Catalog_2026.pdf</span>
+                  <span className="text-xs text-white truncate block">Shiveshwar_Product_Catalog_2026.pdf</span>
                 </div>
                 <a 
                   href="https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png"
