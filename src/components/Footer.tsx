@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/CartContext';
-import { Mail, Phone, MapPin, Globe, Compass, ExternalLink, MessageSquare, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, Compass, ExternalLink, MessageSquare } from 'lucide-react';
 
 const logo =
   'https://cdn.prod.website-files.com/699c95622d9783a33a533b90/699e230609649f301ffe4dbd_Shree%20Shiveshwar%20Weavetech%20LLP%20-%201%20-%20Edited.png';
@@ -75,7 +75,7 @@ export default function Footer() {
     window.addEventListener('resize', resize);
 
     // Generate floating golden sparkles
-    const count = Math.min(Math.round((canvas.width * canvas.height) / 12000), 80);
+    const count = Math.min(Math.round((canvas.width * canvas.height) / 10000), 100);
     for (let i = 0; i < count; i++) {
       const baseOpacity = Math.random() * 0.4 + 0.1;
       particles.push({
@@ -161,6 +161,34 @@ export default function Footer() {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
+
+  const coordinators = [
+    {
+      name: 'Prakashbhai Mangukiya',
+      role: 'FOUNDER & VISION LEAD',
+      badge: 'Founder',
+    },
+    {
+      name: 'Parth P. Mangukiya',
+      role: 'DIRECTOR',
+      phone: '+919316189146',
+    },
+    {
+      name: 'Fenil Mangukiya',
+      role: 'OPERATIONS & LOGISTICS MANAGER',
+      phone: '+918155962069',
+    },
+    {
+      name: 'Ayush Kanani',
+      role: 'MARKETING HEAD',
+      phone: '+919586054194',
+    },
+    {
+      name: 'Dhruv Patel',
+      role: 'EXPORT GUIDE',
+      phone: '+917600381234',
+    }
+  ];
 
   return (
     <footer 
@@ -249,6 +277,120 @@ export default function Footer() {
             <p className="font-serif text-base text-[#faf8f4] font-medium tracking-wide">
               EXW & FOB Shipping
             </p>
+          </div>
+        </div>
+
+        {/* Elegant Scanning Gold Divider Line */}
+        <div className="gold-divider-shine" />
+
+        {/* ========================================================================= */}
+        {/* BRAND DIRECTORY & EXECUTIVE GRID (Re-integrated Directory) */}
+        {/* ========================================================================= */}
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr_1fr] pt-4">
+          {/* Col 1: System Navigation */}
+          <div className="space-y-5 md:border-l md:border-[#b8924a]/20 md:pl-6 text-left">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#d4a96a] block">
+              {language === 'EN' ? 'System Nav' : 'System-Navigation'}
+            </span>
+            <ul className="space-y-3.5 text-[10px] font-mono tracking-widest text-[#f5f0e8]/75">
+              <li>
+                <Link href="/" className="hover:text-[#d4a96a] transition-colors duration-300 block">
+                  STARTSEITE
+                </Link>
+              </li>
+              <li>
+                <Link href="/products" className="hover:text-[#d4a96a] transition-colors duration-300 block">
+                  FABRIC CATALOGUE
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-[#d4a96a] transition-colors duration-300 block">
+                  COMPANY PROFILE
+                </Link>
+              </li>
+              <li>
+                <Link href="/quality" className="hover:text-[#d4a96a] transition-colors duration-300 block">
+                  QUALITY MANAGEMENT
+                </Link>
+              </li>
+              <li>
+                <Link href="/shipping-export" className="hover:text-[#d4a96a] transition-colors duration-300 block">
+                  LOGISTICS & FREIGHT
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#d4a96a] transition-colors duration-300 block">
+                  CONTACT DESK
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 2: Material Index */}
+          <div className="space-y-5 md:border-l md:border-[#b8924a]/20 md:pl-6 text-left">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#d4a96a] block">
+              {language === 'EN' ? 'Material Index' : 'Material-Index'}
+            </span>
+            <ul className="space-y-3.5 text-[10px] font-mono tracking-widest text-[#f5f0e8]/75">
+              <li>
+                <Link href="/products/cotton-fabrics" className="flex items-center justify-between hover:text-[#d4a96a] transition-colors group">
+                  <span>COTTON FABRICS (50–150 GSM)</span>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[9px] text-[#d4a96a] ml-2">↗</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/polyester-fabrics" className="flex items-center justify-between hover:text-[#d4a96a] transition-colors group">
+                  <span>GREIG POLYESTER (50–250 GSM)</span>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[9px] text-[#d4a96a] ml-2">↗</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/blended-fabrics" className="flex items-center justify-between hover:text-[#d4a96a] transition-colors group">
+                  <span>BLENDED FABRICS (50/250 GSM)</span>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[9px] text-[#d4a96a] ml-2">↗</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/custom-development" className="flex items-center justify-between hover:text-[#d4a96a] transition-colors group">
+                  <span>BESPOKE MILL WEAVING</span>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[9px] text-[#d4a96a] ml-2">↗</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Executive Desk */}
+          <div className="space-y-5 md:border-l md:border-[#b8924a]/20 md:pl-6 text-left">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#d4a96a] block">
+              {language === 'EN' ? 'Executive Desk' : 'Vorstand & Kontakte'}
+            </span>
+            <div className="grid gap-3.5">
+              {coordinators.map((c, i) => (
+                <div 
+                  key={i} 
+                  className="text-xs pb-2 border-b border-[#b8924a]/10 flex items-center justify-between gap-1 group"
+                >
+                  <div>
+                    <span className="font-serif text-xs text-[#faf8f4] group-hover:text-[#d4a96a] transition-colors font-medium">
+                      {c.name}
+                    </span>
+                    <span className="text-[8px] uppercase tracking-widest text-[#f5f0e8]/45 block font-mono">
+                      {c.role}
+                    </span>
+                  </div>
+                  {('phone' in c) && c.phone && (
+                    <a 
+                      href={`https://wa.me/${c.phone.replace(/[^0-9]/g, '')}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-[8px] font-mono text-[#d4a96a]/70 hover:text-[#faf8f4] transition tracking-widest"
+                    >
+                      CONNECT ↗
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -353,7 +495,7 @@ export default function Footer() {
                   rel="noreferrer"
                   className="flex items-center gap-1.5 hover:text-white transition duration-300 group-hover:scale-102"
                 >
-                  <Phone className="h-3 w-3" />
+                  <Phone className="h-3.5 w-3.5" />
                   <span>+91 9106139666</span>
                 </a>
                 <span className="text-[#b8924a]/30">|</span>
