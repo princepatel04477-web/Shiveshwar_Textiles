@@ -458,60 +458,65 @@ export default function Footer() {
         </div>
 
         {/* ========================================================================= */}
-        {/* SECTION 4: Premium "Built By" Luxury Signature Card */}
+        {/* SECTION 4: Developer Credit Strip (Horizontal Row) */}
         {/* ========================================================================= */}
-        <div className="flex justify-center pt-4">
-          <div className="w-full max-w-lg border border-[#b8924a]/20 bg-[#12110f]/60 backdrop-blur-md p-6 md:p-8 rounded-sm text-center relative group overflow-hidden transition-all duration-500 hover:border-[#b8924a]/50 hover:shadow-[0_0_25px_rgba(184,146,74,0.15)]">
-            
-            {/* Absolute Background Accent lines */}
-            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#d4a96a]/40" />
-            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#d4a96a]/40" />
-            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#d4a96a]/40" />
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#d4a96a]/40" />
-            
-            {/* Signature Content */}
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[9px] uppercase tracking-[0.25em] text-[#d4a96a]/70 font-mono block">
-                  Website Designed & Developed By
-                </span>
-                <a 
-                  href="https://wa.me/919106139666?text=Hi%20Prince,%20saw%20your%20developer%20signature%20on%20Shiveshwar%20Textiles." 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="font-serif text-2xl uppercase tracking-widest text-[#faf8f4] hover:text-[#d4a96a] transition duration-300 font-semibold block pt-1"
-                >
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 py-4 px-6 md:px-8 border border-[#b8924a]/15 bg-[#11100e]/40 backdrop-blur-sm rounded-sm">
+          {/* Developer details */}
+          <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10 text-xs">
+            {/* Developer Name */}
+            <div className="flex items-center gap-3">
+              <div className="h-1.5 w-1.5 rounded-full bg-[#d4a96a] shrink-0" />
+              <div>
+                <span className="text-[9px] uppercase tracking-widest text-[#f5f0e8]/45 block font-mono">Website Developer</span>
+                <span className="text-[#faf8f4] font-serif font-medium tracking-wide">
                   Prince Patel
-                </a>
-                <span className="text-[10px] uppercase tracking-wider text-[#f5f0e8]/50 block font-mono">
-                  Full Stack Developer & Digital Solutions Architect
                 </span>
               </div>
-              
-              <div className="flex items-center justify-center gap-4 text-[10px] font-mono pt-1 text-[#d4a96a]/80">
+            </div>
+
+            {/* Developer Role */}
+            <div className="flex items-center gap-3">
+              <div className="h-1.5 w-1.5 rounded-full bg-[#d4a96a]/55 shrink-0" />
+              <div>
+                <span className="text-[9px] uppercase tracking-widest text-[#f5f0e8]/45 block font-mono">Role</span>
+                <span className="text-[#faf8f4] font-serif font-medium tracking-wide">
+                  Full Stack Developer
+                </span>
+              </div>
+            </div>
+
+            {/* Developer Contact */}
+            <div className="flex items-center gap-3">
+              <Phone className="h-4 w-4 text-[#d4a96a] shrink-0" />
+              <div>
+                <span className="text-[9px] uppercase tracking-widest text-[#f5f0e8]/45 block font-mono">Direct Contact</span>
                 <a 
-                  href="https://wa.me/919106139666?text=Hi%20Prince,%20saw%20your%20developer%20signature%20on%20Shiveshwar%20Textiles."
+                  href="https://wa.me/919106139666?text=Hi%20Prince,%20saw%20your%20developer%2520credit%20on%20Shiveshwar%20Textiles." 
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-1.5 hover:text-white transition duration-300 group-hover:scale-102"
+                  className="text-[#faf8f4] hover:text-[#d4a96a] transition duration-300 font-mono tracking-wide"
                 >
-                  <Phone className="h-3.5 w-3.5" />
-                  <span>+91 9106139666</span>
-                </a>
-                <span className="text-[#b8924a]/30">|</span>
-                <a 
-                  href="https://wa.me/919106139666?text=Hi%20Prince,%20saw%20your%20developer%20signature%20on%20Shiveshwar%20Textiles."
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-1 hover:text-white transition duration-300"
-                >
-                  <span>Chat Direct</span>
-                  <ExternalLink className="h-2.5 w-2.5" />
+                  +91 9106139666
                 </a>
               </div>
             </div>
           </div>
+
+          {/* Action CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+            {/* WhatsApp CTA */}
+            <a 
+              href="https://wa.me/919106139666?text=Hi%20Prince,%20saw%20your%20developer%20credit%20on%20Shiveshwar%20Textiles."
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 border border-[#b8924a]/45 hover:border-[#faf8f4] bg-transparent text-xs uppercase tracking-widest px-6 py-3 transition text-[#faf8f4] hover:bg-[#b8924a]/10 font-bold font-mono w-full sm:w-auto"
+            >
+              <MessageSquare className="h-3.5 w-3.5" />
+              <span>Developer Chat</span>
+            </a>
+          </div>
         </div>
+
 
         {/* ========================================================================= */}
         {/* SECTION 5: Footer Bottom Bar */}
