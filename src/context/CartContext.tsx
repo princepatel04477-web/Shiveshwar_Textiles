@@ -4,10 +4,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export interface CartItem {
   id: string;
-  name: string;
+  name: string; // maps to productName
   gsm: string;
   image: string;
   quantity: number; // in meters
+  fabricType?: string;
+  width?: string;
+  moq?: string;
 }
 
 interface CartContextProps {
@@ -21,6 +24,8 @@ interface CartContextProps {
   closeDrawer: () => void;
   animateCartPulse: () => void;
   shouldPulse: boolean;
+  toast: { message: string } | null;
+  setToast: (toast: { message: string } | null) => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -29,6 +34,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [shouldPulse, setShouldPulse] = useState(false);
+  const [toast, setToast] = useState<{ message: string } | null>(null);
 
   useEffect(() => {
     const savedCart = localStorage.getItem('shiveshwar_cart');
@@ -40,6 +46,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   const saveCart = (items: CartItem[]) => {
     setCartItems(items);
@@ -64,6 +77,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       saveCart([...cartItems, { ...item, quantity }]);
     }
     animateCartPulse();
+    setToast({ message: 'Added to Inquiry' });
   };
 
   const removeItem = (id: string) => {
@@ -94,10 +108,29 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         openDrawer,
         closeDrawer,
         animateCartPulse,
-        shouldPulse
+        shouldPulse,
+        toast,
+        setToast
       }}
     >
       {children}
+      {toast && (
+        <div 
+          className="fixed bottom-8 right-8 z-[9999] p-4 border border-[#b8924a]/30 bg-[#11100e] text-[#f5f0e8] rounded shadow-2xl flex items-center justify-between gap-4 animate-slide-in max-w-md"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-[#d4a96a] font-bold">✓</span>
+            <span className="text-xs leading-relaxed font-sans">{toast.message}</span>
+          </div>
+          <button 
+            type="button"
+            onClick={() => setToast(null)} 
+            className="text-white/40 hover:text-white transition-colors text-xs font-bold leading-none cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </CartContext.Provider>
   );
 };

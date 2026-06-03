@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { X, Trash2, Mail, Phone, Calculator, Check, AlertCircle } from 'lucide-react';
+import { submitInquiry } from '@/app/actions/submitInquiry';
 
 export default function CartDrawer() {
   const { cartItems, isDrawerOpen, closeDrawer, removeItem, updateQuantity, clearCart } = useCart();
@@ -20,6 +21,7 @@ export default function CartDrawer() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [randomRef, setRandomRef] = useState('');
 
   // Form validation states
@@ -134,7 +136,7 @@ export default function CartDrawer() {
     };
   }, [isSubmitted]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Final validations
@@ -145,14 +147,38 @@ export default function CartDrawer() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      // Shake effect can trigger here or simply block
       return;
     }
 
-    // Set success states
-    const ref = 'ST-' + Math.floor(100000 + Math.random() * 900000);
-    setRandomRef(ref);
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      const formPayload = new FormData();
+      formPayload.append('fullName', 'RFQ Builder Contact');
+      formPayload.append('email', formData.email);
+      formPayload.append('companyName', formData.companyName);
+      formPayload.append('subject', 'RFQ Builder Submission');
+      formPayload.append('country', formData.country);
+      formPayload.append('vatNumber', formData.vatNumber);
+      formPayload.append('referral', 'Website RFQ Builder');
+      formPayload.append('message', `RFQ Target Delivery Date: ${formData.deliveryDate || 'Not specified'}\n\nSpecial Requirements/Notes:\n${formData.notes || 'None'}`);
+      formPayload.append('isHuman', 'true');
+      formPayload.append('selectedProducts', JSON.stringify(cartItems));
+      formPayload.append('website', ''); // Honeypot empty
+
+      const result = await submitInquiry(null, formPayload);
+      if (result.success) {
+        const ref = 'ST-' + Math.floor(100000 + Math.random() * 900000);
+        setRandomRef(ref);
+        setIsSubmitted(true);
+      } else {
+        alert(result.error || 'Failed to submit RFQ. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred while submitting your RFQ.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -397,12 +423,13 @@ export default function CartDrawer() {
                     </label>
                   </div>
 
-                  {/* Submit RFQ */}
+                   {/* Submit RFQ */}
                   <button
                     type="submit"
-                    className="w-full bg-[#b8924a] hover:bg-[#d4a96a] text-[#0f0e0c] font-bold uppercase tracking-widest text-xs py-3.5 transition"
+                    disabled={isSubmitting}
+                    className="w-full bg-[#b8924a] hover:bg-[#d4a96a] disabled:bg-[#b8924a]/50 text-[#0f0e0c] font-bold uppercase tracking-widest text-xs py-3.5 transition disabled:cursor-not-allowed cursor-pointer"
                   >
-                    Submit Bulk Wholesale RFQ
+                    {isSubmitting ? 'Submitting RFQ...' : 'Submit Bulk Wholesale RFQ'}
                   </button>
                 </form>
               </>

@@ -26,8 +26,45 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Shiveshwar Textiles | Premium Fabric Manufacturer & Distribution Network",
-  description: "Manufacturing premium fabrics (Cotton, Polyester, Blends) directly from our advanced mill infrastructure. Up to 1M meters/month capacity, high-performance quality standards.",
+  metadataBase: new URL('https://shiveshwartextiles.com'),
+  title: {
+    default: 'Shiveshwar Textiles | Premium Textile Manufacturing',
+    template: 'Shiveshwar Textiles | %s',
+  },
+  description: 'Shiveshwar Textiles is a textile manufacturing company based in Surat, Gujarat, specializing in cotton fabrics, polyester fabrics, blended fabrics, custom weaving, and large-scale textile production.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico?v=2', sizes: 'any' },
+      { url: '/favicon-16x16.png?v=2', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png?v=2', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png?v=2', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://shiveshwartextiles.com',
+    siteName: 'Shiveshwar Textiles',
+    title: 'Shiveshwar Textiles | Premium Textile Manufacturing',
+    description: 'Shiveshwar Textiles is a textile manufacturing company based in Surat, Gujarat, specializing in cotton fabrics, polyester fabrics, blended fabrics, custom weaving, and large-scale textile production.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Shiveshwar Textiles - Premium Textile Manufacturing',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shiveshwar Textiles | Premium Textile Manufacturing',
+    description: 'Shiveshwar Textiles is a textile manufacturing company based in Surat, Gujarat, specializing in cotton fabrics, polyester fabrics, blended fabrics, custom weaving, and large-scale textile production.',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

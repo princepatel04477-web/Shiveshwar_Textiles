@@ -103,7 +103,7 @@ export default function Navbar() {
             title="Open RFQ Drawer"
           >
             <ShoppingBag className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">RFQ</span>
+            <span className="hidden sm:inline">RFQ {cartItems.length > 0 ? `(${cartItems.length})` : ''}</span>
             {cartItems.length > 0 && (
               <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#d4a96a] text-[9px] font-bold text-[#0f0e0c] animate-scale-in">
                 {cartItems.length}

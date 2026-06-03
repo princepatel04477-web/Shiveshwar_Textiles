@@ -517,6 +517,76 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* ========================================================================= */}
+        {/* PREMIUM SOCIAL MEDIA SECTION */}
+        {/* ========================================================================= */}
+        <div className="space-y-6 pt-4">
+          <div className="text-center md:text-left space-y-1.5">
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#d4a96a] block">
+              {language === 'EN' ? 'Social Presence' : 'Soziale Medien'}
+            </span>
+            <h3 className="font-serif text-lg text-white/90 tracking-wide">
+              {language === 'EN' ? 'Connect With Us' : 'Verbinden Sie sich mit uns'}
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Instagram Card */}
+            <a 
+              href="https://www.instagram.com/shiveshwartextiles" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="relative group block overflow-hidden rounded-xs border border-[#b8924a]/20 bg-[#11100e]/30 p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#d4a96a]/60 hover:shadow-[0_0_20px_rgba(212,169,106,0.15)]"
+            >
+              {/* Gold glow hover effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#b8924a]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="relative z-10 flex flex-col justify-between h-full space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-serif text-xl tracking-wider text-[#faf8f4] group-hover:text-[#d4a96a] transition-colors duration-300">
+                    Instagram
+                  </span>
+                  <span className="text-[#d4a96a] font-light text-xl transition-transform duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                    ↗
+                  </span>
+                </div>
+                <p className="text-xs text-[#f5f0e8]/50 tracking-wide group-hover:text-[#f5f0e8]/85 transition-colors duration-300">
+                  {language === 'EN' 
+                    ? 'Follow Our Manufacturing Journey' 
+                    : 'Folgen Sie unserer Produktionsreise'}
+                </p>
+              </div>
+            </a>
+
+            {/* LinkedIn Card */}
+            <a 
+              href="https://www.linkedin.com/company/shiveshwar-textiles" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="relative group block overflow-hidden rounded-xs border border-[#b8924a]/20 bg-[#11100e]/30 p-6 backdrop-blur-sm transition-all duration-500 hover:border-[#d4a96a]/60 hover:shadow-[0_0_20px_rgba(212,169,106,0.15)]"
+            >
+              {/* Gold glow hover effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#b8924a]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="relative z-10 flex flex-col justify-between h-full space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-serif text-xl tracking-wider text-[#faf8f4] group-hover:text-[#d4a96a] transition-colors duration-300">
+                    LinkedIn
+                  </span>
+                  <span className="text-[#d4a96a] font-light text-xl transition-transform duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                    ↗
+                  </span>
+                </div>
+                <p className="text-xs text-[#f5f0e8]/50 tracking-wide group-hover:text-[#f5f0e8]/85 transition-colors duration-300">
+                  {language === 'EN' 
+                    ? 'Business Profile & Industry Updates' 
+                    : 'Unternehmensprofil & Branchen-Updates'}
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+
 
         {/* ========================================================================= */}
         {/* SECTION 5: Footer Bottom Bar */}
