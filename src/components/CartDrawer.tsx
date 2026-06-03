@@ -317,10 +317,9 @@ export default function CartDrawer() {
                 {/* 2. Live Calculation Summary */}
                 <div className="border border-[#b8924a]/15 bg-[#171513] p-4 space-y-2">
                   <span className="text-[9px] uppercase tracking-widest text-[#d4a96a] font-mono block">Live RFQ Estimator</span>
-                  <div className="grid grid-cols-2 gap-2 text-[10px] uppercase font-mono text-white/80">
-                    <div>Total volume: <span className="text-white font-bold">{totalMeters}m</span></div>
+                  <div className="space-y-1.5 text-[10px] uppercase font-mono text-white/80">
                     <div>Approx Lead: <span className="text-white font-bold">{getEstLeadTime()}</span></div>
-                    <div className="col-span-2 border-t border-[#b8924a]/10 pt-1.5 mt-1 text-[9px] text-white/50">
+                    <div className="border-t border-[#b8924a]/10 pt-1.5 mt-1 text-[9px] text-white/50">
                       Est. Shipment: <span className="text-[#d4a96a] font-bold">{getEstShipment()}</span>
                     </div>
                   </div>
