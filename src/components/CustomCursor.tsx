@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useEffect, useState, useRef } from 'react';
 
 export default function CustomCursor() {
@@ -19,6 +18,7 @@ export default function CustomCursor() {
     if (isTouchDevice) return;
 
     setIsVisible(true);
+    document.documentElement.classList.add('custom-cursor-active');
 
     const onMouseMove = (e: MouseEvent) => {
       mouseRef.current.x = e.clientX;
@@ -30,7 +30,7 @@ export default function CustomCursor() {
       
       // Look for clickable items or elements marked with data-cursor
       const cursorTarget = target.closest('[data-cursor]') as HTMLElement | null;
-      const isLink = target.closest('a, button, select, input[type="submit"]') !== null;
+      const isLink = target.closest('a, button, select, input, textarea, [role="button"]') !== null;
 
       if (cursorTarget) {
         setCursorType('hover-label');
@@ -77,6 +77,7 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseover', onMouseOver);
       cancelAnimationFrame(animationId);
+      document.documentElement.classList.remove('custom-cursor-active');
     };
   }, []);
 
@@ -87,19 +88,23 @@ export default function CustomCursor() {
       {/* Inner Dot */}
       <div 
         ref={dotRef}
-        className="fixed w-1.5 h-1.5 bg-[#d4a96a] rounded-full pointer-events-none z-[999] transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300"
+        className="fixed w-1.5 h-1.5 bg-[#d4a96a] rounded-full pointer-events-none z-[999] transform -translate-x-1/2 -translate-y-1/2"
+        style={{ transition: 'opacity 0.15s ease' }}
       />
       
       {/* Outer Ring */}
       <div 
         ref={ringRef}
-        className={`fixed rounded-full pointer-events-none z-[998] transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center font-mono text-[9px] uppercase tracking-widest text-[#0f0e0c] font-bold text-center select-none overflow-hidden transition-all duration-300 ${
+        className={`fixed rounded-full pointer-events-none z-[998] transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center font-mono text-[9px] uppercase tracking-widest text-[#0f0e0c] font-bold text-center select-none overflow-hidden ${
           cursorType === 'hover-label'
             ? 'w-16 h-16 bg-[#d4a96a] border-transparent'
             : cursorType === 'hover'
             ? 'w-10 h-10 border border-[#d4a96a] bg-[#d4a96a]/10 scale-110'
             : 'w-7 h-7 border border-[#d4a96a]/40 bg-transparent'
         }`}
+        style={{ 
+          transition: 'width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease' 
+        }}
       >
         <span className={`transition-opacity duration-200 ${cursorType === 'hover-label' ? 'opacity-100' : 'opacity-0'}`}>
           {hoverText}
@@ -108,3 +113,4 @@ export default function CustomCursor() {
     </>
   );
 }
+

@@ -222,4 +222,12 @@ img,
   }
 }
 
+/* Hide default cursor on desktop when custom cursor is active */
+@media (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
 

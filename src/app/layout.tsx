@@ -11,6 +11,7 @@ import CommandPalette from "@/components/CommandPalette";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Preloader from "@/components/Preloader";
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body className="font-sans antialiased bg-[#0f0e0c] text-[#f5f0e8] flex flex-col min-h-screen overflow-x-hidden">
+        <CustomCursor />
         <Preloader />
         <LanguageProvider>
           <CartProvider>
