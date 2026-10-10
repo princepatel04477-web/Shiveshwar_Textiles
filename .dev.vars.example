@@ -1,0 +1,8 @@
+# Local secrets for `npm run dev` / `npm run start` (copy to .dev.vars, never commit .dev.vars)
+# In production, set with: npx wrangler secret put RESEND_API_KEY
+#
+# Inquiries are stored in Cloudflare D1 (binding "DB" in wrangler.jsonc), no key needed.
+# NOTIFICATION_EMAIL and SENDER_EMAIL are plain vars in wrangler.jsonc.
+
+# Resend email API key (https://resend.com -> API Keys)
+RESEND_API_KEY=re_your_api_key

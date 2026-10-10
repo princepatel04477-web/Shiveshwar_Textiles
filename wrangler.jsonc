@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "shiveshwar-textiles",
+  "compatibility_date": "2026-10-10",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "vinext/server/fetch-handler",
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "shiveshwar-inquiries",
+      "database_id": "4b20c85e-646b-4cab-9c9c-cf0f2402abc3",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "NOTIFICATION_EMAIL": "parthmangukiya@shiveshwartextiles.com",
+    "SENDER_EMAIL": "Wholesale Portal <onboarding@resend.dev>"
+  }
+}

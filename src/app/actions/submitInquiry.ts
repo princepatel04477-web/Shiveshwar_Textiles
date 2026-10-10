@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@supabase/supabase-js';
+import { env } from 'cloudflare:workers';
 import { Resend } from 'resend';
 
 // Simple HTML input sanitization helper
@@ -59,8 +59,8 @@ export async function submitInquiry(prevState: any, formData: FormData) {
       return { success: false, error: 'Please enter a valid business email address.' };
     }
 
-    if (message.length < 20) {
-      return { success: false, error: 'Your message must be at least 20 characters long.' };
+    if (message.trim().length < 10) {
+      return { success: false, error: 'Your message must be at least 10 characters long.' };
     }
 
     // Sanitize and trim inputs
@@ -73,66 +73,58 @@ export async function submitInquiry(prevState: any, formData: FormData) {
     const cleanVatNumber = vatNumber ? sanitizeInput(vatNumber.trim()) : '';
     const cleanSource = source ? sanitizeInput(source.trim()) : '';
     const cleanMessage = sanitizeInput(message.trim());
+    const submissionTime = new Date().toLocaleString();
 
-    // 3. Initialize Supabase Admin Client
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    let dbSaved = false;
+    let emailSent = false;
+    let dbErrorMessage: string | null = null;
 
-    if (!supabaseUrl || !supabaseKey) {
-      console.error('Supabase credentials missing on server.');
-      return { success: false, error: 'Server configuration error. Please contact our support team.' };
+    // 3. Store inquiry in Cloudflare D1 (binding "DB" in wrangler.jsonc)
+    try {
+      // Server-Side Rate Limiting (Check if email submitted in last 60 seconds)
+      const recent = await env.DB
+        .prepare('SELECT id FROM inquiries WHERE email = ? AND created_at > ? LIMIT 1')
+        .bind(cleanBusinessEmail, new Date(Date.now() - 60000).toISOString())
+        .first();
+
+      if (recent) {
+        return { success: false, error: 'Too many requests. Please wait a minute before submitting again.' };
+      }
+
+      await env.DB
+        .prepare(
+          `INSERT INTO inquiries
+            (id, created_at, name, email, company, phone, country, subject, vat_number, source, message, selected_products, status)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new')`
+        )
+        .bind(
+          crypto.randomUUID(),
+          new Date().toISOString(),
+          cleanFullName,
+          cleanBusinessEmail,
+          cleanCompanyName,
+          cleanPhone,
+          cleanCountry,
+          cleanSubject,
+          cleanVatNumber,
+          cleanSource,
+          cleanMessage,
+          JSON.stringify(selectedProducts)
+        )
+        .run();
+
+      dbSaved = true;
+    } catch (dbEx) {
+      console.error('Failed to save inquiry to D1:', dbEx);
+      dbErrorMessage = (dbEx as Error)?.message || 'Database error';
     }
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    // 4. Server-Side Rate Limiting (Check if email submitted in last 60 seconds)
-    const { data: recentInquiries, error: limitError } = await supabase
-      .from('inquiries')
-      .select('id')
-      .eq('email', cleanBusinessEmail)
-      .gt('created_at', new Date(Date.now() - 60000).toISOString());
-
-    if (limitError) {
-      console.error('Database rate limit query failed:', limitError);
-    }
-
-    if (recentInquiries && recentInquiries.length > 0) {
-      return { success: false, error: 'Too many requests. Please wait a minute before submitting again.' };
-    }
-
-    // 5. Database Insertion
-    const { data: insertedRecord, error: dbError } = await supabase
-      .from('inquiries')
-      .insert([
-        {
-          name: cleanFullName,
-          email: cleanBusinessEmail,
-          company: cleanCompanyName,
-          phone: cleanPhone,
-          country: cleanCountry,
-          message: cleanMessage,
-          selected_products: selectedProducts,
-          status: 'new'
-        }
-      ])
-      .select()
-      .single();
-
-    if (dbError) {
-      console.error('Failed to save inquiry:', dbError);
-      return { success: false, error: 'Failed to record your inquiry. Please try again.' };
-    }
-
-    const submissionTime = insertedRecord?.created_at
-      ? new Date(insertedRecord.created_at).toLocaleString()
-      : new Date().toLocaleString();
-
-    // 6. Send Email Notifications via Resend
-    const resendApiKey = process.env.RESEND_API_KEY;
+    // 4. Send Email Notifications via Resend
+    const resendApiKey = env.RESEND_API_KEY;
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
-      const notifyEmail = process.env.NOTIFICATION_EMAIL || 'parthmangukiya@shiveshwartextiles.com';
-      const senderEmail = process.env.SENDER_EMAIL || 'Wholesale Portal <onboarding@resend.dev>';
+      const notifyEmail = env.NOTIFICATION_EMAIL || 'parthmangukiya@shiveshwartextiles.com';
+      const senderEmail = env.SENDER_EMAIL || 'Wholesale Portal <onboarding@resend.dev>';
 
       // A. Send email notification to B2B coordinate desk
       try {
@@ -170,7 +162,7 @@ export async function submitInquiry(prevState: any, formData: FormData) {
         await resend.emails.send({
           from: senderEmail,
           to: notifyEmail,
-          subject: 'New Website Inquiry',
+          subject: `New Website Inquiry - ${cleanFullName} (${cleanCompanyName || 'Direct Client'})`,
           text: `New inquiry received.
 
 Customer Name:
@@ -188,6 +180,9 @@ ${cleanPhone || 'N/A'}
 Country:
 ${cleanCountry || 'N/A'}
 
+Subject:
+${cleanSubject}
+
 Message:
 ${cleanMessage}
 
@@ -198,7 +193,7 @@ Submitted At:
 ${submissionTime}`,
           html: `<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid rgba(184, 146, 74, 0.15); background: #0c0b09; color: #f5f0e8; border-radius: 4px;">
             <h2 style="color: #d4a96a; border-bottom: 1px solid rgba(184, 146, 74, 0.15); padding-bottom: 10px; margin-top: 0; font-size: 20px; font-weight: normal; text-transform: uppercase; letter-spacing: 0.1em;">New Website Inquiry</h2>
-            <p style="color: rgba(245, 240, 232, 0.8); font-size: 14px;">A new business inquiry has been recorded in the database.</p>
+            <p style="color: rgba(245, 240, 232, 0.8); font-size: 14px;">A new business inquiry has been recorded.</p>
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px;">
               <tr style="border-bottom: 1px solid rgba(245, 240, 232, 0.05);"><td style="padding: 10px 0; color: #d4a96a; width: 140px;">Customer Name</td><td style="padding: 10px 0; color: #f5f0e8; font-weight: bold;">${cleanFullName}</td></tr>
               <tr style="border-bottom: 1px solid rgba(245, 240, 232, 0.05);"><td style="padding: 10px 0; color: #d4a96a;">Business Email</td><td style="padding: 10px 0; color: #f5f0e8; font-weight: bold;">${cleanBusinessEmail}</td></tr>
@@ -220,8 +215,9 @@ ${submissionTime}`,
             </div>
           </div>`
         });
+        emailSent = true;
       } catch (emailErr) {
-        console.error('Error sending notification email:', emailErr);
+        console.error('Error sending notification email via Resend:', emailErr);
       }
 
       // B. Send confirmation auto-reply email to client
@@ -256,9 +252,27 @@ Shiveshwar Textiles`,
       console.warn('RESEND_API_KEY is not defined. Skipping email dispatch.');
     }
 
-    return { success: true };
+    // 5. Outcome determination
+    // If either database storage succeeded OR email notification succeeded, the inquiry is safely recorded!
+    if (dbSaved || emailSent) {
+      return { success: true };
+    }
+
+    // If both database storage and email failed:
+    const errorDetail = dbErrorMessage
+      ? `Database error: ${dbErrorMessage}`
+      : 'Inquiry services currently unavailable.';
+    console.error('Inquiry submission failed:', errorDetail);
+
+    return {
+      success: false,
+      error: 'Unable to record your inquiry automatically right now. Please reach us directly at parthmangukiya@shiveshwartextiles.com or via WhatsApp at +91 93161 89146.'
+    };
   } catch (err) {
     console.error('Unhandled Server Action error:', err);
-    return { success: false, error: 'A critical server error occurred.' };
+    return {
+      success: false,
+      error: 'An unexpected error occurred. Please contact parthmangukiya@shiveshwartextiles.com or WhatsApp +91 93161 89146.'
+    };
   }
 }

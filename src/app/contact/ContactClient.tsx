@@ -374,6 +374,7 @@ function ContactFormSection() {
             <span className="text-[10px] uppercase tracking-wider text-[#d4a96a] font-mono">Your Message / Fabric Specifications *</span>
             <textarea
               required
+              minLength={10}
               rows={6}
               value={formData.message}
               onChange={e => setFormData({ ...formData, message: e.target.value })}
