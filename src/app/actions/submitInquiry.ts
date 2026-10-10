@@ -124,7 +124,7 @@ export async function submitInquiry(prevState: any, formData: FormData) {
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
       const notifyEmail = env.NOTIFICATION_EMAIL || 'parthmangukiya@shiveshwartextiles.com';
-      const senderEmail = env.SENDER_EMAIL || 'Wholesale Portal <onboarding@resend.dev>';
+      const senderEmail = env.SENDER_EMAIL || 'Shiveshwar Textiles <no-reply@shiveshwartextiles.com>';
 
       // A. Send email notification to B2B coordinate desk
       try {
@@ -162,6 +162,7 @@ export async function submitInquiry(prevState: any, formData: FormData) {
         await resend.emails.send({
           from: senderEmail,
           to: notifyEmail,
+          replyTo: cleanBusinessEmail,
           subject: `New Website Inquiry - ${cleanFullName} (${cleanCompanyName || 'Direct Client'})`,
           text: `New inquiry received.
 
@@ -225,6 +226,7 @@ ${submissionTime}`,
         await resend.emails.send({
           from: senderEmail,
           to: cleanBusinessEmail,
+          replyTo: notifyEmail,
           subject: 'Thank You for Contacting Shiveshwar Textiles',
           text: `Dear ${cleanFullName},
 

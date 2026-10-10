@@ -9,6 +9,12 @@
     "not_found_handling": "none",
     "binding": "ASSETS"
   },
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "shiveshwartextiles.com", "custom_domain": true },
+    { "pattern": "www.shiveshwartextiles.com", "custom_domain": true }
+  ],
   "observability": {
     "enabled": true
   },
@@ -22,6 +28,6 @@
   ],
   "vars": {
     "NOTIFICATION_EMAIL": "parthmangukiya@shiveshwartextiles.com",
-    "SENDER_EMAIL": "Wholesale Portal <onboarding@resend.dev>"
+    "SENDER_EMAIL": "Shiveshwar Textiles <no-reply@shiveshwartextiles.com>"
   }
 }
